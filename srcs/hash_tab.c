@@ -51,5 +51,5 @@ char	*search(t_hash *hash, char *key)
 			return (node->value);
 		node = node->next;
 	}
-	return (node->value);
+	return ("");
 }
