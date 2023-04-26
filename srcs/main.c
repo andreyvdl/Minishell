@@ -1,27 +1,20 @@
 #include "../includes/minishell.h"
 
+void	command(char *(*read)(const char *))
+{
+		char *input = read("minishell:> ");
+		if (ft_strcmp(input, "ls") == 0)
+			printf("%s\n", input);
+		free(input);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	(void)envp;
 	(void)argc;
 	(void)argv;
-	char	*line;
 
-	line = NULL;
 	while (true)
-	{
-		line = readline("mini> ");
-		if (line == NULL)
-		{
-			ft_putstr("exit\n");
-			break ;
-		}
-		else if (*line != '\0')
-		{
-			printf("Voce escreveu: [%s]\n", line);
-			free(line);
-		}
-	}
-	
+		command(readline);
 	return (0);
 }
