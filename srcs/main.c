@@ -4,6 +4,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
 
+<<<<<<< HEAD
 	line = NULL;
 	while (true)
 	{
@@ -23,4 +24,8 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	return (0);
+=======
+int main() {
+    printf("%i", hash_code("anderson"));
+>>>>>>> 44e1fa67e4d7d6db897c9978ac0782e9da462db9
 }
