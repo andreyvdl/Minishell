@@ -1,7 +1,7 @@
 #ifndef MINISHELL_TYPEDEFS_H
 # define MINISHELL_TYPEDEFS_H
 
-# define HASH_SIZE 100
+# define HASH_SIZE 400
 
 typedef struct s_node {
 	char			*key;
