@@ -18,7 +18,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@echo "$(COLOR_BIN)[BIN]$(COLOR_RESET) Creating $@..."
 	@make -C ./libs/libft
-	@$(COMP) -o $@ $^ -L./libs/libft/ -lreadline
+	@$(COMP) -o $@ $^ -L./libs/libft/ -lft -lreadline
 
 $(BUILD_DIR)/%.o: $(SOURCES)/%.c | $(BUILD_DIR)
 	@echo "$(COLOR_BUILD)[BUILD]$(COLOR_RESET) Compiling $<..."
@@ -29,10 +29,12 @@ $(BUILD_DIR):
 	@mkdir -p $@
 
 clean:
+	make clean -C  ./libs/libft/
 	@echo "$(COLOR_RM)[RM]$(COLOR_RESET) Removing objects..."
 	@rm -rf $(BUILD_DIR)
 
 fclean: clean
+		make fclean -C  ./libs/libft/
 	@echo "$(COLOR_RM)[RM]$(COLOR_RESET) Removing $(NAME)..."
 	@rm -f $(NAME)
 

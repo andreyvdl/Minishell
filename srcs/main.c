@@ -2,6 +2,7 @@
 
 int	main(int argc, char **argv, char **envp)
 {
+	(void)envp;
 	(void)argc;
 	(void)argv;
 	char	*line;
@@ -21,7 +22,6 @@ int	main(int argc, char **argv, char **envp)
 			free(line);
 		}
 	}
-	// A gente nao vai usar eles a nao ser que queira fazer easter egg
 	
 	return (0);
 }

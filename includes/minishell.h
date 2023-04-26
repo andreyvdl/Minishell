@@ -12,6 +12,8 @@
 #include "../libs/libft/includes/libft.h"
 
 
-unsigned int hash_code(char *key);
+unsigned int	hash_code(char *key);
+t_node	*create_node(char *key, char *value);
+
 
 #endif // minishell.h

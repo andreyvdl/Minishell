@@ -11,3 +11,12 @@ unsigned int hash_code(char *key)
 	}
 	return (hash % HASH_SIZE);
 }
+
+t_node *create_node(char *key, char *value){
+	t_node *node = (t_node *)malloc(sizeof(t_node));
+	node->key = key;
+	node->value = value;
+	node->next = NULL;
+	return (node);
+}
+
