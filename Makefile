@@ -5,7 +5,7 @@ BUILD_DIR = ./builds
 
 OBJS = $(patsubst $(SOURCES)/%.c, $(BUILD_DIR)/%.o, $(wildcard $(SOURCES)/*.c))
 
-COMP = cc -Wall -Werror -Wextra -lreadline
+COMP = cc -Wall -Werror -Wextra
 
 COLOR_BIN = \033[32m
 COLOR_RM = \033[31m
@@ -17,7 +17,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "$(COLOR_BIN)[BIN]$(COLOR_RESET) Creating $@..."
-	@$(COMP) -o $@ $^
+	@$(COMP) -o $@ $^ -lreadline
 
 $(BUILD_DIR)/%.o: $(SOURCES)/%.c | $(BUILD_DIR)
 	@echo "$(COLOR_BUILD)[BUILD]$(COLOR_RESET) Compiling $<..."
