@@ -12,7 +12,8 @@
 #include "../libs/libft/includes/libft.h"
 
 
-unsigned int	hash_code(char *key);
+
+char	*search(t_hash *hash, char *key);
 t_node	*create_node(char *key, char *value);
 
 

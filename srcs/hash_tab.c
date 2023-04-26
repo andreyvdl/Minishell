@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-static unsigned int hash_code(char *key)
+static unsigned int	hash_code(char *key)
 {
 	unsigned long	hash = 5381;
 	unsigned int	c;
@@ -12,7 +12,8 @@ static unsigned int hash_code(char *key)
 	return (hash % HASH_SIZE);
 }
 
-t_node *create_node(char *key, char *value){
+t_node	*create_node(char *key, char *value)
+{
 	t_node *node = (t_node *)malloc(sizeof(t_node));
 	node->key = key;
 	node->value = value;
@@ -38,4 +39,17 @@ void	insert_node(t_hash *hash, char *key, char *value)
 				node = node->next;
 			}
 		}
+}
+
+char	*search(t_hash *hash, char *key)
+{
+	unsigned int index = hash_code(key);
+	t_node *node = hash->list[index];
+	while(node)
+	{
+		if (ft_strcmp(node->key, key) == 0)
+			return (node->value);
+		node = node->next;
+	}
+	return (node->value);
 }
