@@ -17,7 +17,8 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "$(COLOR_BIN)[BIN]$(COLOR_RESET) Creating $@..."
-	@$(COMP) -o $@ $^ -lreadline
+	@make -C ./libs/libft
+	@$(COMP) -o $@ $^ -L./libs/libft/ -lreadline
 
 $(BUILD_DIR)/%.o: $(SOURCES)/%.c | $(BUILD_DIR)
 	@echo "$(COLOR_BUILD)[BUILD]$(COLOR_RESET) Compiling $<..."

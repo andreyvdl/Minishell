@@ -2,7 +2,5 @@
 
 
 int main() {
-    while (1)
-        readline("mini> ");
-    return 0;
+    printf("%i", hash_code("anderson"));
 }
