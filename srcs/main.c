@@ -5,7 +5,6 @@
 char	*env_collect(char *str)
 {	
 	char *s;
-	
 	int i;
 
 	i = 0;
@@ -33,23 +32,19 @@ void	printer(char *search, char **input)
 }
 
 
-void	command(char *(*read)(const char *), char **env)
+void	command(char *(*read)(const char *), char **env, t_hash *hash)
 {
 		int	i;
 		char	*input; 
-		t_hash *hash;
-		
-
+	
 		i = 0;
 		char *token;
-		hash = (t_hash *)malloc(sizeof(t_hash));
+		
 		
 		while (env[i])
 		{
 			token = env_collect(env[i]);
-
 			insert_node(hash, token, &env[i][ft_strlen(env[i]) + 1]);
-			//printf(env[i]);
 			i++;
 		}
 		input = read("minishell:> ");
@@ -62,8 +57,12 @@ int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
+	
+	t_hash *hash;
+	
+	hash = (t_hash *)malloc(sizeof(t_hash));
 
 	while (true)
-		command(readline, envp);
+		command(readline, envp, hash);
 	return (0);
 }
