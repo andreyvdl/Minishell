@@ -2,8 +2,8 @@
 
 char	*env_collect(char *str)
 {	
-	char *s;
-	int i;
+	int		i;
+	char	*s;
 
 	i = 0;
 	s = str;
@@ -15,17 +15,17 @@ char	*env_collect(char *str)
 
 void	printer(char *search, char **input)
 {
-	int i; 
-	
+	int	i;
+
 	i = 0;
 	while (input[i])
 	{
 		if (ft_strcmp(search, input[i]) == 0)
 		{
-			printf(input[i]);
-			return;
+			printf("%s", input[i]);
+			return ;
 		}
-		printf(input[i]);
+		printf("%s", input[i]);
 		i++;
 	}
 }
@@ -33,11 +33,11 @@ void	printer(char *search, char **input)
 
 void	command(char *(*read)(const char *), char **env, t_hash *hash)
 {
-	int	i;
-	char	*input; 
-	
+	int		i;
+	char	*input;
+	char	*token;
+
 	i = 0;
-	char *token;
 	while (env[i])
 	{
 		token = env_collect(env[i]);
@@ -50,10 +50,10 @@ void	command(char *(*read)(const char *), char **env, t_hash *hash)
 
 int	main(int argc, char **argv, char **envp)
 {
+	t_hash	*hash;
+
 	(void)argc;
 	(void)argv;
-	t_hash *hash;
-	
 	hash = (t_hash *)malloc(sizeof(t_hash));
 	while (true)
 		command(readline, envp, hash);
