@@ -1,6 +1,5 @@
 #include "../includes/minishell.h"
 
-
 void	builtins(char *input, t_hash *hash)
 {
 	while ((*input == ' ' || *input == '\t'))
@@ -18,7 +17,7 @@ void	builtins(char *input, t_hash *hash)
 	else if (ft_strncmp(input, "env", ft_strlen("env")) == 0)
 		printf("env\n");
 	else if (ft_strncmp(input, "exit", ft_strlen("exit")) == 0)
-		printf("exit\n");
+		mini_exit(input + 4, hash);
 	else
-		return;
+		return ;
 }
