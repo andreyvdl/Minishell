@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 15:00:37 by adantas-          #+#    #+#             */
-/*   Updated: 2023/04/25 22:35:29 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/04/27 17:31:23 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int				ft_isdigit(int c);
 int				ft_islower(int c);
 int				ft_isprime(int nb);
 int				ft_isprint(int c);
+int				ft_isspace(int c);
 int				ft_isupper(int c);
 
 char			*ft_itoa(int n);
@@ -44,6 +45,7 @@ char			*ft_itob(int nbr);
 char			*ft_itoh(int n);
 char			*ft_itoo(int n);
 int				ft_atoi(const char *nptr);
+ssize_t			ft_atoll(const char *nptr);
 int				ft_btoi(const char *binary);
 int				ft_htoi(const char *hexadecimal);
 int				ft_otoi(const char *octal);
