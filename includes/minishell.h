@@ -7,8 +7,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "./minishell_typedefs.h"
-#include "../libs/libft/includes/libft_structs.h"
-#include "../libs/libft/includes/libft_defines.h"
 #include "../libs/libft/includes/libft.h"
 
 
