@@ -9,7 +9,7 @@
 #include "./minishell_typedefs.h"
 #include "../libs/libft/includes/libft.h"
 
-int	cd(char *str);
+int		cd(char *str);
 void	echo(char *str, t_hash *hash);
 void	unset(char *str, t_hash *hash);
 void	export(char *str, t_hash *hash);
