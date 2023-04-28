@@ -24,21 +24,7 @@ exit 00000000000000000000000000000000009223372036854775807
 exit "\t\t\t\t\t\r\v\v\v\f\n -000000000000000000000092233720368547758078         \t\t\t\t\t\t    "
 */
 
-static int	exit_validate(char *input)
-{
-	char	*temp;
-
-	temp = input;
-	while (*temp)
-	{
-		if (ft_isdigit(*temp) == 0 && *temp != '-' && *temp != '+')
-		{
-			
-		}
-		temp++;
-	}
-}
-
+/*
 void	mini_exit(char *input, t_hash *hash)
 {
 	while (*input && ft_isspace)
@@ -60,3 +46,4 @@ void	mini_exit(char *input, t_hash *hash)
 		exit(2);
 	}
 }
+*/

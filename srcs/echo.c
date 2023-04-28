@@ -20,7 +20,6 @@ static char	*splitter(char *str)
 	return (splitter);
 }
 
-
 static int	get_variable(char *str, t_hash *hash)
 {
 	char	*value;
@@ -30,8 +29,7 @@ static int	get_variable(char *str, t_hash *hash)
 	return (ft_strlen(value));
 }
 
-
-static int	occurrence(char *str, char c, t_hash *hash)
+static int	occurrence(char *str, char c, t_hash *hash, int flag)
 {
 	int	j;
 
@@ -41,7 +39,11 @@ static int	occurrence(char *str, char c, t_hash *hash)
 		while (str[j])
 		{
 			if (str[j] == c)
+			{
+				if (flag)
+					ft_putchar('\n');
 				return (1);
+			}
 			if (str[j] == '$' && c == '"')
 				j += get_variable(str + j + 1, hash);
 			else
@@ -51,15 +53,62 @@ static int	occurrence(char *str, char c, t_hash *hash)
 	}
 	return (0);
 }
+ void trace_on(char *str, t_hash *hash)
+{
+    int i = 0;
+
+    if (!str)
+        return;
+
+    while (str[i] && str[i] == 'n')
+        i++;
+
+    if (str[i] && (str[i] == ' ' || str[i] == '\t'))
+    {
+        while (str[i] && (str[i] == ' ' || str[i] == '\t'))
+            i++;
+
+        if (str[i] == '"' || str[i] == '\'')
+        {
+            occurrence(str + i, '"', hash, 0);
+            occurrence(str + i, '\'', hash, 0);
+        }
+        else
+        {
+            ft_putstr(str + i);
+        }
+    }
+    else
+    {
+        while (str[i] && str[i] != '\'' && str[i] != '"')
+            i++;
+
+        if (str[i] == '"' || str[i] == '\'')
+        {
+            occurrence(str + i, '"', hash, 0);
+            occurrence(str + i, '\'', hash, 0);
+        }
+        else
+        {
+            ft_putstr(str);
+        }
+    }
+}
 
 
 void	echo(char *str, t_hash *hash)
 {
-	while (*str != ' ' && *str != '\t')
+	while ((*str == ' ' || *str == '\t'))
 		str++;
-	str++;
-	if (occurrence(str, '"', hash) == 0)
-		ft_putchar('\n');
-	else if (occurrence(str, '\'', hash) == 0)
-		ft_putchar('\n');
+	while ((*str != ' ' && *str != '\t'))
+		str++;
+	while ((*str == ' ' || *str == '\t'))
+		str++;
+	if (ft_strncmp("-n", str, 2) == 0)
+		trace_on(str, hash);
+	else
+	{
+		occurrence(str, '"', hash, 1);
+		occurrence(str, '\'', hash, 1);
+	}
 }
