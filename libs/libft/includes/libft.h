@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 15:00:37 by adantas-          #+#    #+#             */
-/*   Updated: 2023/04/27 17:31:23 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/04/28 10:53:18 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int				ft_isalpha(int c);
 int				ft_isascii(int c);
 int				ft_isdigit(int c);
 int				ft_islower(int c);
+int				ft_ismetachar(int c);
 int				ft_isprime(int nb);
 int				ft_isprint(int c);
 int				ft_isspace(int c);
