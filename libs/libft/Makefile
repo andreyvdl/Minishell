@@ -6,7 +6,7 @@
 #    By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/26 12:02:01 by adantas-          #+#    #+#              #
-#    Updated: 2023/04/27 17:35:58 by adantas-         ###   ########.fr        #
+#    Updated: 2023/04/28 10:53:40 by adantas-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ LIBFT_SOURCES=${addprefix sources/Binary_Tree/, ft_btree_apply_infix.c \
 				ft_btree_create_node.c ft_btree_insert_data.c \
 				ft_btree_search_item.c} \
 				${addprefix sources/Booleans/, ft_isalnum.c ft_isalpha.c \
-					ft_isascii.c ft_isdigit.c ft_islower.c ft_isprime.c \
-					ft_isprint.c ft_isspace.c ft_isupper.c} \
+					ft_isascii.c ft_isdigit.c ft_islower.c ft_ismetachar.c \
+					ft_isprime.c ft_isprint.c ft_isspace.c ft_isupper.c} \
 				${addprefix sources/Converters/, ft_atoi.c ft_atoll.c ft_btoi.c \
 				ft_htoi.c ft_itoa.c ft_itob.c ft_itoh.c ft_itoo.c ft_otoi.c} \
 				${addprefix sources/Ft_Printf/, ft_printf.c ft_printf_fd.c \
