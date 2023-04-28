@@ -8,7 +8,7 @@ static char	*splitter(char *str, int flag)
 
 	if (flag)
 	{
-		while (*str != '=')
+		while (*str != '=' && *str)
 			str++;
 		splitter = str + 1;
 		ft_putstr(splitter);
