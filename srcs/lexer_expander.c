@@ -97,6 +97,7 @@ static char	*expand_it(char *str, t_hash *hash)
 	new_cmd = malloc(size + 1);
 	new_cmd[size] = '\0';
 	//copy_with_values(str, new_cmd);
+	printf("str = [%s]", str);
 	return (new_cmd);
 }
 

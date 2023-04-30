@@ -18,6 +18,7 @@ void	parser(char *str, t_hash *hash);
 char	*search(t_hash *hash, char *key);
 void	builtins(char *input, t_hash *hash);
 int		intersections(char *str, char inter);
+char	*expand_vars(char *str, t_hash *hash);
 t_node	*create_node(char *key, char *value);
 void	insert_node(t_hash *hash, char *key, char *value);
 void	inside_quote_copy(char **str, char **new, char quote);
