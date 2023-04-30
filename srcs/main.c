@@ -45,6 +45,7 @@ void	command(char *(*read)(const char *), char **env, t_hash *hash)
 		i++;
 	}
 	input = read("minishell:> ");
+	parser(input, hash);
 	builtins(input, hash);
 }
 

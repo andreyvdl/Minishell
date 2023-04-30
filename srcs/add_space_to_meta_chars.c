@@ -1,10 +1,5 @@
 #include "../includes/minishell.h"
 
-/*TIRA ESSAS FUNCOES DEPOIS QUE FOREM PRO HEADER*/
-
-void	inside_quote_counter(char **str, size_t *counter, char quote);
-void	inside_quote_copy(char **str, char **new, char quote);
-
 int	meta_char_n_quote_cases(char *str)
 {
 	if (ft_ismetachar(*(str + 1)) && !ft_ismetachar(*str) && *str != ' ')
@@ -62,7 +57,7 @@ void	copy_2_new_str(char *str, char *new)
 	}
 }
 
-void	separator(char *str)
+char	*separator(char *str)
 {
 	char	*new_str;
 	size_t	size;
@@ -72,7 +67,7 @@ void	separator(char *str)
 	new_str[size] = '\0';
 	copy_2_new_str(str, new_str);
 	printf("ORIGINAL[%s]\nDEPOIS[%s]\n", str, new_str);
-	free(new_str);
+	return(new_str);
 }
 
 // int	main(void) {

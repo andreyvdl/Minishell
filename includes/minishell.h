@@ -10,13 +10,16 @@
 #include "../libs/libft/includes/libft.h"
 
 int		cd(char *str);
+char	*separator(char *str);
 void	echo(char *str, t_hash *hash);
 void	unset(char *str, t_hash *hash);
 void	export(char *str, t_hash *hash);
+void	parser(char *str, t_hash *hash);
 char	*search(t_hash *hash, char *key);
 void	builtins(char *input, t_hash *hash);
 int		intersections(char *str, char inter);
 t_node	*create_node(char *key, char *value);
 void	insert_node(t_hash *hash, char *key, char *value);
-
+void	inside_quote_copy(char **str, char **new, char quote);
+void	inside_quote_counter(char **str, size_t *counter, char quote);
 #endif // minishell.h
