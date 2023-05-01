@@ -38,13 +38,15 @@ void	export(char *str, t_hash *hash)
 	while (*str && (*str == ' ' || *str == '\t'))
 		str++;
 
-	variable = extract_variable(str);
+	variable = ft_strdup(extract_variable(str));
 	if (syntax_error(variable) != 1)
 		return ((void)printf("[export:`%s`:not a valid identifier]\n", str));
 
 	value = extract_value(str);
 	existing_value = search(hash, variable);
 	if (existing_value == NULL)
+		insert_node(hash, variable, value);
+	else
 		insert_node(hash, variable, value);
 	printf("Exported %s=%s\n", variable, value);
 }
