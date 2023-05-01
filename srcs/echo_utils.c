@@ -15,8 +15,9 @@ int	intersections(char *str, char inter)
 	start += 1;
 	while (start < end)
 	{
-		printf("%c",str[start]);
+		ft_putchar(str[start]);
 		start++;
 	}
+	ft_putchar('\n');
 	return (end);
 }

@@ -1,6 +1,5 @@
 #include "../includes/minishell.h"
 
-
 static void	get_value_dollar_size(char **str, size_t *counter, t_hash *hash)
 {
 	char	*key;
@@ -108,7 +107,7 @@ char	*expand_vars(char *str, t_hash *hash)
 	if (ft_strchr(str, '$'))
 	{
 		expanded_str = expand_it(str, hash);
-		free(str);
+		//free(str); -- invalid free
 		return (expanded_str);
 	}
 	else
