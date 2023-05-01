@@ -27,21 +27,34 @@ t_node	*create_node(char *key, char *value)
 }
 
 
-void	insert_node(t_hash *hash, char *key, char *value)
+void insert_node(t_hash *hash, char *key, char *value)
 {
 	unsigned const int	index = hash_code(key);
 	t_node				*node;
 
 	node = hash->list[index];
 	if (node == NULL)
+	{
 		hash->list[index] = create_node(key, value);
+	}
 	else
 	{
-		while (node->next)
+		while (node)
+		{
+			if (ft_strcmp(node->key, key) == 0)
+			{
+				free(node->value);
+				node->value = ft_strdup(value);
+				return ;
+			}
+			if (node->next == NULL)
+				break ;
 			node = node->next;
+		}
 		node->next = create_node(key, value);
 	}
 }
+
 
 
 char	*search(t_hash *hash, char *key)
