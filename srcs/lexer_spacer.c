@@ -75,4 +75,3 @@ char	*separator(char *str)
 // 	separator(str_teste);
 // 	free(str_teste);
 // }
-
