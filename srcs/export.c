@@ -1,44 +1,50 @@
 #include "../includes/minishell.h"
 
-static char	*splitter(char *str, int flag)
+static int syntax_error(char *str)
 {
-	
-	char	*splitter;
-	int i;
+	if (!(*str == '_' || isalpha(*str)))
+		return (-1);
+	while (*++str)
+	if (!isalnum(*str) && *str != '_')
+		return (-1);
+	return (1);
+}
 
-	if (flag)
-	{
-		while (*str != '=' && *str)
-			str++;
-		splitter = str + 1;
-		ft_putstr(splitter);
-	}
-	else
-	{
-		i = 0;
-		while (str[i] != '=')
-			i++;
-		str[i] = '\0';
-		splitter = str;
-	}
-	return (splitter);
+static char	*extract_variable(char *str)
+{
+	int i = 0;
+	printf("varible = %s\n", str);
+	while (str[i] && str[i] != '=')
+		i++;
+	str[i] = '\0';
+	return (str);
+}
+
+static char	*extract_value(char *str)
+{
+	while (*str && *str != '=' && !(*str >= ' ' && *str <= '\t'))
+		str++;
+	return (str + 1);
 }
 
 void	export(char *str, t_hash *hash)
 {
-	while (str && (*str != ' ' &&  *str != '\t'))
-		str++;
-	while (str && (*str == ' ' || *str == '\t'))
-		str++;
-	char *reach;
-	char *varible;
+	char	*existing_value;
+	char	*variable;
+	char	*value;
 
-	varible = splitter(str, 0);
-	reach = search(hash, varible);
-	ft_putstr(varible);
-	if (reach == NULL)
-		insert_node(hash, varible, splitter(str, 1));
-	else
-		ft_putstr(reach);
+	while (*str && (*str != ' ' && *str != '\t'))
+		str++;
+	while (*str && (*str == ' ' || *str == '\t'))
+		str++;
 
+	variable = extract_variable(str);
+	if (syntax_error(variable) != 1)
+		return ((void)printf("[export:`%s`:not a valid identifier]\n", str));
+
+	value = extract_value(str);
+	existing_value = search(hash, variable);
+	if (existing_value == NULL)
+		insert_node(hash, variable, value);
+	printf("Exported %s=%s\n", variable, value);
 }
