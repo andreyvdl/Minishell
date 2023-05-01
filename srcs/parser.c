@@ -13,7 +13,6 @@ void	get_words(char *str, t_hash *hash)
 		i++;
 	}
 	free(tree);
-	free(str);
 }
 
 void	parser(char *str, t_hash *hash)
