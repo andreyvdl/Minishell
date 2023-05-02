@@ -25,4 +25,5 @@ t_node	*create_node(char *key, char *value);
 void	insert_node(t_hash *hash, char *key, char *value);
 void	inside_quote_copy(char **str, char **new, char quote);
 void	inside_quote_counter(char **str, size_t *counter, char quote);
+void	copy_with_expansions(char *str, char *new, t_hash *hash);
 #endif // minishell.h
