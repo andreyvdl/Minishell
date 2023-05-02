@@ -6,10 +6,11 @@ void	get_words(char *str, t_hash *hash)
 	int i;
 
 	i = 0;
+	(void)hash;
 	tree = ft_split(str, ' ');
 	while (tree[i] && tree)
 	{
-		expand_vars(tree[i], hash);
+		ft_printf("[%s]\n", tree[i]);
 		i++;
 	}
 	free(tree);
@@ -17,8 +18,10 @@ void	get_words(char *str, t_hash *hash)
 
 void	parser(char *str, t_hash *hash)
 {
-	(void)hash;
+	char	*clean_cmd;
+
 	while (*str && (*str == ' ' || *str == '\t'))
 		str++;
-	get_words(separator(str), hash);
+	clean_cmd = expand_vars(separator(str), hash);
+	get_words(clean_cmd, hash);
 }
