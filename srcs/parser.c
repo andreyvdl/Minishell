@@ -1,6 +1,101 @@
 #include "../includes/minishell.h"
 
-t_tokens	*new_token(e_token_type type, char *value, int len)
+
+static int	validate_metachar(char **splited_pline)
+{
+	if (**splited_pline == '&')
+	{
+		ft_putendl_fd("\e[31mms: unsuported syntax `&`\e[0m", 2);
+		return (true);
+	}
+	else if (**splited_pline == '|')
+	{
+		if (pipe_case(splited_pline))
+			return (true);
+	}
+	else if (**splited_pline == '<')
+	{
+		if (read_from_case(splited_pline))
+			return (true);
+	}
+	else if (**splited_pline == '>')
+	{
+		if (write_to_case(splited_pline))
+			return (true);
+	}
+	return (false);
+}
+
+static int	has_invalid_syntax(char **splited_pline)
+{
+	char	**temp;
+
+	// https://www.phind.com/search?cache=ee788b8e-bdf8-4d7c-adb2-9754bd0036e1&init=true
+	temp = splited_pline;
+	while (*splited_pline)
+	{
+		if (ft_ismetachar(**splited_pline))
+		{
+			if (validate_metachar(splited_pline))
+			{
+				// ft_free_matrix((void ***)&temp); -- segfault, mas precisa de free
+				return (true);
+			}
+		}
+		splited_pline++;
+	}
+	// ft_free_matrix((void ***)&temp); -- segfault, mas precisa de free
+	return (false);
+}
+
+static int	unclosed_quotes(char *pipeline)
+{
+	while (*pipeline)
+	{
+		if (*pipeline == '\'' || *pipeline == '\"')
+		{
+			if (unclosed_quotes_case(&pipeline, *pipeline))
+				return (true);
+		}
+		else
+			pipeline++;
+	}
+	return (false);
+}
+
+static char	*lexer(char *pipeline, t_hash *hash)
+{
+	char	*temp;
+
+	temp = separator(pipeline);
+	free(pipeline);
+	pipeline = NULL;
+	easy_splitter(temp);
+	pipeline = expand_vars(temp, hash);
+	if (temp != pipeline) // se o endereço das duas for igual significa q n tem $
+		free(temp);
+	return (pipeline);
+}
+
+void	parser(char *pipeline, t_hash *hash)
+{
+	pipeline = lexer(pipeline, hash);
+	if (unclosed_quotes(pipeline))
+	{
+		free(pipeline);
+		insert_node(hash, "?", "2");
+		return ;
+	}
+	if (has_invalid_syntax(ft_split(pipeline, -7)))
+	{
+		free(pipeline);
+		insert_node(hash, "?", "2");
+		return ;
+	}
+	// printf("[%s]\n", pipeline);
+}
+
+/* t_tokens	*new_token(e_token_type type, char *value, int len)
 {
 	t_tokens *token;
 
@@ -106,4 +201,4 @@ void parser(char *input, t_hash *hash)
 		current = current->next;
 	}
 	ft_printf("\n");
-}
+} */
