@@ -30,11 +30,9 @@ void	printer(char *search, char **input)
 	}
 }
 
-
-void	command(char *(*read)(const char *), char **env, t_hash *hash)
+void	command(char *input, char **env, t_hash *hash)
 {
 	int		i;
-	char	*input;
 	char	*token;
 
 	i = 0;
@@ -44,19 +42,22 @@ void	command(char *(*read)(const char *), char **env, t_hash *hash)
 		insert_node(hash, token, &env[i][ft_strlen(env[i]) + 1]);
 		i++;
 	}
-	input = read("minishell:> ");
 	parser(input, hash);
-	builtins(input, hash);
+	//builtins(input, hash);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_hash	*hash;
+	char	*input;
 
 	(void)argc;
 	(void)argv;
 	hash = (t_hash *)malloc(sizeof(t_hash));
-	while (true)
-		command(readline, envp, hash);
+
+	while (true){
+		input = readline("Minishell > ");
+		command(input,envp, hash);
+	}
 	return (0);
 }
