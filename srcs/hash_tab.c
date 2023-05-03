@@ -34,9 +34,7 @@ void insert_node(t_hash *hash, char *key, char *value)
 
 	node = hash->list[index];
 	if (node == NULL)
-	{
 		hash->list[index] = create_node(key, value);
-	}
 	else
 	{
 		while (node)
@@ -54,8 +52,6 @@ void insert_node(t_hash *hash, char *key, char *value)
 		node->next = create_node(key, value);
 	}
 }
-
-
 
 char	*search(t_hash *hash, char *key)
 {
