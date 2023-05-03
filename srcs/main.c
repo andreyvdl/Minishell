@@ -32,17 +32,29 @@ void	printer(char *search, char **input)
 
 void	command(char *input, char **env, t_hash *hash)
 {
-	int		i;
-	char	*token;
+	static int		i;
+	char			*token;
+	char			*pipeline;
 
-	i = 0;
-	while (env[i])
+	if (i == 0)
 	{
-		token = env_collect(env[i]);
-		insert_node(hash, token, &env[i][ft_strlen(env[i]) + 1]);
-		i++;
+		while (env[i])
+		{
+			token = env_collect(env[i]);
+			insert_node(hash, token, &env[i][ft_strlen(env[i]) + 1]);
+			i++;
+		}
+		insert_node(hash, "?", "0");
 	}
-	parser(input, hash);
+	if (input == NULL)
+	{
+		// free em tudo q tem q dar free
+		ft_putstr("exit\n");
+		exit(0);
+	}
+	pipeline = ft_strtrim(input, "\n\v\t\r\f ");
+	free(input);
+	parser(pipeline, hash);
 	//builtins(input, hash);
 }
 
