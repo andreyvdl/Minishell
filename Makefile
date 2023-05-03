@@ -5,7 +5,7 @@ BUILD_DIR = ./builds
 
 OBJS = $(patsubst $(SOURCES)/%.c, $(BUILD_DIR)/%.o, $(wildcard $(SOURCES)/*.c))
 
-COMP = cc -Wall -Werror -Wextra
+COMP = cc -Wall -Werror -Wextra -g3
 
 COLOR_BIN = \033[32m
 COLOR_RM = \033[31m
