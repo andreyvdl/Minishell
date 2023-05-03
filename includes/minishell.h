@@ -35,4 +35,11 @@ char	*expand_vars(char *str, t_hash *hash);
 // t_node return
 t_node	*create_node(char *key, char *value);
 
+// new functions, analyze they before putting in the right place
+void	easy_splitter(char *str);
+int	unclosed_quotes_case(char **pipeline, char quote);
+int pipe_case(char **splited_pline);
+int	read_from_case(char **splited_pline);
+int	write_to_case(char **splited_pline);
+
 #endif // minishell.h
