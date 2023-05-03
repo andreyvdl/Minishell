@@ -68,10 +68,3 @@ char	*separator(char *str)
 	copy_2_new_str(str, new_str);
 	return(new_str);
 }
-
-// int	main(void) {
-// 	char	*str_teste = ft_strdup("YES<OI'>HELLO|OLA<|'WATSUP|>\"HOLA>>KONICHIWA<<ZAWARUDO\"<<<WORLD>>>MUNDO||SIM");
-
-// 	separator(str_teste);
-// 	free(str_teste);
-// }
