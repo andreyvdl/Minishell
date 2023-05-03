@@ -6,7 +6,6 @@ int	intersections(char *str, char inter)
 	int	end;
 
 	start = 0;
-
 	while(str[start] && str[start] != inter)
 		start++;
 	end = start + 1;

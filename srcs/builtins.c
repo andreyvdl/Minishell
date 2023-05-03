@@ -14,10 +14,18 @@ void	builtins(char *input, t_hash *hash)
 		export(input, hash);
 	else if (ft_strncmp(input, "unset ", ft_strlen("unset ")) == 0)
 		unset(input, hash);
-	else if (ft_strncmp(input, "env ", ft_strlen("env ")) == 0)
+	else if (ft_strcmp(input, "env") == 0)
 		env(hash);
 	else if (ft_strncmp(input, "exit ", ft_strlen("exit ")) == 0)
 		ft_putstr("exit\n");
 	else
 		return ((void)ft_printf("minishell: command not found: %s\n", input));
 }
+
+/*
+int		built_ins(char *input, t_hash *hash, char actions)
+{
+
+}
+*/
+	

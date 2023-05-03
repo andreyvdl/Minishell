@@ -94,7 +94,6 @@ char	*expand_vars(char *str, t_hash *hash)
 		expanded_str = (char *)malloc(size + 1);
 		expanded_str[size] = '\0';
 		copy_with_expansions(str, expanded_str, hash);
-		free(str);
 		return (expanded_str);
 	}
 	else
