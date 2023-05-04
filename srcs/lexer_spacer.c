@@ -66,5 +66,5 @@ char	*separator(char *str)
 	new_str = malloc(sizeof(char) * (size + 1));
 	new_str[size] = '\0';
 	copy_2_new_str(str, new_str);
-	return(new_str);
+	return (new_str);
 }
