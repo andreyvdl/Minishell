@@ -47,13 +47,10 @@ void	command(char *input, char **env, t_hash *hash)
 		insert_node(hash, "?", "0");
 	}
 	if (input == NULL)
-	{
-		// free em tudo q tem q dar free
-		ft_putstr("exit\n");
-		exit(0);
-	}
+		free_all_and_exit(hash);
 	pipeline = ft_strtrim(input, "\n\v\t\r\f ");
 	free(input);
+	add_to_history(pipeline);
 	parser(pipeline, hash);
 	//builtins(input, hash);
 }
@@ -65,11 +62,11 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	hash = (t_hash *)malloc(sizeof(t_hash));
-
-	while (true){
+	hash = (t_hash *)ft_calloc(sizeof(t_hash), 1);
+	while (true)
+	{
 		input = readline("Minishell > ");
-		command(input,envp, hash);
+		command(input, envp, hash);
 	}
 	return (0);
 }
