@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 15:00:37 by adantas-          #+#    #+#             */
-/*   Updated: 2023/04/28 10:53:18 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:59:44 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ void			*ft_memcpy(void *dst, const void *src, size_t n);
 void			*ft_memmove(void *dst, const void *src, size_t n);
 void			*ft_memset(void *s, int c, size_t n);
 void			ft_bzero(void *s, size_t n);
-void			ft_free(void **pointer);
-void			ft_free_matrix(void ***matrix);
+void			ft_free(void *pointer);
+void			ft_free_matrix(void **matrix);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 void			ft_swap(void **pointer1, void **pointer2);
 
