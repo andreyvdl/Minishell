@@ -31,19 +31,19 @@ static int	has_invalid_syntax(char **splited_pline)
 	char	**temp;
 
 	temp = splited_pline;
-	while (*splited_pline)
+	while (*temp)
 	{
-		if (ft_ismetachar(**splited_pline))
+		if (ft_ismetachar(**temp))
 		{
-			if (validate_metachar(splited_pline))
+			if (validate_metachar(temp))
 			{
-				ft_free_matrix((void ***)&temp);
+				ft_free_matrix((void **)splited_pline);
 				return (true);
 			}
 		}
-		splited_pline++;
+		temp++;
 	}
-	ft_free_matrix((void ***)&temp);
+	ft_free_matrix((void **)splited_pline);
 	return (false);
 }
 
@@ -62,7 +62,7 @@ static int	unclosed_quotes(char *pipeline)
 	return (false);
 }
 
-static char	*lexer(char *pipeline, t_hash *hash)
+static char	*lexer(char *pipeline)
 {
 	char	*temp;
 
@@ -70,26 +70,29 @@ static char	*lexer(char *pipeline, t_hash *hash)
 	free(pipeline);
 	pipeline = NULL;
 	easy_splitter(temp);
-	pipeline = expand_vars(temp, hash);
-	if (temp != pipeline)
-		free(temp);
-	return (pipeline);
+	return (temp);
 }
 
 void	parser(char *pipeline, t_hash *hash)
 {
-	pipeline = lexer(pipeline, hash);
+	char	*temp;
+
+	pipeline = lexer(pipeline);
 	if (unclosed_quotes(pipeline))
 	{
 		free(pipeline);
 		insert_node(hash, "?", "2");
 		return ;
 	}
-	if (has_invalid_syntax(ft_split(pipeline, -7)))
-	{
+	temp = expand_vars(pipeline, hash);
+	if (temp != pipeline)
 		free(pipeline);
+	if (has_invalid_syntax(ft_split(temp, -7)))
+	{
+		free(temp);
 		insert_node(hash, "?", "2");
 		return ;
 	}
-	ft_printf("[%s]\n", pipeline);
+	ft_printf("[%s]\n", temp);
+	free(temp);
 }
