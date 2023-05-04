@@ -36,10 +36,10 @@ static int	has_invalid_syntax(char **splited_pline)
 		if (ft_ismetachar(**splited_pline))
 		{
 			if (validate_metachar(splited_pline))
-				{
-					ft_free_matrix((void ***)&temp);
-					return (true);
-				}
+			{
+				ft_free_matrix((void ***)&temp);
+				return (true);
+			}
 		}
 		splited_pline++;
 	}
@@ -71,7 +71,7 @@ static char	*lexer(char *pipeline, t_hash *hash)
 	pipeline = NULL;
 	easy_splitter(temp);
 	pipeline = expand_vars(temp, hash);
-	if (temp != pipeline) // se o endereço das duas for igual significa q n tem $
+	if (temp != pipeline)
 		free(temp);
 	return (pipeline);
 }
