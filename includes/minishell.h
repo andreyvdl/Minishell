@@ -11,8 +11,12 @@
 
 // int return
 int		cd(char *str);
-int		intersections(char *str, char inter);
+int		pipe_case(char **splited_pline);
 int		built_ins(char *input, t_hash *hash, char actions);
+int		write_to_case(char **splited_pline);
+int		intersections(char *str, char inter);
+int		read_from_case(char **splited_pline);
+int		unclosed_quotes_case(char **pipeline, char quote);
 
 //void return
 void	env(t_hash *hash);
@@ -23,6 +27,7 @@ void	export(char *str, t_hash *hash);
 void	parser(char *str, t_hash *hash);
 void	builtins(char *input, t_hash *hash);
 void	insert_node(t_hash *hash, char *key, char *value);
+void	easy_splitter(char *str);
 void	inside_quote_copy(char **str, char **new, char quote);
 void	inside_quote_counter(char **str, size_t *counter, char quote);
 void	copy_with_expansions(char *str, char *new, t_hash *hash);
@@ -36,10 +41,8 @@ char	*expand_vars(char *str, t_hash *hash);
 t_node	*create_node(char *key, char *value);
 
 // new functions, analyze they before putting in the right place
-void	easy_splitter(char *str);
-int	unclosed_quotes_case(char **pipeline, char quote);
-int pipe_case(char **splited_pline);
-int	read_from_case(char **splited_pline);
-int	write_to_case(char **splited_pline);
+void	free_hash(t_hash *hash);
+void	free_all_and_exit(t_hash *hash);
+void	add_to_history(char *pipeline);
 
 #endif // minishell.h
