@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 19:51:30 by adantas-          #+#    #+#             */
-/*   Updated: 2023/04/25 09:45:30 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:10:08 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	start;
 	size_t	end;
 
-	if (s1 == NULL)
+	if (s1 == NULL && *s1 == '\0')
 		return (NULL);
 	start = 0;
 	while (s1[start] != '\0' && set_in_beginning(s1[start], set) == true)
