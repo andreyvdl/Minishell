@@ -11,6 +11,7 @@ void	inside_quote_counter(char **str, size_t *counter, char quote)
 	}
 	if (**str == quote && ft_ismetachar(*(*str + 1)))
 		(*counter)++;
+	(*counter)++;
 }
 
 void	inside_quote_copy(char **str, char **new, char quote)
@@ -31,4 +32,6 @@ void	inside_quote_copy(char **str, char **new, char quote)
 		**new = ' ';
 		(*new)++;
 	}
+	if (**str)
+		(*str)++;
 }
