@@ -54,9 +54,9 @@ void	command(char *input, char **env, t_hash *hash)
 	set_up_hash(hash, env);
 	if (input == NULL)
 		free_all_and_exit(hash);
+	add_to_history(input);
 	pipeline = ft_strtrim(input, "\n\v\t\r\f ");
 	free(input);
-	add_to_history(pipeline);
 	input = separator(pipeline);
 	easy_splitter(input);
 	if (parser(input, hash))
@@ -79,6 +79,11 @@ int	main(int argc, char **argv, char **envp)
 	while (true)
 	{
 		input = readline("Minishell > ");
+		if (input && *input == '\0')
+		{
+			free(input);
+			continue ;
+		}
 		command(input, envp, hash);
 	}
 	return (0);
