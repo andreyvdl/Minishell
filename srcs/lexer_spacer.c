@@ -26,7 +26,10 @@ size_t	size_with_spaces(char *str)
 		if (*str == '\'' || *str == '\"')
 			inside_quote_counter(&str, &counter, *str);
 		else if (metachar_and_quote_cases(str))
-			counter++;
+		{
+			str++;
+			counter += 2;
+		}
 		else
 		{
 			counter++;
@@ -51,7 +54,10 @@ void	copy_2_new_str(char *str, char *new)
 		if (*str == '\'' || *str == '\"')
 			inside_quote_copy(&str, &new, *str);
 		else if (metachar_and_quote_cases(str))
+		{
 			copy_and_add_space(str, &new);
+			str++;
+		}
 		else
 		{
 			*new = *str;
