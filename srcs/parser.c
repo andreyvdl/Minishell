@@ -36,14 +36,10 @@ static int	has_invalid_syntax(char **splited_pline)
 		if (ft_ismetachar(**temp))
 		{
 			if (validate_metachar(temp))
-			{
-				ft_free_matrix((void **)splited_pline);
 				return (true);
-			}
 		}
 		temp++;
 	}
-	ft_free_matrix((void **)splited_pline);
 	return (false);
 }
 
@@ -62,37 +58,22 @@ static int	unclosed_quotes(char *pipeline)
 	return (false);
 }
 
-static char	*lexer(char *pipeline)
+int	parser(char *pipeline, t_hash *hash)
 {
-	char	*temp;
+	char	**splited;
 
-	temp = separator(pipeline);
-	free(pipeline);
-	pipeline = NULL;
-	easy_splitter(temp);
-	return (temp);
-}
-
-void	parser(char *pipeline, t_hash *hash)
-{
-	char	*temp;
-
-	pipeline = lexer(pipeline);
 	if (unclosed_quotes(pipeline))
 	{
-		free(pipeline);
 		insert_node(hash, "?", "2");
-		return ;
+		return (true);
 	}
-	temp = expand_vars(pipeline, hash);
-	if (temp != pipeline)
-		free(pipeline);
-	if (has_invalid_syntax(ft_split(temp, -7)))
+	splited = ft_split(pipeline, -7);
+	if (has_invalid_syntax(splited))
 	{
-		free(temp);
+		ft_free_matrix((void **)splited);
 		insert_node(hash, "?", "2");
-		return ;
+		return (true);
 	}
-	ft_printf("[%s]\n", temp);
-	free(temp);
+	ft_free_matrix((void **)splited);
+	return (false);
 }
