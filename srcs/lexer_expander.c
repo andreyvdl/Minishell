@@ -91,8 +91,7 @@ char	*expand_vars(char *str, t_hash *hash)
 	if (ft_strchr(str, '$'))
 	{
 		size = size_with_values(str, hash);
-		expanded_str = (char *)malloc(size + 1);
-		expanded_str[size] = '\0';
+		expanded_str = (char *)ft_calloc((size + 1), sizeof(char));
 		copy_with_expansions(str, expanded_str, hash);
 		return (expanded_str);
 	}
