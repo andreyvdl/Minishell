@@ -30,11 +30,10 @@ void	printer(char *search, char **input)
 	}
 }
 
-void	command(char *input, char **env, t_hash *hash)
+static void	set_up_hash(t_hash *hash, char **env)
 {
-	static int		i;
-	char			*token;
-	char			*pipeline;
+	char		*token;
+	static int	i;
 
 	if (i == 0)
 	{
@@ -46,12 +45,26 @@ void	command(char *input, char **env, t_hash *hash)
 		}
 		insert_node(hash, "?", "0");
 	}
+}
+
+void	command(char *input, char **env, t_hash *hash)
+{
+	char	*pipeline;
+
+	set_up_hash(hash, env);
 	if (input == NULL)
 		free_all_and_exit(hash);
 	pipeline = ft_strtrim(input, "\n\v\t\r\f ");
 	free(input);
 	add_to_history(pipeline);
-	parser(pipeline, hash);
+	input = separator(pipeline);
+	easy_splitter(input);
+	if (parser(input, hash))
+	{
+		free(input);
+		return ;
+	}
+	free(input);
 	//builtins(input, hash);
 }
 
