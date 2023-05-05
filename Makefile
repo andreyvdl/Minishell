@@ -40,4 +40,10 @@ fclean: clean
 
 re: fclean all
 
+valg: all
+	valgrind -q --leak-check=full --show-leak-kinds=all --suppressions=sup ./minishell
+
+gdb: all
+	gdb --tui minishell
+
 .PHONY: all clean fclean re
