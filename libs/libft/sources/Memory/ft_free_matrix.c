@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:17:07 by adantas-          #+#    #+#             */
-/*   Updated: 2023/05/04 16:57:48 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:18:40 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ void	ft_free_matrix(void **matrix)
 			matrix[line] = NULL;
 			line++;
 		}
+		free(matrix);
+		matrix = NULL;
+	}
+	if (matrix != NULL)
+	{
 		free(matrix);
 		matrix = NULL;
 	}
