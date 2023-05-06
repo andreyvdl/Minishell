@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/25 11:19:26 by adantas-          #+#    #+#             */
-/*   Updated: 2023/05/04 16:58:04 by adantas-         ###   ########.fr       */
+/*   Created: 2023/04/27 17:22:11 by adantas-          #+#    #+#             */
+/*   Updated: 2023/04/27 17:24:44 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libft.h"
 
-/**
- * @brief Free a pointer and set it to NULL;
- * 
- * @param pointer A pointer to the address of the pointer to be freed;
- */
-void	ft_free(void *pointer)
+int	ft_isspace(int c)
 {
-	if (pointer != NULL)
-	{
-		free(pointer);
-		pointer = NULL;
-	}
+	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r' || \
+		c == ' ')
+		return (true);
+	return (false);
 }

@@ -1,15 +1,12 @@
 #include "../includes/minishell.h"
 
-//t_node	*create_node(char *key, char *value)
-
 char	*env_collect(char *str)
 {	
-	char *s;
-	int i;
+	int		i;
+	char	*s;
 
 	i = 0;
 	s = str;
-
 	while (s[i] != '=' && s[i])
 		i++;
 	s[i] = '\0';
@@ -18,51 +15,76 @@ char	*env_collect(char *str)
 
 void	printer(char *search, char **input)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (input[i])
 	{
 		if (ft_strcmp(search, input[i]) == 0)
 		{
-			printf(input[i]);
-			return;
+			printf("%s", input[i]);
+			return ;
 		}
-		printf(input[i]);
+		printf("%s", input[i]);
 		i++;
 	}
 }
 
-
-void	command(char *(*read)(const char *), char **env, t_hash *hash)
+static void	set_up_hash(t_hash *hash, char **env)
 {
-		int	i;
-		char	*input; 
-	
-		i = 0;
-		char *token;
-		
-		
+	char		*token;
+	static int	i;
+
+	if (i == 0)
+	{
 		while (env[i])
 		{
 			token = env_collect(env[i]);
 			insert_node(hash, token, &env[i][ft_strlen(env[i]) + 1]);
 			i++;
 		}
-		input = read("minishell:> ");
-		printf("%s\n", search(hash, input));
-		
-		
+		insert_node(hash, "?", "0");
+	}
+}
+
+void	command(char *input, char **env, t_hash *hash)
+{
+	char	*pipeline;
+
+	set_up_hash(hash, env);
+	if (input == NULL)
+		free_all_and_exit(hash);
+	add_to_history(input);
+	pipeline = ft_strtrim(input, "\n\v\t\r\f ");
+	free(input);
+	input = separator(pipeline);
+	easy_splitter(input);
+	if (parser(input, hash))
+	{
+		free(input);
+		return ;
+	}
+	free(input);
+	//builtins(input, hash);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
+	t_hash	*hash;
+	char	*input;
+
 	(void)argc;
 	(void)argv;
-	
-	t_hash *hash;
-	
-	hash = (t_hash *)malloc(sizeof(t_hash));
-
+	hash = (t_hash *)ft_calloc(sizeof(t_hash), 1);
 	while (true)
-		command(readline, envp, hash);
+	{
+		input = readline("Minishell > ");
+		if (input && *input == '\0')
+		{
+			free(input);
+			continue ;
+		}
+		command(input, envp, hash);
+	}
 	return (0);
 }

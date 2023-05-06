@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 15:00:37 by adantas-          #+#    #+#             */
-/*   Updated: 2023/04/25 22:35:29 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:59:44 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ int				ft_isalpha(int c);
 int				ft_isascii(int c);
 int				ft_isdigit(int c);
 int				ft_islower(int c);
+int				ft_ismetachar(int c);
 int				ft_isprime(int nb);
 int				ft_isprint(int c);
+int				ft_isspace(int c);
 int				ft_isupper(int c);
 
 char			*ft_itoa(int n);
@@ -44,6 +46,7 @@ char			*ft_itob(int nbr);
 char			*ft_itoh(int n);
 char			*ft_itoo(int n);
 int				ft_atoi(const char *nptr);
+ssize_t			ft_atoll(const char *nptr);
 int				ft_btoi(const char *binary);
 int				ft_htoi(const char *hexadecimal);
 int				ft_otoi(const char *octal);
@@ -89,8 +92,8 @@ void			*ft_memcpy(void *dst, const void *src, size_t n);
 void			*ft_memmove(void *dst, const void *src, size_t n);
 void			*ft_memset(void *s, int c, size_t n);
 void			ft_bzero(void *s, size_t n);
-void			ft_free(void **pointer);
-void			ft_free_matrix(void ***matrix);
+void			ft_free(void *pointer);
+void			ft_free_matrix(void **matrix);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 void			ft_swap(void **pointer1, void **pointer2);
 

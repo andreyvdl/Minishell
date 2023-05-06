@@ -64,14 +64,14 @@ static char	**allocate_strings(char const *string, char delimiter, \
 	{
 		while (string[index] == delimiter)
 			index++;
-		*matrix[line] = (char *)malloc(get_word_size(string, delimiter, index) \
+		(*matrix)[line] = (char *)malloc(get_word_size(string, delimiter, index) \
 										+ 1);
-		if (*matrix[line] == NULL)
+		if ((*matrix)[line] == NULL)
 		{
 			clear_matrix(matrix, line);
 			return (NULL);
 		}
-		copy_word(string, &(*matrix[line]), delimiter, &index);
+		copy_word(string, &(*matrix)[line], delimiter, &index);
 		line++;
 	}
 	(*matrix)[line] = NULL;
