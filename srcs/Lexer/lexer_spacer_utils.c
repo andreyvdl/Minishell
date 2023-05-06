@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	inside_quote_counter(char **str, size_t *counter, char quote)
 {

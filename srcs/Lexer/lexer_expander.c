@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 static void	get_dollar_value_size(char **str, size_t *counter, t_hash *hash)
 {

@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	unclosed_quotes_case(char **pipeline, char quote)
 {

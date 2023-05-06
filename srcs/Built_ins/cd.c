@@ -1,6 +1,6 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	unset(char *str, t_hash *hash)
+int	cd(char *str)
 {
 	while (*str && (*str != ' ' &&  *str != '\t'))
 		str++;
@@ -8,5 +8,5 @@ void	unset(char *str, t_hash *hash)
 		str++;
 	ft_putstr(str);
 	ft_putchar('\n');
-	(void)hash;
+	return (0);
 }
