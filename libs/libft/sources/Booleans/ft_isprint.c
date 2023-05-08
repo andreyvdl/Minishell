@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:23:55 by adantas-          #+#    #+#             */
-/*   Updated: 2023/04/25 17:34:00 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:46:53 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@
 int	ft_isprint(int c)
 {
 	if (c >= ' ' && c <= '~')
-		return (true);
-	return (false);
+		return (TRUE);
+	return (FALSE);
 }
