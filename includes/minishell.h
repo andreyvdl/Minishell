@@ -1,16 +1,25 @@
 #ifndef MINISHELL_H
-#define MINISHELL_H
+# define MINISHELL_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "./minishell_typedefs.h"
-#include "../libs/libft/includes/libft.h"
+# include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <sys/wait.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include "./minishell_typedefs.h"
+# include "../libs/libft/includes/libft.h"
+
+
+# ifndef RED
+#  define RED "\033[31m"
+# endif
+
+# ifndef RST
+#  define RST "\033[0m"
+# endif
 
 // int return
 int		cd(char *str);
