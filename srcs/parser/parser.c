@@ -5,25 +5,25 @@ static int	validate_metachar(char **splited_pline)
 {
 	if (**splited_pline == '&')
 	{
-		ft_putendl_fd("\e[31mms: unsuported syntax `&`\e[0m", 2);
-		return (true);
+		ft_putendl_fd(RED"ms: unsuported syntax `&`"RST, STDERR_FILENO);
+		return (TRUE);
 	}
 	else if (**splited_pline == '|')
 	{
 		if (pipe_case(splited_pline))
-			return (true);
+			return (TRUE);
 	}
 	else if (**splited_pline == '<')
 	{
 		if (read_from_case(splited_pline))
-			return (true);
+			return (TRUE);
 	}
 	else if (**splited_pline == '>')
 	{
 		if (write_to_case(splited_pline))
-			return (true);
+			return (TRUE);
 	}
-	return (false);
+	return (FALSE);
 }
 
 static int	has_invalid_syntax(char **splited_pline)
@@ -36,11 +36,11 @@ static int	has_invalid_syntax(char **splited_pline)
 		if (ft_ismetachar(**temp))
 		{
 			if (validate_metachar(temp))
-				return (true);
+				return (TRUE);
 		}
 		temp++;
 	}
-	return (false);
+	return (FALSE);
 }
 
 static int	unclosed_quotes(char *pipeline)
@@ -50,34 +50,12 @@ static int	unclosed_quotes(char *pipeline)
 		if (*pipeline == '\'' || *pipeline == '\"')
 		{
 			if (unclosed_quotes_case(&pipeline, *pipeline))
-				return (true);
+				return (TRUE);
 		}
 		else
 			pipeline++;
 	}
-	return (false);
-}
-
-static void remove_quotes(char *pipeline)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (pipeline && pipeline[i])
-	{
-		if (pipeline[i] == '\'' || pipeline[i] == '\"' || pipeline[i] == '`')
-		{
-			j = i;
-			while (pipeline && pipeline[j])
-			{
-				pipeline[j] = pipeline[j + 1];
-				j++;
-			}
-			i--;
-		}
-		i++;
-	}
+	return (FALSE);
 }
 
 int	parser(char *pipeline, t_hash *hash)
@@ -87,18 +65,23 @@ int	parser(char *pipeline, t_hash *hash)
 	if (unclosed_quotes(pipeline))
 	{
 		insert_node(hash, "?", "2");
-		return (true);
+		return (TRUE);
 	}
-	remove_quotes(pipeline);
 	splited = ft_split(pipeline, -7);
 	if (has_invalid_syntax(splited))
 	{
 		ft_free_matrix((void **)splited);
 		insert_node(hash, "?", "2");
-		return (true);
+		return (TRUE);
+	}
+	if (redirect_invalid(splited))
+	{
+		ft_free_matrix((void **)splited);
+		insert_node(hash, "?", "1");
+		return (TRUE);
 	}
 	execute_line(expand_vars(pipeline, hash), hash);
 	ft_printf("\n");
 	ft_free_matrix((void **)splited);
-	return (false);
+	return (FALSE);
 }
