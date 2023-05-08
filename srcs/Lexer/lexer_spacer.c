@@ -3,17 +3,17 @@
 int	metachar_and_quote_cases(char *str)
 {
 	if (ft_ismetachar(*(str + 1)) && !ft_ismetachar(*str) && *str != ' ')
-		return (true);
+		return (TRUE);
 	else if (ft_ismetachar(*str) && !ft_ismetachar(*(str + 1)) && \
 	*(str + 1) != ' ' && *(str + 1) != '\0')
-		return (true);
+		return (TRUE);
 	else if ((*str == '|' && (*(str + 1) == '<' || *(str + 1) == '>')) || \
 	((*str == '<' || *str == '>') && *(str + 1) == '|'))
-		return (true);
+		return (TRUE);
 	else if ((*(str + 1) == '\'' || *(str + 1) == '\"') && *str != ' ' && \
 	!ft_isalnum(*str))
-		return (true);
-	return (false);
+		return (TRUE);
+	return (FALSE);
 }
 
 size_t	size_with_spaces(char *str)
