@@ -58,6 +58,28 @@ static int	unclosed_quotes(char *pipeline)
 	return (false);
 }
 
+static void remove_quotes(char *pipeline)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (pipeline && pipeline[i])
+	{
+		if (pipeline[i] == '\'' || pipeline[i] == '\"' || pipeline[i] == '`')
+		{
+			j = i;
+			while (pipeline && pipeline[j])
+			{
+				pipeline[j] = pipeline[j + 1];
+				j++;
+			}
+			i--;
+		}
+		i++;
+	}
+}
+
 int	parser(char *pipeline, t_hash *hash)
 {
 	char	**splited;
@@ -67,6 +89,7 @@ int	parser(char *pipeline, t_hash *hash)
 		insert_node(hash, "?", "2");
 		return (true);
 	}
+	remove_quotes(pipeline);
 	splited = ft_split(pipeline, -7);
 	if (has_invalid_syntax(splited))
 	{
@@ -74,6 +97,8 @@ int	parser(char *pipeline, t_hash *hash)
 		insert_node(hash, "?", "2");
 		return (true);
 	}
+	execute_line(expand_vars(pipeline, hash), hash);
+	ft_printf("\n");
 	ft_free_matrix((void **)splited);
 	return (false);
 }

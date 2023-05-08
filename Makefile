@@ -30,19 +30,21 @@ SRCS_LEXER = srcs/Lexer/lexer_easy_splitter.c \
 SRCS_PARSER = srcs/parser/parser.c \
 		srcs/parser/parser_utils.c
 
-SRCS_OTHERS = srcs/main.c \
-		srcs/pipe.c
+SRCS_EXECUTOR = srcs/executor/executor.c
 
-SRCS = $(SRCS_BUILT_INS) $(SRCS_ESSENTIALS) $(SRCS_HASH_TABLE) $(SRCS_LEXER) $(SRCS_PARSER) $(SRCS_OTHERS)
+SRCS_OTHERS = srcs/main.c
 
-OBJS_BUILT_INS = $(patsubst srcs/Built_ins/%.c,builds/Built_ins/%.o,$(SRCS_BUILT_INS))
+SRCS = $(SRCS_BUILT_INS) $(SRCS_ESSENTIALS) $(SRCS_HASH_TABLE) $(SRCS_LEXER) $(SRCS_PARSER) $(SRCS_EXECUTOR) $(SRCS_OTHERS)
+
 OBJS_ESSENTIALS = $(patsubst srcs/essentials/%.c,builds/essentials/%.o,$(SRCS_ESSENTIALS))
 OBJS_HASH_TABLE = $(patsubst srcs/Hash_table/%.c,builds/Hash_table/%.o,$(SRCS_HASH_TABLE))
-OBJS_LEXER = $(patsubst srcs/Lexer/%.c,builds/Lexer/%.o,$(SRCS_LEXER))
+OBJS_BUILT_INS = $(patsubst srcs/Built_ins/%.c,builds/Built_ins/%.o,$(SRCS_BUILT_INS))
+OBJS_EXECUTOR = $(patsubst srcs/executor/%.c,builds/executor/%.o,$(SRCS_EXECUTOR))
 OBJS_PARSER = $(patsubst srcs/parser/%.c,builds/parser/%.o,$(SRCS_PARSER))
+OBJS_LEXER = $(patsubst srcs/Lexer/%.c,builds/Lexer/%.o,$(SRCS_LEXER))
 OBJS_OTHERS = $(patsubst %.c,builds/%.o,$(notdir $(SRCS_OTHERS)))
 
-OBJS = $(OBJS_BUILT_INS) $(OBJS_ESSENTIALS) $(OBJS_HASH_TABLE) $(OBJS_LEXER) $(OBJS_PARSER) $(OBJS_OTHERS)
+OBJS = $(OBJS_BUILT_INS) $(OBJS_ESSENTIALS) $(OBJS_HASH_TABLE) $(OBJS_LEXER) $(OBJS_PARSER) $(OBJS_OTHERS) $(OBJS_EXECUTOR)
 
 
 all: CFLAGS += -O2 #flagzinha de otimizacao n se importe por enquanto
@@ -81,6 +83,11 @@ builds/parser/%.o: srcs/parser/%.c
 	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+builds/executor/%.o: srcs/executor/%.c
+	@mkdir -p builds/executor
+	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
 builds/%.o: srcs/%.c
 	@mkdir -p builds
 	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
@@ -104,4 +111,4 @@ gdb: all
 
 re: fclean all
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re
