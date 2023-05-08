@@ -13,7 +13,7 @@ char	*env_collect(char *str)
 	return (s);
 }
 
-void	printer(char *search, char **input)
+/* void	printer(char *search, char **input)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ void	printer(char *search, char **input)
 		printf("%s", input[i]);
 		i++;
 	}
-}
+} */
 
 static void	set_up_hash(t_hash *hash, char **env)
 {
@@ -64,8 +64,7 @@ void	command(char *input, char **env, t_hash *hash)
 		free(input);
 		return ;
 	}
-	free(input);
-	//builtins(input, hash);
+	token_and_execution(input, hash);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -76,7 +75,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	hash = (t_hash *)ft_calloc(sizeof(t_hash), 1);
-	while (true)
+	while (TRUE)
 	{
 		input = readline("Minishell > ");
 		if (input && *input == '\0')
