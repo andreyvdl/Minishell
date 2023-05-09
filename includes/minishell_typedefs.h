@@ -17,15 +17,15 @@ typedef struct s_hash {
 }	t_hash;
 
 typedef struct s_command {
-	char	*command;
-	char	*args[];
+	char	*path;
+	char	**args;
 	int		write_to;
 	int		read_from;
 }	t_command;
 
 typedef struct s_pipe {
-	t_command	*command[];
-	char		*envp[];
+	t_command	**command;
+	char		**envp;
 }	t_pipe;
 
 #endif
