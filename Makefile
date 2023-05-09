@@ -26,12 +26,15 @@ SRCS_LEXER = srcs/Lexer/lexer_easy_splitter.c \
 		srcs/Lexer/lexer_spacer_utils.c
 
 SRCS_PARSER = srcs/parser/parser.c \
-		srcs/parser/parser_utils.c
+		srcs/parser/parser_utils.c \
+		srcs/parser/parser_reading_invalid.c \
+		srcs/parser/parser_writing_invalid.c \
+		srcs/parser/parser_redirects.c
 
 SRCS_EXECUTOR = srcs/executor/executor.c
 
-SRCS_TOKEN = srcs/Lexer/lexer_expander.c \
-		srcs/Lexer/lexer_expander_utils.c
+SRCS_TOKEN = srcs/Tokenizer/token_expander.c \
+		srcs/Tokenizer/token_expander_utils.c
 
 SRCS_OTHERS = srcs/main.c
 
@@ -87,6 +90,11 @@ builds/parser/%.o: srcs/parser/%.c
 
 builds/executor/%.o: srcs/executor/%.c
 	@mkdir -p builds/executor
+	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+builds/Tokenizer/%.o: srcs/Tokenizer/%.c
+	@mkdir -p builds/Tokenizer
 	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
