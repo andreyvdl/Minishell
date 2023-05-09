@@ -5,7 +5,7 @@ static int	validate_metachar(char **splited_pline)
 {
 	if (**splited_pline == '&')
 	{
-		ft_putendl_fd(RED"ms: unsuported syntax `&`"RST, STDERR_FILENO);
+		ft_printf_fd(STDERR_FILENO, ERR_UNS_SYNTAX);
 		return (TRUE);
 	}
 	else if (**splited_pline == '|')
@@ -58,6 +58,11 @@ static int	unclosed_quotes(char *pipeline)
 	return (FALSE);
 }
 
+/*
+TODO: separate the redirections from the pipeline before verify if they are
+valid: bash accepts: `ls < gjabgja | cat > jgbahga` as two errors !!NOT ONE!!;
+*/
+
 int	parser(char *pipeline, t_hash *hash)
 {
 	char	**splited;
@@ -74,14 +79,14 @@ int	parser(char *pipeline, t_hash *hash)
 		insert_node(hash, "?", "2");
 		return (TRUE);
 	}
-	if (redirect_invalid(splited))
+	if (redirect_invalid(splited, hash))
 	{
 		ft_free_matrix((void **)splited);
 		insert_node(hash, "?", "1");
 		return (TRUE);
 	}
-	execute_line(expand_vars(pipeline, hash), hash);
-	ft_printf("\n");
+	// execute_line(expand_vars(pipeline, hash), hash);
+	// ft_printf("\n");
 	ft_free_matrix((void **)splited);
 	return (FALSE);
 }
