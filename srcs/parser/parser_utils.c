@@ -7,8 +7,7 @@ int	unclosed_quotes_case(char **pipeline, char quote)
 		(*pipeline)++;
 	if (**pipeline == '\0')
 	{
-		ft_printf_fd(STDERR_FILENO, RED"ms: close this quote `%c`\n"RST, \
-		quote);
+		ft_printf_fd(STDERR_FILENO, ERR_QUOTE, quote);
 		return (TRUE);
 	}
 	(*pipeline)++;
@@ -19,20 +18,18 @@ int	pipe_case(char **splited_pline)
 {
 	if (*(*splited_pline + 1) == '|' || *(*splited_pline + 1) == '&')
 	{
-		ft_printf_fd(STDERR_FILENO, RED"ms: unsuported syntax `%s`\n"RST, \
-		*splited_pline);
+		ft_printf_fd(STDERR_FILENO, ERR_UNS_SYNTAX, *splited_pline);
 		return (TRUE);
 	}
 	else if (*(splited_pline + 1) == NULL)
 	{
-		ft_putendl_fd(RED"ms: syntax error `EOL`"RST, STDERR_FILENO);
+		ft_putendl_fd(ERR_EOL_SYNTAX, STDERR_FILENO);
 		return (TRUE);
 	}
 	else if (ft_ismetachar(**(splited_pline + 1)) && \
 	**(splited_pline + 1) != '<' && **(splited_pline +1) != '>')
 	{
-		ft_printf_fd(STDERR_FILENO, \
-		RED"ms: syntax error after `%s`\n"RST, *splited_pline);
+		ft_printf_fd(STDERR_FILENO, ERR_NEXT_SYNTAX, *splited_pline);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -43,19 +40,17 @@ int	read_from_case(char **splited_pline)
 	if (ft_strncmp(*splited_pline, "<<<", 3) == 0 || ft_strstr(*splited_pline, \
 	">") || ft_strstr(*splited_pline, "&"))
 	{
-		ft_printf_fd(STDERR_FILENO, \
-		RED"ms: syntax error `%s`\n"RST, *splited_pline);
+		ft_printf_fd(STDERR_FILENO, ERR_NOW_SYNTAX, *splited_pline);
 		return (TRUE);
 	}
 	else if (*(splited_pline + 1) == NULL)
 	{
-		ft_putendl_fd(RED"ms: syntax error `EOL`"RST, STDERR_FILENO);
+		ft_putendl_fd(ERR_EOL_SYNTAX, STDERR_FILENO);
 		return (TRUE);
 	}
 	else if (ft_ismetachar(**(splited_pline + 1)))
 	{
-		ft_printf_fd(STDERR_FILENO, \
-		RED"ms: syntax error after `%s`\n"RST, *splited_pline);
+		ft_printf_fd(STDERR_FILENO, ERR_NEXT_SYNTAX, *splited_pline);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -66,19 +61,17 @@ int	write_to_case(char **splited_pline)
 	if (ft_strncmp(*splited_pline, ">>>", 3) == 0 || ft_strstr(*splited_pline, \
 	"<") || ft_strstr(*splited_pline, "&"))
 	{
-		ft_printf_fd(STDERR_FILENO, \
-		RED"ms: syntax error `%s`\n"RST, *splited_pline);
+		ft_printf_fd(STDERR_FILENO, ERR_NOW_SYNTAX, *splited_pline);
 		return (TRUE);
 	}
 	else if (*(splited_pline + 1) == NULL)
 	{
-		ft_putendl_fd(RED"ms: syntax error `EOL`"RST, STDERR_FILENO);
+		ft_putendl_fd(ERR_EOL_SYNTAX, STDERR_FILENO);
 		return (TRUE);
 	}
 	else if (ft_ismetachar(**(splited_pline + 1)))
 	{
-		ft_printf_fd(STDERR_FILENO, \
-		RED"ms: syntax error after `%s`\n"RST, *splited_pline);
+		ft_printf_fd(STDERR_FILENO, ERR_NEXT_SYNTAX, *splited_pline);
 		return (TRUE);
 	}
 	return (FALSE);
