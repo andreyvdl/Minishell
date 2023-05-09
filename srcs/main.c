@@ -64,7 +64,7 @@ void	command(char *input, char **env, t_hash *hash)
 		free(input);
 		return ;
 	}
-	token_and_execution(input, hash);
+	// token_and_execution(input, hash);
 }
 
 int	main(int argc, char **argv, char **envp)
