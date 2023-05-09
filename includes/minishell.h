@@ -12,13 +12,32 @@
 # include "./minishell_typedefs.h"
 # include "../libs/libft/includes/libft.h"
 
-
-# ifndef RED
-#  define RED "\033[31m"
+# ifndef ERR_QUOTE
+#  define ERR_QUOTE "\033[31mms: close this quote `%c`\n\033[0m"
 # endif
 
-# ifndef RST
-#  define RST "\033[0m"
+# ifndef ERR_UNS_SYNTAX
+#  define ERR_UNS_SYNTAX "\033[31mms: unsuported syntax `%s`\n\033[0m"
+# endif
+
+# ifndef ERR_EOL_SYNTAX
+#  define ERR_EOL_SYNTAX "\033[31mms: syntax error `EOL`\033[0m"
+# endif
+
+# ifndef ERR_NEXT_SYNTAX
+#  define ERR_NEXT_SYNTAX "\033[31mms: syntax error after `%s`\n\033[0m"
+# endif
+
+# ifndef ERR_NOW_SYNTAX
+#  define ERR_NOW_SYNTAX "\033[31mms: syntax error `%s`\n\033[0m"
+# endif
+
+# ifndef ERR_READING
+#  define ERR_READING "\033[31mms: read error\033[0m"
+# endif
+
+# ifndef ERR_WRITING
+#  define ERR_WRITING "\033[31mms: write error\033[0m"
 # endif
 
 // int return
@@ -57,5 +76,8 @@ char	*expand_vars(char *str, t_hash *hash);
 t_node	*create_node(char *key, char *value);
 
 // new functions, analyze they before putting in the right place
+int		redirect_invalid(char **split_pline, t_hash *hash);
+int		reading_invalid(char *file, t_hash *hash);
+int		writing_invalid(char *file, t_hash *hash);
 
 #endif // minishell.h
