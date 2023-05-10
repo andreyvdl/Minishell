@@ -32,18 +32,16 @@ char	*env_collect(char *str)
 
 static void	set_up_hash(t_hash *hash, char **env)
 {
-	char		*token;
-	static int	i;
+	int		i;
+	char	*token;
 
-	if (i == 0)
+	insert_node(hash, "?", "0");
+	i = 0;
+	while (env[i])
 	{
-		while (env[i])
-		{
-			token = env_collect(env[i]);
-			insert_node(hash, token, &env[i][ft_strlen(env[i]) + 1]);
-			i++;
-		}
-		insert_node(hash, "?", "0");
+		token = env_collect(env[i]);
+		insert_node(hash, token, &env[i][ft_strlen(env[i]) + 1]);
+		i++;
 	}
 }
 
@@ -51,19 +49,18 @@ void	command(char *input, char **env, t_hash *hash)
 {
 	char	*pipeline;
 
-	set_up_hash(hash, env);
 	if (input == NULL)
 		free_all_and_exit(hash);
 	add_to_history(input);
 	pipeline = ft_strtrim(input, "\n\v\t\r\f ");
 	free(input);
 	input = separator(pipeline);
-	easy_splitter(input);
 	if (parser(input, hash))
 	{
 		free(input);
 		return ;
 	}
+	// tokenizer(input, hash);
 	// token_and_execution(input, hash);
 }
 
@@ -75,6 +72,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	hash = (t_hash *)ft_calloc(sizeof(t_hash), 1);
+	set_up_hash(hash, envp);
 	while (TRUE)
 	{
 		input = readline("Minishell > ");
