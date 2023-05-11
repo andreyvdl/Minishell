@@ -5,7 +5,7 @@ static int	validate_metachar(char **splited_pline)
 {
 	if (**splited_pline == '&')
 	{
-		ft_printf_fd(STDERR_FILENO, ERR_UNS_SYNTAX);
+		ft_printf_fd(STDERR_FILENO, ERR_UNS_SYNTAX, *splited_pline);
 		return (TRUE);
 	}
 	else if (**splited_pline == '|')
