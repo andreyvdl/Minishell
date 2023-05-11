@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 LIBFT = libs/libft/libft.a
 INCLUDES = -I includes -I libs/libft/includes
 
@@ -52,10 +52,10 @@ OBJS_OTHERS = $(patsubst %.c,builds/%.o,$(notdir $(SRCS_OTHERS)))
 OBJS = $(OBJS_BUILT_INS) $(OBJS_ESSENTIALS) $(OBJS_HASH_TABLE) $(OBJS_LEXER) $(OBJS_PARSER) $(OBJS_OTHERS) $(OBJS_EXECUTOR) ${OBJS_TOKEN}
 
 
-all: CFLAGS += -O2 #flagzinha de otimizacao n se importe por enquanto
+# all: CFLAGS += -O2 #flagzinha de otimizacao n se importe por enquanto
 all: $(NAME)
 
-debug: CFLAGS += -g
+# debug: CFLAGS += -g3
 debug: fclean all
 
 $(NAME): $(OBJS)
