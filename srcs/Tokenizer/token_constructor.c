@@ -1,37 +1,5 @@
 #include "../../includes/minishell.h"
 
-/* static void	pass_quotes(char **input, char quote)
-{
-	(*input)++;
-	while (**input != quote)
-		(*input)++;
-}
-
-static void	count_cmds(char *input, size_t *n_cmds)
-{
-	(*n_cmds)++;
-	while (*input)
-	{
-		if (*input == '|')
-			(*n_cmds)++;
-		else if (*input == '\'' || *input == '\"')
-			pass_quotes(&input, *input);
-		input++;
-	}
-}
-
-// TODO: make this function cut part of the command: `ls-7-la-7|-7echo-7oi`
-// to: `ls-7-la` and `echo-7oi`
-
-static char	*extract_cmd(char **input)
-{
-	char	*cmd;
-	char	*temp;
-
-	temp = *input;
-	while (**)
-}
-
 static char	**count_and_fill(char *input, size_t *n_cmds)
 {
 	char	**commands;
@@ -45,6 +13,8 @@ static char	**count_and_fill(char *input, size_t *n_cmds)
 		commands[index] = extract_cmd(&input);
 		index++;
 	}
+	commands[index] = NULL;
+	return (commands);
 }
 
 void	tokenizer(char *input, t_hash *hash)
@@ -54,4 +24,18 @@ void	tokenizer(char *input, t_hash *hash)
 
 	n_cmds = 0;
 	commands = count_and_fill(input, &n_cmds);
-} */
+	/*
+	* os comandos estao em commands cada um em 1 string, todos com aspas, sem expandir e com os redirects;
+	todo: leitura/escrita de arquivos do filho.
+	todo: checagem de acesso de arquivos.
+	todo: resto das bultins.
+	todo: status code.
+	todo: resumindo abaixo.
+	pai: faz o lexer e parseia por aspas e syntax;
+		se for 1 comando e for builtin ele executa
+		se for 1 comando e nao for builtin o filho executa
+	filho: abre arquivos e executa comandos;
+		se os comandos forem builtins ele deve retornar o status pro pai
+		se os comandos nao forem builtins ele deve executar enquanto o pai espera o retorno
+	 */
+}
