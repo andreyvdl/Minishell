@@ -13,31 +13,31 @@
 # include "../libs/libft/includes/libft.h"
 
 # ifndef ERR_QUOTE
-#  define ERR_QUOTE "\033[31mms: close this quote `%c`\n\033[0m"
+#  define ERR_QUOTE "\e[5;31mms: close this quote \e[1m`%c`\n\e[0m"
 # endif
 
 # ifndef ERR_UNS_SYNTAX
-#  define ERR_UNS_SYNTAX "\033[31mms: unsuported syntax `%s`\n\033[0m"
+#  define ERR_UNS_SYNTAX "\e[5;31mms: unsuported syntax \e[1m`%s`\n\e[0m"
 # endif
 
 # ifndef ERR_EOL_SYNTAX
-#  define ERR_EOL_SYNTAX "\033[31mms: syntax error `EOL`\033[0m"
+#  define ERR_EOL_SYNTAX "\e[5;31mms: syntax error \e[1m`EOL`\e[0m"
 # endif
 
 # ifndef ERR_NEXT_SYNTAX
-#  define ERR_NEXT_SYNTAX "\033[31mms: syntax error after `%s`\n\033[0m"
+#  define ERR_NEXT_SYNTAX "\e[5;31mms: syntax error after \e[1m`%s`\n\e[0m"
 # endif
 
 # ifndef ERR_NOW_SYNTAX
-#  define ERR_NOW_SYNTAX "\033[31mms: syntax error `%s`\n\033[0m"
+#  define ERR_NOW_SYNTAX "\e[5;31mms: syntax error \e[1m`%s`\n\e[0m"
 # endif
 
 # ifndef ERR_READING
-#  define ERR_READING "\033[31mms: read error\033[0m"
+#  define ERR_READING "\e[1;5;31mms: read error\e[0m"
 # endif
 
 # ifndef ERR_WRITING
-#  define ERR_WRITING "\033[31mms: write error\033[0m"
+#  define ERR_WRITING "\e[1;5;31mms: write error\e[0m"
 # endif
 
 // int return
