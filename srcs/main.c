@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-char	*env_collect(char *str)
+static char	*env_collect(char *str)
 {	
 	int		i;
 	char	*s;
@@ -45,7 +45,7 @@ static void	set_up_hash(t_hash *hash, char **env)
 	}
 }
 
-void	command(char *input, char **env, t_hash *hash)
+static void	command(char *input, t_hash *hash)
 {
 	char	*pipeline;
 
@@ -81,7 +81,7 @@ int	main(int argc, char **argv, char **envp)
 			free(input);
 			continue ;
 		}
-		command(input, envp, hash);
+		command(input, hash);
 	}
 	return (0);
 }
