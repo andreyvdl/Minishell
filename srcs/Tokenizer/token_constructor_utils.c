@@ -37,7 +37,7 @@ char	*extract_cmd(char **input)
 	char	*cmd;
 	char	*temp;
 
-	temp = input;
+	temp = *input;
 	while (**input && **input != '|')
 	{
 		if (**input == '\'' || **input == '\"')

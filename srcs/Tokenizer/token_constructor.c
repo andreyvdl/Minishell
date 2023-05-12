@@ -24,6 +24,10 @@ void	tokenizer(char *input, t_hash *hash)
 
 	n_cmds = 0;
 	commands = count_and_fill(input, &n_cmds);
+	for (int i = 0; commands && commands[i]; i++){
+		redirection(commands[i]);
+	}
+	(void)hash;
 	/*
 	* os comandos estao em commands cada um em 1 string, todos com aspas, sem expandir e com os redirects;
 	todo: leitura/escrita de arquivos do filho.

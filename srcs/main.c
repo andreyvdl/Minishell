@@ -60,8 +60,8 @@ static void	command(char *input, t_hash *hash)
 		free(input);
 		return ;
 	}
-	// tokenizer(input, hash);
-	// token_and_execution(input, hash);
+	tokenizer(input, hash);
+	//token_and_execution(input, hash);
 }
 
 int	main(int argc, char **argv, char **envp)
