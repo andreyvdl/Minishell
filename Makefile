@@ -33,23 +33,29 @@ SRCS_PARSER = srcs/parser/parser.c \
 
 SRCS_EXECUTOR = srcs/executor/executor.c
 
+SRCS_REDIRECTIONS = srcs/redirections/redirect.c \
+	srcs/redirections/redirect_utils.c \
+
 SRCS_TOKEN = srcs/Tokenizer/token_expander.c \
-		srcs/Tokenizer/token_expander_utils.c
+		srcs/Tokenizer/token_expander_utils.c \
+		srcs/Tokenizer/token_constructor.c \
+		srcs/Tokenizer/token_constructor_utils.c \
 
 SRCS_OTHERS = srcs/main.c
 
-SRCS = $(SRCS_BUILT_INS) $(SRCS_ESSENTIALS) $(SRCS_HASH_TABLE) $(SRCS_LEXER) $(SRCS_PARSER) $(SRCS_EXECUTOR) $(SRCS_OTHERS)
+SRCS = $(SRCS_BUILT_INS) $(SRCS_ESSENTIALS) $(SRCS_HASH_TABLE) $(SRCS_LEXER) $(SRCS_PARSER) $(SRCS_EXECUTOR) $(SRCS_REDIRECTIONS) $(SRCS_OTHERS)
 
+OBJS_REDIRECTIONS = $(patsubst srcs/redirections/%.c,builds/redirections/%.o,$(SRCS_REDIRECTIONS))
 OBJS_ESSENTIALS = $(patsubst srcs/essentials/%.c,builds/essentials/%.o,$(SRCS_ESSENTIALS))
 OBJS_HASH_TABLE = $(patsubst srcs/Hash_table/%.c,builds/Hash_table/%.o,$(SRCS_HASH_TABLE))
 OBJS_BUILT_INS = $(patsubst srcs/Built_ins/%.c,builds/Built_ins/%.o,$(SRCS_BUILT_INS))
 OBJS_EXECUTOR = $(patsubst srcs/executor/%.c,builds/executor/%.o,$(SRCS_EXECUTOR))
+OBJS_TOKEN = $(patsubst srcs/Tokenizer/%.c,builds/Tokenizer/%.o,$(SRCS_TOKEN))
 OBJS_PARSER = $(patsubst srcs/parser/%.c,builds/parser/%.o,$(SRCS_PARSER))
 OBJS_LEXER = $(patsubst srcs/Lexer/%.c,builds/Lexer/%.o,$(SRCS_LEXER))
-OBJS_TOKEN = $(patsubst srcs/Tokenizer/%.c,builds/Tokenizer/%.o,$(SRCS_TOKEN))
 OBJS_OTHERS = $(patsubst %.c,builds/%.o,$(notdir $(SRCS_OTHERS)))
 
-OBJS = $(OBJS_BUILT_INS) $(OBJS_ESSENTIALS) $(OBJS_HASH_TABLE) $(OBJS_LEXER) $(OBJS_PARSER) $(OBJS_OTHERS) $(OBJS_EXECUTOR) ${OBJS_TOKEN}
+OBJS = $(OBJS_BUILT_INS) $(OBJS_REDIRECTIONS) $(OBJS_ESSENTIALS) $(OBJS_HASH_TABLE) $(OBJS_LEXER) $(OBJS_PARSER) $(OBJS_OTHERS) $(OBJS_EXECUTOR) ${OBJS_TOKEN}
 
 
 # all: CFLAGS += -O2 #flagzinha de otimizacao n se importe por enquanto
@@ -95,6 +101,11 @@ builds/executor/%.o: srcs/executor/%.c
 
 builds/Tokenizer/%.o: srcs/Tokenizer/%.c
 	@mkdir -p builds/Tokenizer
+	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+builds/redirections/%.o: srcs/redirections/%.c
+	@mkdir -p builds/redirections
 	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
