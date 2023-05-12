@@ -1,124 +1,104 @@
+#============ [FILES] ==========
 NAME = minishell
+
+FILES = main.c \
+		builtins.c \
+		cd.c \
+		echo.c \
+		echo_utils.c \
+		env.c \
+		exit.c \
+		export.c \
+		pwd.c \
+		unset.c \
+		add_to_history.c \
+		free_all_and_exit.c \
+		executor.c \
+		hash_free.c \
+		hash_tab.c \
+		lexer_easy_splitter.c \
+		lexer_spacer.c \
+		lexer_spacer_utils.c \
+		parser.c \
+		parser_reading_invalid.c \
+		parser_redirects.c \
+		parser_utils.c \
+		parser_writing_invalid.c \
+		redirect.c \
+		redirect_utils.c \
+		token_constructor.c \
+		token_constructor_utils.c \
+		token_expander.c \
+		token_expander_utils.c
+
+OBJS = $(addprefix $(BUILDS)/, $(FILES:.c=.o))
+
+DEP = $(OBJS:.o=.d)
+
+LIBFT = $(LIBFTDIR)libft.a
+
+#================= [DIRS] ===================
+SRCS = ./srcs
+VPATH = Built_ins essentials executor Hash_table  Lexer parser  redirections Tokenizer
+VPATH := $(SRCS) $(addprefix $(SRCS)/, $(VPATH))
+HEADER = ./includes ./libs/libft/includes
+HEADER := $(addprefix -I, $(HEADER))
+LIBFTDIR = ./libs/libft/
+BUILDS = ./builds
+
+#=================== [CONFIG_COMP] ==========
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
-LIBFT = libs/libft/libft.a
-INCLUDES = -I includes -I libs/libft/includes
+CFLAGS = -Wall -Werror -Wextra
+DEPFLAGS = -MMD -MF
+VALFLAGS = 
 
-# vou mudar isso ainda fiquei com preguica e so pra quebrar um galho por enquanto
-SRCS_BUILT_INS = srcs/Built_ins/builtins.c \
-		srcs/Built_ins/cd.c \
-		srcs/Built_ins/echo.c \
-		srcs/Built_ins/echo_utils.c \
-		srcs/Built_ins/env.c \
-		srcs/Built_ins/exit.c \
-		srcs/Built_ins/export.c \
-		srcs/Built_ins/pwd.c \
-		srcs/Built_ins/unset.c
+#===================== [COMMANDS] ===========
+DEL = rm -rf
+MKDIR = mkdir -p
 
-SRCS_ESSENTIALS = srcs/essentials/add_to_history.c \
-		srcs/essentials/free_all_and_exit.c
+#=====================[MESSAGES]=============
 
-SRCS_HASH_TABLE = srcs/Hash_table/hash_free.c \
-		srcs/Hash_table/hash_tab.c
+DEL_MSG				= @echo -n "[\e[0;31m DEL \e[0m] "
+BIN_MSG				= @echo -n "[\e[0;32m BIN \e[0m] "
+BLD_MSG				= @echo -n "[\e[0;34m BLD \e[0m] "
+MKD_MSG				= @echo -n "[\e[0;35m MKD \e[0m] "
 
-SRCS_LEXER = srcs/Lexer/lexer_easy_splitter.c \
-		srcs/Lexer/lexer_spacer.c \
-		srcs/Lexer/lexer_spacer_utils.c
+# =================[BASIC_RULES] ============
 
-SRCS_PARSER = srcs/parser/parser.c \
-		srcs/parser/parser_utils.c \
-		srcs/parser/parser_reading_invalid.c \
-		srcs/parser/parser_writing_invalid.c \
-		srcs/parser/parser_redirects.c
-
-SRCS_EXECUTOR = srcs/executor/executor.c
-
-SRCS_TOKEN = srcs/Tokenizer/token_expander.c \
-		srcs/Tokenizer/token_expander_utils.c
-
-SRCS_OTHERS = srcs/main.c
-
-SRCS = $(SRCS_BUILT_INS) $(SRCS_ESSENTIALS) $(SRCS_HASH_TABLE) $(SRCS_LEXER) $(SRCS_PARSER) $(SRCS_EXECUTOR) $(SRCS_OTHERS)
-
-OBJS_ESSENTIALS = $(patsubst srcs/essentials/%.c,builds/essentials/%.o,$(SRCS_ESSENTIALS))
-OBJS_HASH_TABLE = $(patsubst srcs/Hash_table/%.c,builds/Hash_table/%.o,$(SRCS_HASH_TABLE))
-OBJS_BUILT_INS = $(patsubst srcs/Built_ins/%.c,builds/Built_ins/%.o,$(SRCS_BUILT_INS))
-OBJS_EXECUTOR = $(patsubst srcs/executor/%.c,builds/executor/%.o,$(SRCS_EXECUTOR))
-OBJS_PARSER = $(patsubst srcs/parser/%.c,builds/parser/%.o,$(SRCS_PARSER))
-OBJS_LEXER = $(patsubst srcs/Lexer/%.c,builds/Lexer/%.o,$(SRCS_LEXER))
-OBJS_TOKEN = $(patsubst srcs/Tokenizer/%.c,builds/Tokenizer/%.o,$(SRCS_TOKEN))
-OBJS_OTHERS = $(patsubst %.c,builds/%.o,$(notdir $(SRCS_OTHERS)))
-
-OBJS = $(OBJS_BUILT_INS) $(OBJS_ESSENTIALS) $(OBJS_HASH_TABLE) $(OBJS_LEXER) $(OBJS_PARSER) $(OBJS_OTHERS) $(OBJS_EXECUTOR) ${OBJS_TOKEN}
-
-
-# all: CFLAGS += -O2 #flagzinha de otimizacao n se importe por enquanto
 all: $(NAME)
 
-# debug: CFLAGS += -g3
-debug: fclean all
-
-$(NAME): $(OBJS)
-	@make -C libs/libft
-	@printf "\r\033[0;32m[BIN] $(NAME)\033[0m\033[K\n"
-	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) -o $(NAME) -lreadline
-
-builds/Built_ins/%.o: srcs/Built_ins/%.c
-	@mkdir -p builds/Built_ins
-	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-builds/essentials/%.o: srcs/essentials/%.c
-	@mkdir -p builds/essentials
-	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-builds/Hash_table/%.o: srcs/Hash_table/%.c
-	@mkdir -p builds/Hash_table
-	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-builds/Lexer/%.o: srcs/Lexer/%.c
-	@mkdir -p builds/Lexer
-	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-builds/parser/%.o: srcs/parser/%.c
-	@mkdir -p builds/parser
-	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-builds/executor/%.o: srcs/executor/%.c
-	@mkdir -p builds/executor
-	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-builds/Tokenizer/%.o: srcs/Tokenizer/%.c
-	@mkdir -p builds/Tokenizer
-	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-builds/%.o: srcs/%.c
-	@mkdir -p builds
-	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(NAME): $(LIBFT) $(BUILDS) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(HEADER)  $(LIBFT) -o $(NAME) -lreadline
 
 clean:
-	@make clean -C libs/libft
-	@printf "\r\033[0;31m[REMOVE] objects\033[0m\033[K\n"
-	@rm -rf builds
+	$(DEL) $(BUILDS)
+	@make clean -C $(LIBFTDIR)
 
 fclean: clean
-	@make fclean -C libs/libft
-	@printf "\r\033[0;31m[REMOVE] $(NAME)\033[0m\033[K\n"
-	@rm -f $(NAME)
-
-valg: all
-	valgrind -q --leak-check=full --show-leak-kinds=all --suppressions=sup ./minishell
-
-gdb: all
-	gdb --tui minishell
+	$(DEL) ./minishell
+	@make fclean -C $(LIBFTDIR)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+# =================[OTHER_RULES]============
+$(BUILDS):
+	@$(MKDIR) $@
+
+$(BUILDS)/%.o:%.c
+	$(BLD_MSG)
+	@echo "Building ..." $@
+	@$(CC) $(CFLAGS) -c $(HEADER) $< -o $@ $(DEPFLAGS) $(@:.o=.d)
+
+$(LIBFT):
+	@make -C $(LIBFTDIR)
+
+test:$(NAME)
+	./$(NAME)
+
+t:test
+
+# ============ [Target-sepecific Directives]==========
+.PHONY: all clean fclean re test t v
+
+# =============[Dependency Inclusion Directive] ======
+-include ${DEP}
