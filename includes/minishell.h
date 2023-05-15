@@ -64,6 +64,7 @@ void	builtins(char *input, t_hash *hash);
 void	tokenizer(char *input, t_hash *hash);
 void	execute_line(char *line, t_hash *hash);
 void	count_cmds(char *input, size_t *n_cmds);
+
 void	insert_node(t_hash *hash, char *key, char *value);
 void	inside_quote_copy(char **str, char **new, char quote);
 void	copy_with_expansions(char *str, char *new, t_hash *hash);
@@ -79,9 +80,10 @@ char	*expand_vars(char *str, t_hash *hash);
 t_node	*create_node(char *key, char *value);
 
 // new functions, analyze they before putting in the right place
-int		redirect_invalid(char **split_pline, t_hash *hash);
+int		redirection(char *str);
 int		reading_invalid(char *file, t_hash *hash);
 int		writing_invalid(char *file, t_hash *hash);
+int		redirect_invalid(char **split_pline, t_hash *hash);
 
 // pid_t return
 pid_t	execute_command(char **args, t_hash *hash);

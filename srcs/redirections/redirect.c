@@ -81,21 +81,32 @@ int redirect_input_string(char *str)
 
 int		redirection(char *str)
 {
-	int	i;
+	int		i;
+	int		original_stdout;
+	char	**tokens;
 
+	original_stdout = dup(STDOUT_FILENO);
 	i = 0;
-	ft_printf("%s", str);
-	while (str && *str && str[i])
+	tokens = ft_split(str, -7);
+
+	while (tokens && *tokens && **tokens && tokens[i])
 	{
-		if (str[i] == '>')
+		if (ft_strcmp(tokens[i], ">") == 0)
 		{
-			if (str[i + 1] == '>')
-				redirect_output_append(str);
-			else
-				redirect_output_trunc(str);
+			if (tokens[i + 1])
+				redirect_output_trunc(tokens[i + 1]);
+		}
+		else if (ft_strcmp(tokens[i], ">>") == 0)
+		{
+			if (tokens[i + 1])
+				redirect_output_append(tokens[i + 1]);
 		}
 		i++;
 	}
-	ft_printf("%s\n", str);
+	i = 1;
+	while (tokens && *tokens && **tokens && tokens[i])
+		printf("%s\n", tokens[i++]);
+	dup2(original_stdout, STDOUT_FILENO);
+	close(original_stdout);
 	return (1);
 }
