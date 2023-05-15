@@ -1,10 +1,8 @@
 #ifndef MINISHELL_TYPEDEFS_H
 # define MINISHELL_TYPEDEFS_H
 
-# ifndef HASH_SIZE
-#  define HASH_SIZE 10
-# endif
-
+// Based on the default quantity of envars on the 42 campus iMac;
+# define HASH_SIZE 56
 
 typedef struct s_node {
 	char			*key;
