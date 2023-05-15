@@ -48,9 +48,8 @@ BUILDS = ./builds
 
 #=================== [CONFIG_COMP] ==========
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 DEPFLAGS = -MMD -MF
-VALFLAGS = 
 
 #===================== [COMMANDS] ===========
 DEL = rm -rf
@@ -96,6 +95,12 @@ test:$(NAME)
 	./$(NAME)
 
 t:test
+
+v:all
+	valgrind -q --leak-check=full --show-leak-kinds=all --suppressions=sup ./minishell
+
+gdb:all
+	gdb --tui minishell
 
 # ============ [Target-sepecific Directives]==========
 .PHONY: all clean fclean re test t v
