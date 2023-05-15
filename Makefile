@@ -64,20 +64,9 @@ MKD_MSG				= @echo -n "[\e[0;35m MKD \e[0m] "
 
 # =================[BASIC_RULES] ============
 
-all: $(NAME)
-
 $(NAME): $(LIBFT) $(BUILDS) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(HEADER)  $(LIBFT) -o $(NAME) -lreadline
 
-clean:
-	$(DEL) $(BUILDS)
-	@make clean -C $(LIBFTDIR)
-
-fclean: clean
-	$(DEL) ./minishell
-	@make fclean -C $(LIBFTDIR)
-
-re: fclean all
 
 # =================[OTHER_RULES]============
 $(BUILDS):
@@ -87,9 +76,6 @@ $(BUILDS)/%.o:%.c
 	$(BLD_MSG)
 	@echo "Building ..." $@
 	@$(CC) $(CFLAGS) -c $(HEADER) $< -o $@ $(DEPFLAGS) $(@:.o=.d)
-
-$(LIBFT):
-	@make -C $(LIBFTDIR)
 
 test:$(NAME)
 	./$(NAME)

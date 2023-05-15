@@ -28,4 +28,10 @@ typedef struct s_pipe {
 	char		**envp;
 }	t_pipe;
 
+
+typedef struct s_redirect
+{
+	char	*filename;
+	char	*buffer;
+}	t_redirect;
 #endif

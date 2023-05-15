@@ -42,6 +42,7 @@
 
 // int return
 int		cd(char *str);
+int		redirection(char *str);
 int		pipe_case(char **splited_pline);
 int		parser(char *str, t_hash *hash);
 int		write_to_case(char **splited_pline);
@@ -63,7 +64,7 @@ void	builtins(char *input, t_hash *hash);
 void	tokenizer(char *input, t_hash *hash);
 void	execute_line(char *line, t_hash *hash);
 void	count_cmds(char *input, size_t *n_cmds);
-pid_t	execute_command(char **args, t_hash *hash);
+
 void	insert_node(t_hash *hash, char *key, char *value);
 void	inside_quote_copy(char **str, char **new, char quote);
 void	copy_with_expansions(char *str, char *new, t_hash *hash);
@@ -83,5 +84,8 @@ int		redirection(char *str);
 int		reading_invalid(char *file, t_hash *hash);
 int		writing_invalid(char *file, t_hash *hash);
 int		redirect_invalid(char **split_pline, t_hash *hash);
+
+// pid_t return
+pid_t	execute_command(char **args, t_hash *hash);
 
 #endif // minishell.h
