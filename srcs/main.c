@@ -13,23 +13,6 @@ static char	*env_collect(char *str)
 	return (s);
 }
 
-/* void	printer(char *search, char **input)
-{
-	int	i;
-
-	i = 0;
-	while (input[i])
-	{
-		if (ft_strcmp(search, input[i]) == 0)
-		{
-			printf("%s", input[i]);
-			return ;
-		}
-		printf("%s", input[i]);
-		i++;
-	}
-} */
-
 static void	set_up_hash(t_hash *hash, char **env)
 {
 	int		i;
@@ -69,13 +52,14 @@ int	main(int argc, char **argv, char **envp)
 	t_hash	*hash;
 	char	*input;
 
-	(void)argc;
-	(void)argv;
+	if (argc != 1)
+		easter_eggs(argv[1]);
 	hash = (t_hash *)ft_calloc(sizeof(t_hash), 1);
 	set_up_hash(hash, envp);
 	while (TRUE)
 	{
-		input = readline("Minishell > ");
+		// set_up_signals(); disable for now
+		input = readline(PROMPT);
 		if (input && *input == '\0')
 		{
 			free(input);
