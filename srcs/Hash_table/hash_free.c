@@ -18,7 +18,8 @@ void	free_hash(t_hash *hash)
 	while (index < HASH_SIZE)
 	{
 		temp = hash->list[index];
-		free_this_node(temp);
+		if (temp)
+			free_this_node(temp);
 		index++;
 	}
 	free(hash);
