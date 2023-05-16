@@ -12,6 +12,7 @@
 # include "./minishell_typedefs.h"
 # include "../libs/libft/includes/libft.h"
 
+# define PROMPT "Minishell >$ "
 # define ERR_QUOTE "\e[5;31mms: close this quote \e[1m`%c`\n\e[0m"
 # define ERR_UNS_SYNTAX "\e[5;31mms: unsuported syntax \e[1m`%s`\n\e[0m"
 # define ERR_EOL_SYNTAX "\e[5;31mms: syntax error \e[1m`EOL`\e[0m"
@@ -34,7 +35,9 @@ int		unclosed_quotes_case(char **pipeline, char quote);
 
 //void return
 void	env(t_hash *hash);
+void	set_up_signals(void);
 void	free_hash(t_hash *hash);
+void	easter_eggs(char *flags);
 void	easy_splitter(char *str);
 void	pwd(char *str, t_hash *hash);
 void	echo(char *str, t_hash *hash);
