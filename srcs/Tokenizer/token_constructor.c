@@ -18,28 +18,18 @@ static char	**count_and_fill(char *input, size_t *n_cmds)
 }
 
 /* Arranja um lugar pra essa função depois */
-void	wait_child(pid_t pid, size_t n_cmds)
-{
-	int		wstatus;
-	size_t	count;
 
-	count = 1;
-	waitpid(pid, &wstatus, 0);
-	while (count < n_cmds)
-	{
-		wait(NULL);
-		count++;
-	}
-}
 
 void	tokenizer(char *input, t_hash *hash)
 {
 	char	**commands;
 	size_t	n_cmds;
-	pid_t	pid;
+	//pid_t	pid;
 
 	n_cmds = 0;
 	commands = count_and_fill(input, &n_cmds);
+	(void)hash;
+	/*
 	if (n_cmds > 1)
 	// {
 	// 	while (*commands)
@@ -53,6 +43,13 @@ void	tokenizer(char *input, t_hash *hash)
 		// TODO: PAI.
 	else
 		// working_child(*commands, hash);
+	
+	*/
+	for (int i = 0; commands && commands[i]; i++){
+		if (isbuiltin(commands[i]))
+			ft_printf("%s\n", commands[i]);
+		ft_printf("\n");
+	}
 	free(commands);
 }
 	/*

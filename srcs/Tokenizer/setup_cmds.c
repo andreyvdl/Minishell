@@ -6,5 +6,10 @@ pid_t	set_up_multiple_cmd(char *cmd, t_hash *hash)
 	pid_t	pid;
 
 	pid = fork();
-	if )
+	if (pid < 0)
+		return (-1);
+	else if (pid == 0)
+	{
+
+	}
 }

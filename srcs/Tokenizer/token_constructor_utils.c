@@ -22,7 +22,7 @@ void	count_cmds(char *input, size_t *n_cmds)
 
 static char	*clean_cmd(char *cmd)
 {
-	char	set[1];
+	char	set[2];
 	char	*clean;
 
 	set[0] = -7;
