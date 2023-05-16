@@ -2,6 +2,8 @@
 NAME = minishell
 
 FILES = main.c \
+		easter_eggs.c \
+		signals.c \
 		builtins.c \
 		cd.c \
 		echo.c \
