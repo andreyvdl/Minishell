@@ -62,6 +62,7 @@ char	*expand_vars(char *str, t_hash *hash);
 t_node	*create_node(char *key, char *value);
 
 // new functions, analyze they before putting in the right place
+int	isbuiltin(char *check);
 int		redirection(char *str);
 int		reading_invalid(char *file, t_hash *hash);
 int		writing_invalid(char *file, t_hash *hash);

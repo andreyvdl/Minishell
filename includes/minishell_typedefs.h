@@ -3,7 +3,7 @@
 
 // Based on the default quantity of envars on the 42 campus iMac;
 # define HASH_SIZE 56
-
+# define BUILTIN "echo exit cd export unset pwd env"
 typedef struct s_node {
 	char			*key;
 	char			*value;
