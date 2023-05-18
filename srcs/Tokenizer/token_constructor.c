@@ -1,14 +1,14 @@
 #include "../../includes/minishell.h"
 
-static char	**count_and_fill(char *input, size_t *n_cmds)
+static char	**count_and_fill(char *input, size_t *nbr_cmds)
 {
 	char	**commands;
 	size_t	index;
 
-	count_cmds(input, n_cmds);
-	commands = (char **)ft_calloc((*n_cmds) + 1, sizeof(char *));
+	count_cmds(input, nbr_cmds);
+	commands = (char **)ft_calloc((*nbr_cmds) + 1, sizeof(char *));
 	index = 0;
-	while (index < (*n_cmds))
+	while (index < (*nbr_cmds))
 	{
 		commands[index] = extract_cmd(&input);
 		index++;
@@ -17,40 +17,16 @@ static char	**count_and_fill(char *input, size_t *n_cmds)
 	return (commands);
 }
 
-/* Arranja um lugar pra essa função depois */
-
-
 void	tokenizer(char *input, t_hash *hash)
 {
 	char	**commands;
-	size_t	n_cmds;
-	//pid_t	pid;
+	size_t	nbr_cmd;
 
-	n_cmds = 0;
-	commands = count_and_fill(input, &n_cmds);
-	(void)hash;
-	/*
-	if (n_cmds > 1)
-	// {
-	// 	while (*commands)
-	// 	{
-	// 		pid = set_up_multiple_cmd(commands, hash);
-	// 		commands++;
-	// 	}
-	// 	wait_child(pid, n_cmds);
-	// }
-	else if (n_cmds == 1 && isbuiltin(*commands))
-		// TODO: PAI.
-	else
-		// working_child(*commands, hash);
-	
-	*/
-	for (int i = 0; commands && commands[i]; i++){
-		if (isbuiltin(commands[i]))
-			ft_printf("%s\n", commands[i]);
-		ft_printf("\n");
-	}
-	free(commands);
+	nbr_cmd = 0;
+	commands = count_and_fill(input, &nbr_cmd);
+	free(input);
+	// ! WIP DO NOT DELETE: set_up_global(commands, nbr_cmd, hash);
+	ft_free_matrix(commands);
 }
 	/*
 	* os comandos estao em commands cada um em 1 string, todos com aspas, sem expandir e com os redirects;
