@@ -23,6 +23,9 @@
 # define ERR_FORK "\e[1;5;31mms: forking error\e[0m"
 # define PERM_CREATE 0644
 
+// ! GLOBAL: NEVER DIRECTELY INCREMENT ANY POINTER INSIDE THE STRUCT;
+t_pipe	g_shell;
+
 // int return
 int		cd(char *str);
 int		redirection(char *str);
