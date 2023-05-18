@@ -4,6 +4,7 @@
 // Based on the default quantity of envars on the 42 campus iMac;
 # define HASH_SIZE 56
 # define BUILTIN "echo exit cd export unset pwd env"
+
 typedef struct s_node {
 	char			*key;
 	char			*value;
@@ -14,18 +15,22 @@ typedef struct s_hash {
 	t_node	*list[HASH_SIZE];
 }	t_hash;
 
-typedef struct s_command {
+/* typedef struct s_command {
 	char	*path;
 	char	**args;
 	int		write_to;
 	int		read_from;
-}	t_command;
+}	t_command; */
 
 typedef struct s_pipe {
-	t_command	**command;
-	char		**envp;
+	int		wr_here;
+	int		rd_here;
+	char	**binp;
+	char	**envp;
+	char	***argv;
+	/* t_command	**command;
+	char		**envp; */
 }	t_pipe;
-
 
 typedef struct s_redirect
 {
