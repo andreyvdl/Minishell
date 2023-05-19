@@ -32,7 +32,7 @@ typedef struct s_pipe {
 typedef struct s_redirect
 {
 	char	*filename;
-	char	*buffer;
+	char	*delimiter;
 }	t_redirect;
 
 #endif

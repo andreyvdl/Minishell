@@ -24,14 +24,14 @@
 # define PERM_CREATE 0644
 
 // ! GLOBAL: NEVER DIRECTELY INCREMENT ANY POINTER INSIDE THE STRUCT;
-t_pipe	g_shell;
+//t_pipe	g_shell;
 
 // int return
 int		cd(char *str);
-int		redirection(char *str);
 int		pipe_case(char **splited_pline);
 int		parser(char *str, t_hash *hash);
 int		write_to_case(char **splited_pline);
+int		redirection(char *str, t_hash *hash);
 int		intersections(char *str, char inter);
 int		read_from_case(char **splited_pline);
 int		unclosed_quotes_case(char **pipeline, char quote);
@@ -52,7 +52,7 @@ void	builtins(char *input, t_hash *hash);
 void	tokenizer(char *input, t_hash *hash);
 void	execute_line(char *line, t_hash *hash);
 void	count_cmds(char *input, size_t *n_cmds);
-
+void	heredoc(t_hash *hash, t_redirect *this);
 void	insert_node(t_hash *hash, char *key, char *value);
 void	inside_quote_copy(char **str, char **new, char quote);
 void	copy_with_expansions(char *str, char *new, t_hash *hash);
@@ -63,13 +63,11 @@ char	*separator(char *str);
 char	*extract_cmd(char **input);
 char	*search(t_hash *hash, char *key);
 char	*expand_vars(char *str, t_hash *hash);
-
 // t_node return
 t_node	*create_node(char *key, char *value);
 
 // new functions, analyze they before putting in the right place
-int	isbuiltin(char *check);
-int		redirection(char *str);
+int	    isbuiltin(char *check);
 int		reading_invalid(char *file, t_hash *hash);
 int		writing_invalid(char *file, t_hash *hash);
 int		redirect_invalid(char **split_pline, t_hash *hash);

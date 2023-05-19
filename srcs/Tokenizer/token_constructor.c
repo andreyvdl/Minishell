@@ -31,6 +31,10 @@ void	tokenizer(char *input, t_hash *hash)
 	// 	return ;
 	// }
 	ft_free_matrix(commands);
+	// for (int i = 0; commands && *commands && commands[i]; i++){
+	// 	redirection(commands[i], hash);
+	// }
+	// ft_free_matrix((void **)commands);
 }
 	/*
 	* os comandos estao em commands cada um em 1 string, todos com aspas, sem expandir e com os redirects;
