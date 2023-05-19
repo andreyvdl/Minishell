@@ -25,11 +25,11 @@ void	tokenizer(char *input, t_hash *hash)
 	nbr_cmds = 0;
 	commands = count_and_fill(input, &nbr_cmds);
 	free(input);
-	if (set_up_global(commands, nbr_cmds, hash) == FALSE)
-	{
-		ft_free_matrix(commands);
-		return ;
-	}
+	// if (set_up_global(commands, nbr_cmds, hash) == FALSE)
+	// {
+	// 	ft_free_matrix(commands);
+	// 	return ;
+	// }
 	ft_free_matrix(commands);
 }
 	/*
