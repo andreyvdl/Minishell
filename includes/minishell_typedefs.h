@@ -15,21 +15,18 @@ typedef struct s_hash {
 	t_node	*list[HASH_SIZE];
 }	t_hash;
 
-/* typedef struct s_command {
-	char	*path;
-	char	**args;
-	int		write_to;
-	int		read_from;
-}	t_command; */
-
-typedef struct s_pipe {
+typedef struct s_command {
 	int		wr_here;
 	int		rd_here;
-	char	**binp;
-	char	**envp;
-	char	***argv;
-	/* t_command	**command;
-	char		**envp; */
+	// ? char	*binp; not needed?;
+	char	**argv;
+}	t_command;
+
+typedef struct s_pipe {
+	int			id;
+	int			nbr_sons;
+	char		**envp;
+	t_command	*command;
 }	t_pipe;
 
 typedef struct s_redirect
@@ -37,4 +34,5 @@ typedef struct s_redirect
 	char	*filename;
 	char	*buffer;
 }	t_redirect;
+
 #endif
