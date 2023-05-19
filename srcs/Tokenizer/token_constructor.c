@@ -20,12 +20,16 @@ static char	**count_and_fill(char *input, size_t *nbr_cmds)
 void	tokenizer(char *input, t_hash *hash)
 {
 	char	**commands;
-	size_t	nbr_cmd;
+	size_t	nbr_cmds;
 
-	nbr_cmd = 0;
-	commands = count_and_fill(input, &nbr_cmd);
+	nbr_cmds = 0;
+	commands = count_and_fill(input, &nbr_cmds);
 	free(input);
-	// ! WIP DO NOT DELETE: set_up_global(commands, nbr_cmd, hash);
+	if (set_up_global(commands, nbr_cmds, hash) == FALSE)
+	{
+		ft_free_matrix(commands);
+		return ;
+	}
 	ft_free_matrix(commands);
 }
 	/*
