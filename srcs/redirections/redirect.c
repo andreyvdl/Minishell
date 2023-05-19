@@ -79,17 +79,18 @@ int redirect_input_string(char *str)
 	return (0);
 }
 
-int		redirection(char *str)
+int		redirection(char *str, t_hash *hash)
 {
-	int		i;
-	int		original_stdout;
-	char	**tokens;
+	int			i;
+	int			original_stdout;
+	char		**tokens;
+	t_redirect	this;
 
-	original_stdout = dup(STDOUT_FILENO);
+
 	i = 0;
 	tokens = ft_split(str, -7);
-
-	while (tokens && *tokens && **tokens && tokens[i])
+	original_stdout = dup(STDOUT_FILENO);
+	while (tokens && *tokens && tokens[i])
 	{
 		if (ft_strcmp(tokens[i], ">") == 0)
 		{
@@ -101,11 +102,16 @@ int		redirection(char *str)
 			if (tokens[i + 1])
 				redirect_output_append(tokens[i + 1]);
 		}
+		else if (ft_strcmp(tokens[i], "<<") == 0)
+		{
+			if (tokens[i + 1])
+			{
+				this.delimiter = tokens[i + 1];
+				heredoc(hash, &this);
+			}
+		}
 		i++;
 	}
-	i = 1;
-	while (tokens && *tokens && **tokens && tokens[i])
-		printf("%s\n", tokens[i++]);
 	dup2(original_stdout, STDOUT_FILENO);
 	close(original_stdout);
 	return (1);

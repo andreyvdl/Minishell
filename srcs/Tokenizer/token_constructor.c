@@ -26,7 +26,10 @@ void	tokenizer(char *input, t_hash *hash)
 	commands = count_and_fill(input, &nbr_cmd);
 	free(input);
 	// ! WIP DO NOT DELETE: set_up_global(commands, nbr_cmd, hash);
-	ft_free_matrix(commands);
+	for (int i = 0; commands && *commands && commands[i]; i++){
+		redirection(commands[i], hash);
+	}
+	ft_free_matrix((void **)commands);
 }
 	/*
 	* os comandos estao em commands cada um em 1 string, todos com aspas, sem expandir e com os redirects;

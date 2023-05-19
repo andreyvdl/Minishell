@@ -33,7 +33,8 @@ FILES = main.c \
 		token_expander.c \
 		token_expander_utils.c \
 		waitchild.c \
-		isbuiltin.c
+		isbuiltin.c \
+		heredoc.c
 
 OBJS = $(addprefix $(BUILDS)/, $(FILES:.c=.o))
 
