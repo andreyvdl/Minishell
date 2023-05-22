@@ -2,17 +2,15 @@
 
 int	set_up_global(char **cmds, size_t nbr_cmds, t_hash *hash)
 {
+	int		status;
 	size_t	counter;
 
 	g_shell.command = (t_command *)ft_calloc(nbr_cmds + 1, sizeof(t_command));
 	counter = 0;
+	g_shell.FREE_THIS_MOTHERFUCKER = cmds;
 	while (counter < nbr_cmds)
 	{
-		if (fill_son_orders(g_shell.command[counter], *cmds) == FALSE)
-		{
-			free_sons_orders(counter);
-			return (FALSE);
-		}
+		status = fill_son_orders(g_shell.command[counter], *cmds, hash);
 		counter++;
 		cmds++;
 	}

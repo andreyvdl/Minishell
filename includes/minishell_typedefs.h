@@ -25,6 +25,7 @@ typedef struct s_command {
 typedef struct s_pipe {
 	int			id;
 	int			nbr_sons;
+	char		**FREE_THIS_MOTHERFUCKER;
 	char		**envp;
 	t_command	*command;
 }	t_pipe;

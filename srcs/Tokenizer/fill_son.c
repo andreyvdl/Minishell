@@ -54,8 +54,10 @@ static size_t	count_args(char *cmd)
 	}
 }
 
-int	fill_son_orders(t_command *son_struct, char *cmd)
+int	fill_son_orders(t_command *son_struct, char *cmd, t_hash *hash)
 {
+	int		status;
+	char	**redirect;
 	size_t	nbr_args;
 
 	nbr_args = count_args(cmd);
@@ -64,5 +66,9 @@ int	fill_son_orders(t_command *son_struct, char *cmd)
 		son_struct->argv = (char **)ft_calloc(nbr_args + 1, sizeof(char *));
 		copy_args(son_struct->argv, cmd);
 	}
-	return (TRUE);
+	redirect = ft_split(cmd, -7);
+	if (redirect && *redirect)
+		status = redirection(redirect, hash, son_struct);
+	ft_free_matrix(redirect);
+	return (status);
 }

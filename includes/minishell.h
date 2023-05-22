@@ -13,18 +13,23 @@
 # include "../libs/libft/includes/libft.h"
 
 # define PROMPT "Minishell >$ "
+# define ERR_FORK "\e[1;5;31mms: forking error\e[0m"
 # define ERR_QUOTE "\e[5;31mms: close this quote \e[1m`%c`\n\e[0m"
+# define ERR_READING "\e[1;5;31mms: read error\e[0m"
+# define ERR_WRITING "\e[1;5;31mms: write error\e[0m"
+# define PERM_CREATE 0644
 # define ERR_UNS_SYNTAX "\e[5;31mms: unsuported syntax \e[1m`%s`\n\e[0m"
 # define ERR_EOL_SYNTAX "\e[5;31mms: syntax error \e[1m`EOL`\e[0m"
 # define ERR_NOW_SYNTAX "\e[5;31mms: syntax error \e[1m`%s`\n\e[0m"
 # define ERR_NEXT_SYNTAX "\e[5;31mms: syntax error after \e[1m`%s`\n\e[0m"
-# define ERR_READING "\e[1;5;31mms: read error\e[0m"
-# define ERR_WRITING "\e[1;5;31mms: write error\e[0m"
-# define ERR_FORK "\e[1;5;31mms: forking error\e[0m"
-# define PERM_CREATE 0644
+# define WAR_HEREDOC ""
+
+# define REDI_OK 0
+# define REDI_ERR 1
+# define REDI_SIGNAL -1
 
 // ! GLOBAL: NEVER DIRECTELY INCREMENT ANY POINTER INSIDE THE STRUCT;
-//t_pipe	g_shell;
+t_pipe	g_shell;
 
 // int return
 int		cd(char *str);
