@@ -19,6 +19,11 @@ int redirect_output_trunc(char *filename)
 
 int	redirect_output_append(char *filename, t_command *son, t_hash *hash)
 {
+	if (access(filename, W_OK) == -1)
+	{
+		perror(ERR_WRITING);
+		return (REDI_ERR);
+	}
 	son->wr_here = open(filename, O_WRONLY | O_CREAT | O_APPEND, PERM_CREATE);
 	if (son->wr_here == -1)
 	{
