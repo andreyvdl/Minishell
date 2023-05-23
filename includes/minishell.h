@@ -36,7 +36,7 @@ int		cd(char *str);
 int		pipe_case(char **splited_pline);
 int		parser(char *str, t_hash *hash);
 int		write_to_case(char **splited_pline);
-int		redirection(char *str, t_hash *hash);
+int		redirection(char *str, t_hash *hash, t_command *son);
 int		intersections(char *str, char inter);
 int		read_from_case(char **splited_pline);
 int		unclosed_quotes_case(char **pipeline, char quote);
