@@ -67,8 +67,8 @@ int	fill_son_orders(t_command *son_struct, char *cmd, t_hash *hash)
 		copy_args(son_struct->argv, cmd);
 	}
 	redirect = ft_split(cmd, -7);
-	free(cmd);
-	remove_quotes_expand(redirect);
+	son_struct->wr_here = 0;
+	son_struct->rd_here = 0;
 	if (redirect && *redirect)
 		status = redirection(redirect, hash, son_struct);
 	ft_free_matrix(redirect);
