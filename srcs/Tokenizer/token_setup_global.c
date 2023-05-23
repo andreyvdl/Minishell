@@ -18,6 +18,3 @@ int	set_up_global(char **cmds, size_t nbr_cmds, t_hash *hash)
 	g_shell.nbr_sons = nbr_cmds;
 	g_shell.envp = hash_to_matrix(hash);
 }
-/*
-* later we think on how to give free to all of this;
-*/
