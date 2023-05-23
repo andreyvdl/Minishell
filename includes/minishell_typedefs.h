@@ -25,7 +25,8 @@ typedef struct s_command {
 typedef struct s_pipe {
 	int			id;
 	int			nbr_sons;
-	char		**FREE_THIS_MOTHERFUCKER;
+	char		**LEXER_REST;
+	char		**REDIRECT_REST;
 	char		**envp;
 	t_hash		*hash;
 	t_command	*command;
