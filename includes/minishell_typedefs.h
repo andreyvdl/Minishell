@@ -27,6 +27,7 @@ typedef struct s_pipe {
 	int			nbr_sons;
 	char		**FREE_THIS_MOTHERFUCKER;
 	char		**envp;
+	t_hash		*hash;
 	t_command	*command;
 }	t_pipe;
 
