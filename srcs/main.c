@@ -56,6 +56,7 @@ int	main(int argc, char **argv, char **envp)
 		easter_eggs(argv[1]);
 	hash = (t_hash *)ft_calloc(sizeof(t_hash), 1);
 	set_up_hash(hash, envp);
+	g_shell.hash = hash;
 	while (TRUE)
 	{
 		// set_up_signals(); disable for now
