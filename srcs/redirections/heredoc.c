@@ -1,23 +1,54 @@
 #include "../../includes/minishell.h"
 
-void	heredoc(t_hash *hash, t_redirect *this)
-{
-	char	*input;
-	char	**overview;
-	int		j;
+// void	heredoc()
+// {
+// 	char	*input;
+// 	char	**overview;
+// 	int		j;
 
-	while (1)
+// 	while (1)
+// 	{
+// 		input = readline("> ");
+// 		overview = ft_split(expand_vars(input, hash), -7);
+// 		j = 0;
+// 		while (overview && *overview&&overview[j])
+// 		{
+// 			if (ft_strcmp(overview[j], this->delimiter) == 0)
+// 				return;
+// 			j++;
+// 		}
+// 		free(input);
+// 	}
+// 	ft_free_matrix((void **)overview);
+// }
+
+static char	*remove_quotes(char *limiter)
+{
+	while (*limiter)
 	{
-		input = readline("> ");
-		overview = ft_split(expand_vars(input, hash), -7);
-		j = 0;
-		while (overview && *overview&&overview[j])
+		if (*limiter == '\'')
 		{
-			if (ft_strcmp(overview[j], this->delimiter) == 0)
-				return;
-			j++;
+			ft_memmove(limiter, limiter + 1, ft_strlen(limiter + 1));
+			while (*limiter != '\'' && *limiter)
+				limiter++;
+			ft_memmove(limiter, limiter + 1, ft_strlen(limiter + 1));
 		}
-		free(input);
+		else if ()
 	}
-	ft_free_matrix((void **)overview);
+}
+
+static int	without_expansions(char *limiter, t_command *son)
+{
+	char	*temp;
+
+	temp = remove_quotes(limiter);
+
+}
+
+int	heredoc(char *limiter, t_command *son)
+{
+	if (*limiter == '\"' || *limiter == '\'')
+		return (without_expansions(limiter, son));
+	else
+		return (with_expansions(limiter, son));
 }
