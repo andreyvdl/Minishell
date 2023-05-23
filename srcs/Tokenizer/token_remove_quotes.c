@@ -11,7 +11,7 @@ static void	copy_edited_str(char *str, char *new)
 	while (str[index] != '\0')
 	{
 		if (str[index] == '\'' || str[index] == '\"')
-			move_quotes(str, );
+			move_quotes(str, new);
 		if (str[index] == '$')
 			expand_var();
 		index++;
