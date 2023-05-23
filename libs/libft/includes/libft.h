@@ -121,6 +121,7 @@ char			*ft_strstr(const char *str, const char *to_find);
 char			*ft_strtrim(char const *s1, char const *set);
 char			*ft_strupcase(char *str);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
+size_t			ft_matrixlen(const char **matrix);
 int				ft_strcmp(char *s1, char *s2);
 void			ft_striteri(char *s, void (*f)(unsigned int, char*));
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
