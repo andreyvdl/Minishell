@@ -63,7 +63,28 @@ static int	without_expansions(char *limiter, t_command *son)
 	return (REDI_OK);
 }
 
-static int	with_expansions
+static int	with_expansions(char *limiter, t_command *son)
+{
+	int		pid;
+	int		status;
+	char	*line;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		heredoc_signals();
+		expansion_loop(limiter, son);
+		free_son_and_exit();
+	}
+	waitpid(pid, &status, 0);
+	if (status == SIGNAL_INT)
+	{
+		close(son->rd_here);
+		unlink(HEREDOC_FILE);
+		return (REDI_SIGNAL);
+	}
+	return (REDI_OK);
+}
 
 int	heredoc(char *limiter, t_command *son)
 {

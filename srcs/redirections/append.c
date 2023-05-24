@@ -3,22 +3,22 @@
 int	redirect_output_append(char *filename, t_command *son)
 {
 	char	*temp;
+	int		file_des;
 
 	temp = remove_quotes_and_expand(filename);
-	son->wr_here = open(filename, O_WRONLY | O_CREAT | O_APPEND, PERM_CREATE);
-	free(temp);
-	if (son->wr_here == -1)
+	file_des = open(filename, O_WRONLY | O_CREAT | O_APPEND, PERM_CREATE);
+	if (temp != filename)
+		free(temp);
+	if (file_des == -1)
 	{
+		if (son->wr_here != -1)
+			close(son->wr_here);
+		son->wr_here = file_des;
 		perror(ERR_WRITING);
 		return (REDI_ERR);
 	}
-	// if (dup2(son->wr_here, STDOUT_FILENO) == -1)
-	// {
-	// 	perror(ERR_WRITING);
-	// 	close(son->wr_here);
-	// 	return (REDI_ERR);
-	// }
-	// close(son->wr_here);
-	// son->wr_here = STDOUT_FILENO;
+	if (son->wr_here != -1)
+		close(son->wr_here);
+	son->wr_here = file_des;
 	return (REDI_OK);
 }

@@ -24,6 +24,8 @@
 // 	return (0);
 // }
 
+static void	close_opened()
+
 static int	writers(char **str, t_command *son)
 {
 	if (ft_strcmp(*str, ">>") == 0)
@@ -74,7 +76,6 @@ int	redirection(char **str, t_command *son)
 		}
 		str += 2;
 	}
-	dup2(original_stdout, STDOUT_FILENO);
-	close(original_stdout);
+	close_opened(son);
 	return (status);
 }
