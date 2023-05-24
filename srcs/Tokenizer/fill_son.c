@@ -60,6 +60,7 @@ int	fill_son_orders(t_command *son_struct, char *cmd, t_hash *hash)
 	char	**redirect;
 	size_t	nbr_args;
 
+	// son_struct = (t_command *)ft_calloc(1, sizeof(t_command));
 	nbr_args = count_args(cmd);
 	if (nbr_args > 0)
 	{
