@@ -23,11 +23,11 @@ typedef struct s_command {
 }	t_command;
 
 typedef struct s_pipe {
-	int			id;
-	int			nbr_sons;
 	char		**LEXER_REST;
 	char		**REDIRECT_REST;
 	char		**envp;
+	size_t		id;
+	size_t		nbr_sons;
 	t_hash		*hash;
 	t_command	*command;
 }	t_pipe;
