@@ -19,7 +19,7 @@ static void	free_son_and_exit(void)
 		exit(REDI_OK);
 }
 
-static void	remove_quotes(char *limiter)
+static void	remove_quotes_heredoc(char *limiter)
 {
 	while (*limiter)
 	{
@@ -40,7 +40,7 @@ static void	remove_quotes(char *limiter)
 	}
 }
 
-static int	without_expansions(char *limiter, t_command *son)
+static int	without_expansions(char *limiter, t_command *son, size_t id)
 {
 	int		pid;
 	int		status;
@@ -49,21 +49,21 @@ static int	without_expansions(char *limiter, t_command *son)
 	pid = fork();
 	if (pid == 0)
 	{
-		heredoc_signals();
+		// heredoc_signals(); disable for now
 		no_expansion_loop(limiter, son);
 		free_son_and_exit();
 	}
 	waitpid(pid, &status, 0);
 	if (status == SIGNAL_INT)
 	{
-		close(son->rd_here);
-		unlink(HEREDOC_FILE);
+		close(son[id].rd_here);
+		unlink(HEREDOC_PATH);
 		return (REDI_SIGNAL);
 	}
 	return (REDI_OK);
 }
 
-static int	with_expansions(char *limiter, t_command *son)
+static int	with_expansions(char *limiter, t_command *son, size_t id)
 {
 	int		pid;
 	int		status;
@@ -72,27 +72,27 @@ static int	with_expansions(char *limiter, t_command *son)
 	pid = fork();
 	if (pid == 0)
 	{
-		heredoc_signals();
-		expansion_loop(limiter, son);
+		// heredoc_signals(); disable for now
+		expansion_loop(limiter, son, id);
 		free_son_and_exit();
 	}
 	waitpid(pid, &status, 0);
 	if (status == SIGNAL_INT)
 	{
-		close(son->rd_here);
-		unlink(HEREDOC_FILE);
+		close(son[id].rd_here);
+		unlink(HEREDOC_PATH);
 		return (REDI_SIGNAL);
 	}
 	return (REDI_OK);
 }
 
-int	heredoc(char *limiter, t_command *son)
+int	heredoc(char *limiter, t_command *son, size_t id)
 {
-	son->rd_here = open(HEREDOC_FILE, O_RDWR | O_CREAT | O_TRUNC, PERM_CREATE);
-	if (*limiter == '\"' || *limiter == '\'')
+	son[id]rd_here = open(HEREDOC_PATH, HEREDOC, PERM_CREATE);
+	if (ft_strchr(limiter, '\'') != NULL || ft_strchr(limiter, '\"') != NULL)
 	{
-		remove_quotes(limiter);
-		return (without_expansions(limiter, son));
+		remove_quotes_heredoc(limiter);
+		return (without_expansions(limiter, son, id));
 	}
-	return (with_expansions(limiter, son));
+	return (with_expansions(limiter, son, id));
 }

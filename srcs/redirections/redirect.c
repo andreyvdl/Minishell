@@ -26,33 +26,33 @@
 
 static void	close_opened()
 
-static int	writers(char **str, t_command *son)
+static int	writers(char **str, t_command *son, size_t id)
 {
 	if (ft_strcmp(*str, ">>") == 0)
 	{
-		if (redirect_output_append(str + 1, son) == REDI_ERR)
+		if (redirect_output_append(str + 1, son, id) == REDI_ERR)
 			return (REDI_ERR);
 	}
 	else
-		if (redirect_output_trunc(str + 1, son) == REDI_ERR)
+		if (redirect_output_trunc(str + 1, son, id) == REDI_ERR)
 			return (REDI_ERR);
 	return (REDI_OK);
 }
 
-static int	readers(char **str, t_command *son)
+static int	readers(char **str, t_command *son, size_t id)
 {
 	if (ft_strcmp(*str, "<<") == 0)
 	{
-		if (heredoc(str + 1, son) == REDI_SIGNAL)
+		if (heredoc(str + 1, son, id) != REDI_SIGNAL)
 			return (REDI_SIGNAL);
 	}
 	else
-		if (redirect_input(str + 1, son) == REDI_ERR)
+		if (redirect_input(str + 1, son, id) == REDI_ERR)
 			return (REDI_ERR);
 	return (REDI_OK);
 }
 
-int	redirection(char **str, t_command *son)
+int	redirection(char **str, t_command *son, size_t id)
 {
 	int	status;
 	int	original_stdout;
@@ -64,18 +64,19 @@ int	redirection(char **str, t_command *son)
 	{
 		if (**str == '<')
 		{
-			status = readers(str, son);
+			status = readers(str, son, id);
 			if (status != REDI_OK)
 				break ;
 		}
 		else if (**str == '>')
 		{
-			status = writers(str, son);
+			status = writers(str, son, id);
 			if (status != REDI_OK)
 				break ;
 		}
 		str += 2;
 	}
-	close_opened(son);
+	if (*str != NULL)
+		close_opened(son, id);
 	return (status);
 }

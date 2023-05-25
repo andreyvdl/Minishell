@@ -66,6 +66,7 @@ int	main(int argc, char **argv, char **envp)
 			free(input);
 			continue ;
 		}
+		// signal(SIGINT, SIG_IGN); disable for now
 		command(input, hash);
 	}
 	return (0);

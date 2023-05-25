@@ -71,7 +71,7 @@ int	fill_son_orders(t_command *son_struct, char *cmd, t_hash *hash)
 	son_struct->wr_here = -1;
 	son_struct->rd_here = -1;
 	if (redirect && *redirect)
-		status = redirection(redirect, hash, son_struct);
+		status = redirection(redirect, son_struct, g_shell.id);
 	ft_free_matrix(redirect);
 	return (status);
 }

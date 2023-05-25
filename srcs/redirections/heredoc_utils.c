@@ -27,7 +27,7 @@ static char	*heredoc_expand(char *str)
 	return (new);
 }
 
-void	expansion_loop(char *limiter, t_command *son)
+void	expansion_loop(char *limiter, t_command *son, size_t id)
 {
 	char	*line;
 
@@ -46,12 +46,12 @@ void	expansion_loop(char *limiter, t_command *son)
 			free(line);
 			break ;
 		}
-		ft_putendl_fd(line, son->rd_here);
+		ft_putendl_fd(line, son[id].rd_here);
 		free(line);
 	}
 }
 
-void	no_expansion_loop(char *limiter, t_command *son)
+void	no_expansion_loop(char *limiter, t_command *son, size_t id)
 {
 	char	*line;
 
@@ -68,7 +68,7 @@ void	no_expansion_loop(char *limiter, t_command *son)
 			free(line);
 			break ;
 		}
-		ft_putendl_fd(line, son->rd_here);
+		ft_putendl_fd(line, son[id].rd_here);
 		free(line);
 	}
 }
