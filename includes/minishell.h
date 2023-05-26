@@ -31,13 +31,14 @@
 
 # define REDI_OK 0
 # define REDI_ERR 1
+# define SIGNAL_INT 130
 # define REDI_SIGNAL -1
 
 # define TRUNC 01101
 # define APPEND 02101
 # define HEREDOC 01102
-# define SIGNAL_INT 130
 # define PERM_CREATE 0644
+
 
 // ! GLOBAL: NEVER DIRECTELY INCREMENT ANY POINTER INSIDE THE STRUCT;
 extern t_pipe	g_shell;
