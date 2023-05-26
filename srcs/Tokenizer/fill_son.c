@@ -60,16 +60,16 @@ int	fill_son_orders(t_command *son_struct, char *cmd, t_hash *hash)
 	char	**redirect;
 	size_t	nbr_args;
 
-	// son_struct = (t_command *)ft_calloc(1, sizeof(t_command));
 	nbr_args = count_args(cmd);
 	if (nbr_args > 0)
 	{
-		son_struct->argv = (char **)ft_calloc(nbr_args + 1, sizeof(char *));
-		copy_args(son_struct->argv, cmd);
+		son_struct[g_shell.id]argv = (char **)ft_calloc(nbr_args + 1, \
+		sizeof(char *));
+		copy_args(son_struct[g_shell.id].argv, cmd);
 	}
 	redirect = ft_split(cmd, -7);
-	son_struct->wr_here = -1;
-	son_struct->rd_here = -1;
+	son_struct[g_shell.id].wr_here = -1;
+	son_struct[g_shell.id].rd_here = -1;
 	if (redirect && *redirect)
 		status = redirection(redirect, son_struct, g_shell.id);
 	ft_free_matrix(redirect);
