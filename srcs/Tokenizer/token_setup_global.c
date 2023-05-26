@@ -10,7 +10,7 @@ int	set_up_global(char **cmds, size_t nbr_cmds, t_hash *hash)
 	g_shell.FREE_THIS_MOTHERFUCKER = cmds;
 	while (g_shell.id < nbr_cmds)
 	{
-		status = fill_son_orders(g_shell.command[g_shell.id], *cmds, hash);
+		status = fill_son_orders(g_shell.command, *cmds, hash);
 		if (status == REDI_SIGNAL)
 			return (REDI_SIGNAL);
 		g_shell.id++;
