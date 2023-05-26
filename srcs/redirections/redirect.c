@@ -1,29 +1,5 @@
 #include "../../includes/minishell.h"
 
-// int redirect_input_string(char *str)
-// {
-// 	int pipefd[2];
-
-// 	if (pipe(pipefd) == -1)
-// 		return (-1);
-
-// 	if (write(pipefd[1], str, ft_strlen(str)) == -1)
-// 	{
-// 		close(pipefd[0]);
-// 		close(pipefd[1]);
-// 		return (-1);
-// 	}
-// 	close(pipefd[1]);
-
-// 	if (dup2(pipefd[0], STDIN_FILENO) == -1)
-// 	{
-// 		close(pipefd[0]);
-// 		return (-1);
-// 	}
-// 	close(pipefd[0]);
-// 	return (0);
-// }
-
 static void	close_opened()
 
 static int	writers(char **str, t_command *son, size_t id)
