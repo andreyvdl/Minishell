@@ -39,13 +39,13 @@ void	expansion_loop(char *limiter, t_command *son, size_t id)
 			ft_printf_fd(STDOUT_FILENO, WAR_HEREDOC, limiter);
 			break ;
 		}
-		else if (*line != '\0')
-			line = heredoc_expand(line);
-		if (ft_strcmp(line, limiter) == 0)
+		else if (ft_strcmp(line, limiter) == 0)
 		{
 			free(line);
 			break ;
 		}
+		else if (*line != '\0')
+			line = heredoc_expand(line);
 		ft_putendl_fd(line, son[id].rd_here);
 		free(line);
 	}
