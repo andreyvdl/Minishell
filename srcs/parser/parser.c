@@ -80,14 +80,7 @@ int	parser(char *pipeline, t_hash *hash)
 		insert_node(hash, "?", "2");
 		return (TRUE);
 	}
-	// if (redirect_invalid(splited, hash))
-	// {
-	// 	ft_free_matrix((void **)splited);
-	// 	insert_node(hash, "?", "1");
-	// 	return (TRUE);
-	// }
-	// execute_line(expand_vars(pipeline, hash), hash);
-	// ft_printf("\n");
+	ft_printf("\n");
 	ft_free_matrix((void **)splited);
 	return (FALSE);
 }
