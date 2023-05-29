@@ -80,6 +80,7 @@ static int	with_expansions(char *limiter, t_command *son, size_t id)
 	if (status == SIGNAL_INT)
 	{
 		close(son[id].rd_here);
+		son[id].rd_here = -130;
 		unlink(HEREDOC_PATH);
 		return (REDI_SIGNAL);
 	}
@@ -88,7 +89,7 @@ static int	with_expansions(char *limiter, t_command *son, size_t id)
 
 int	heredoc(char *limiter, t_command *son, size_t id)
 {
-	son[id]rd_here = open(HEREDOC_PATH, HEREDOC, PERM_CREATE);
+	son[id].rd_here = open(HEREDOC_PATH, HEREDOC, PERM_CREATE);
 	if (ft_strchr(limiter, '\'') != NULL || ft_strchr(limiter, '\"') != NULL)
 	{
 		remove_quotes_heredoc(limiter);
