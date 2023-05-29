@@ -11,14 +11,14 @@ int	redirect_output_append(char *filename, t_command *son, size_t id)
 		free(temp);
 	if (file_des == -1)
 	{
-		if (son[id].wr_here != -1)
+		if (son[id].wr_here > -1)
 			close(son[id].wr_here);
-		son[id].wr_here = -1;
+		son[id].wr_here = -42;
 		perror(ERR_WRITING);
 		return (REDI_ERR);
 	}
-	if (son[id].wr_here != -1)
+	if (son[id].wr_here > -1)
 		close(son[id].wr_here);
-	son[id].wr_here = -1;
+	son[id].wr_here = file_des;
 	return (REDI_OK);
 }
