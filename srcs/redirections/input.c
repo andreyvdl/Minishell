@@ -2,11 +2,11 @@
 
 static int	is_directory(char *filename)
 {
-	struct stat	struct_foda_stat;
+	struct stat	file_stat;
 
-	struct_foda_stat = (struct stat){0};
-	stat(filename, &struct_foda_stat);
-	if (S_ISDIR(struct_foda_stat.st_mode))
+	file_stat = (struct stat){0};
+	stat(filename, &file_stat);
+	if (S_ISDIR(file_stat.st_mode))
 		return (TRUE);
 	return (FALSE);
 }
@@ -35,11 +35,16 @@ int	redirect_input(char *filename, t_command *son, size_t id)
 	{
 		if (temp != filename)
 			free(temp);
+		if (son[id].rd_here > -1)
+			close(son[id].rd_here);
+		son[id].rd_here = -42;
 		return (REDI_ERR);
 	}
 	file_des = open(temp, O_RDONLY);
 	if (temp != filename)
 		free(temp);
-	
+	if (son[id].rd_here > -1)
+		close(son[id].rd_here);
+	son[id].rd_here = file_des;
 	return (REDI_OK);
 }
