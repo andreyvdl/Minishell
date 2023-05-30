@@ -5,7 +5,7 @@ int	redirect_output_append(char *filename, t_command *son, size_t id)
 	char	*temp;
 	int		file_des;
 
-	temp = remove_quotes_and_expand(filename);
+	temp = remove_quote_or_expand(filename);
 	file_des = open(temp, APPEND, PERM_CREATE);
 	if (temp != filename)
 		free(temp);

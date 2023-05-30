@@ -30,7 +30,7 @@ int	redirect_input(char *filename, t_command *son, size_t id)
 	char	*temp;
 	int		file_des;
 
-	temp = remove_quotes_and_expand(filename);
+	temp = remove_quote_or_expand(filename);
 	if (open_check(temp) == REDI_ERR)
 	{
 		if (temp != filename)

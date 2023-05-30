@@ -20,7 +20,8 @@
 # define ERR_QUOTE "\e[1;5;31mms: close this quote \e[1m`%c`\n\e[0m"
 # define ERR_READING "\e[1;5;31mms: read error\e[0m"
 # define ERR_WRITING "\e[1;5;31mms: write error\e[0m"
-# define WAR_HEREDOC "\e[1;33mwarning: finish with EOF, expected `%s`\e[0m"
+# define ERR_HEREDOC "\e[1;5;31mms: heredoc error...\n\e[0m"
+# define WAR_HEREDOC "\e[1;33mms: finish with EOF, expected `%s`\n\e[0m"
 # define HEREDOC_PATH "/tmp/.heredoc"
 # define ERR_INPUT_DIR "\e[1;5;31mms: read error: %s\n\e[0m"
 # define HEREDOC_PROMPT "here-document> "
@@ -48,10 +49,14 @@ int		cd(char *str);
 int		pipe_case(char **splited_pline);
 int		parser(char *str, t_hash *hash);
 int		write_to_case(char **splited_pline);
-int		redirection(char *str, t_hash *hash, t_command *son);
 int		intersections(char *str, char inter);
 int		read_from_case(char **splited_pline);
+int		heredoc(char *limiter, t_command *son, size_t id);
 int		unclosed_quotes_case(char **pipeline, char quote);
+int		redirection(char **str, t_command *son, size_t id);
+int		redirect_input(char *filename, t_command *son, size_t id);
+int		redirect_output_trunc(char *filename, t_command *son, size_t id);
+int		redirect_output_append(char *filename, t_command *son, size_t id);
 
 //void return
 void	env(t_hash *hash);
@@ -69,7 +74,6 @@ void	builtins(char *input, t_hash *hash);
 void	tokenizer(char *input, t_hash *hash);
 void	execute_line(char *line, t_hash *hash);
 void	count_cmds(char *input, size_t *n_cmds);
-void	heredoc(t_hash *hash, t_redirect *this);
 void	insert_node(t_hash *hash, char *key, char *value);
 void	inside_quote_copy(char **str, char **new, char quote);
 void	copy_with_expansions(char *str, char *new, t_hash *hash);

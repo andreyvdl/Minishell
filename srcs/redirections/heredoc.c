@@ -26,17 +26,19 @@ static void	remove_quotes_heredoc(char *limiter)
 		if (*limiter == '\'')
 		{
 			ft_memmove(limiter, limiter + 1, ft_strlen(limiter + 1));
-			while (*limiter != '\'' && *limiter)
+			while (*limiter != '\'')
 				limiter++;
 			ft_memmove(limiter, limiter + 1, ft_strlen(limiter + 1));
 		}
 		else if (*limiter == '\"')
 		{
 			ft_memmove(limiter, limiter + 1, ft_strlen(limiter + 1));
-			while (*limiter != '\"' && *limiter)
+			while (*limiter != '\"')
 				limiter++;
 			ft_memmove(limiter, limiter + 1, ft_strlen(limiter + 1));
 		}
+		else
+			limiter++;
 	}
 }
 
@@ -58,6 +60,7 @@ static int	without_expansions(char *limiter, t_command *son, size_t id)
 	{
 		close(son[id].rd_here);
 		unlink(HEREDOC_PATH);
+		son[id].rd_here = -130;
 		return (REDI_SIGNAL);
 	}
 	return (REDI_OK);
@@ -89,7 +92,15 @@ static int	with_expansions(char *limiter, t_command *son, size_t id)
 
 int	heredoc(char *limiter, t_command *son, size_t id)
 {
+	if (son[id].rd_here > -1)
+		close(son[id].rd_here);
 	son[id].rd_here = open(HEREDOC_PATH, HEREDOC, PERM_CREATE);
+	if (son[id].rd_here == -1)
+	{
+		perror(ERR_HEREDOC);
+		son[id].rd_here = -42;
+		return (REDI_SIGNAL);
+	}
 	if (ft_strchr(limiter, '\'') != NULL || ft_strchr(limiter, '\"') != NULL)
 	{
 		remove_quotes_heredoc(limiter);

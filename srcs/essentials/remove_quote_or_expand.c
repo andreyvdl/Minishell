@@ -18,6 +18,8 @@ static void	remove_quote(char *str)
 				str++;
 			ft_memmove(str, str + 1, ft_strlen(str));
 		}
+		else
+			str++;
 	}
 }
 

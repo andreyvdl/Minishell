@@ -22,19 +22,15 @@ FILES = main.c \
 		lexer_spacer.c \
 		lexer_spacer_utils.c \
 		parser.c \
-		parser_reading_invalid.c \
-		parser_redirects.c \
 		parser_utils.c \
-		parser_writing_invalid.c \
 		redirect.c \
-		redirect_utils.c \
 		token_constructor.c \
 		token_constructor_utils.c \
 		token_expander.c \
 		token_expander_utils.c \
 		waitchild.c \
 		isbuiltin.c \
-		heredoc.c
+		heredoc.c \
 
 OBJS = $(addprefix $(BUILDS)/, $(FILES:.c=.o))
 
