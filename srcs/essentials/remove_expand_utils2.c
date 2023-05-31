@@ -30,9 +30,9 @@ static void	expand_value_copy(char **new, char **str)
 			return ;
 		}
 		len = 0;
-		while (ft_isalnum((*str) + len) == TRUE || (*str) + len == '_')
+		while (ft_isalnum(*(*str + len)) == TRUE || *(*str + len) == '_')
 			len++;
-		key = ft_substr(str, 0, len);
+		key = ft_substr(*str, 0, len);
 		aux_copy(new, search(g_shell.hash, key));
 		free(key);
 	}

@@ -15,9 +15,9 @@ static void	dollar_case_count(char **str, size_t *size)
 			return ;
 		}
 		len = 0;
-		while (ft_isalnum((*str) + len) || (*str) + len == '_')
+		while (ft_isalnum(*(*str + len)) || *(*str + len) == '_')
 			len++;
-		key = ft_substr(str, 0, len);
+		key = ft_substr(*str, 0, len);
 		*size += ft_strlen(search(g_shell.hash, key));
 		free(key);
 	}

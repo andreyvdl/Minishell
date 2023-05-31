@@ -52,18 +52,20 @@ static size_t	count_args(char *cmd)
 				cmd++;
 		}
 	}
+	return (nbr_args);
 }
 
-int	fill_son_orders(t_command *son_struct, char *cmd, t_hash *hash)
+int	fill_son_orders(t_command *son_struct, char *cmd)
 {
 	int		status;
 	char	**redirect;
 	size_t	nbr_args;
 
 	nbr_args = count_args(cmd);
+	status = REDI_OK;
 	if (nbr_args > 0)
 	{
-		son_struct[g_shell.id]argv = (char **)ft_calloc(nbr_args + 1, \
+		son_struct[g_shell.id].argv = (char **)ft_calloc(nbr_args + 1, \
 		sizeof(char *));
 		copy_args(son_struct[g_shell.id].argv, cmd);
 	}
@@ -72,6 +74,6 @@ int	fill_son_orders(t_command *son_struct, char *cmd, t_hash *hash)
 	son_struct[g_shell.id].rd_here = -1;
 	if (redirect && *redirect)
 		status = redirection(redirect, son_struct, g_shell.id);
-	ft_free_matrix(redirect);
+	ft_free_matrix((void **)redirect);
 	return (status);
 }

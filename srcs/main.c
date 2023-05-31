@@ -1,5 +1,7 @@
 #include "../includes/minishell.h"
 
+t_pipe g_shell;
+
 static char	*env_collect(char *str)
 {	
 	int		i;

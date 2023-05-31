@@ -1,4 +1,4 @@
-#include "../../includes/minishell.c"
+#include "../../includes/minishell.h"
 
 static void	copy_this_value(char **new, char *value)
 {

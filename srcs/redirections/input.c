@@ -23,6 +23,7 @@ static int	open_check(char *filename)
 		ft_printf_fd(STDERR_FILENO, ERR_INPUT_DIR, strerror(21));
 		return (REDI_ERR);
 	}
+	return (REDI_OK);
 }
 
 int	redirect_input(char *filename, t_command *son, size_t id)

@@ -1,36 +1,16 @@
 #============ [FILES] ==========
 NAME = minishell
 
-FILES = main.c \
-		easter_eggs.c \
-		signals.c \
-		builtins.c \
-		cd.c \
-		echo.c \
-		echo_utils.c \
-		env.c \
-		exit.c \
-		export.c \
-		pwd.c \
-		unset.c \
-		add_to_history.c \
-		free_all_and_exit.c \
+FILES = builtins.c cd.c echo_utils.c echo.c env.c exit.c export.c pwd.c unset.c \
+		add_to_history.c free_all_and_exit.c hash_to_matrix.c isbuiltin.c remove_expand_utils.c remove_expand_utils2.c remove_quote_or_expand.c solo_utils.c \
 		executor.c \
-		hash_free.c \
-		hash_tab.c \
-		lexer_easy_splitter.c \
-		lexer_spacer.c \
-		lexer_spacer_utils.c \
-		parser.c \
-		parser_utils.c \
-		redirect.c \
-		token_constructor.c \
-		token_constructor_utils.c \
-		token_expander.c \
-		token_expander_utils.c \
-		waitchild.c \
-		isbuiltin.c \
-		heredoc.c \
+		hash_free.c hash_tab.c \
+		lexer_easy_splitter.c lexer_spacer_utils.c lexer_spacer.c \
+		parser.c parser_utils.c \
+		append.c heredoc_utils.c heredoc_utils2.c heredoc.c input.c redirect.c trunc.c \
+		fill_son.c token_constructor_utils.c token_constructor.c token_setup_global.c \
+		easter_eggs.c main.c signals.c
+
 
 OBJS = $(addprefix $(BUILDS)/, $(FILES:.c=.o))
 

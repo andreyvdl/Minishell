@@ -40,20 +40,22 @@
 # define HEREDOC 01102
 # define PERM_CREATE 0644
 
-
 // ! GLOBAL: NEVER DIRECTELY INCREMENT ANY POINTER INSIDE THE STRUCT;
 extern t_pipe	g_shell;
 
 // int return
 int		cd(char *str);
-int		pipe_case(char **splited_pline);
+int		isbuiltin(char *check);
 int		parser(char *str, t_hash *hash);
+int		pipe_case(char **splited_pline);
 int		write_to_case(char **splited_pline);
 int		intersections(char *str, char inter);
 int		read_from_case(char **splited_pline);
 int		heredoc(char *limiter, t_command *son, size_t id);
+int		fill_son_orders(t_command *son_struct, char *cmd);
 int		unclosed_quotes_case(char **pipeline, char quote);
 int		redirection(char **str, t_command *son, size_t id);
+int		set_up_global(char **cmds, size_t nbr_cmds, t_hash *hash);
 int		redirect_input(char *filename, t_command *son, size_t id);
 int		redirect_output_trunc(char *filename, t_command *son, size_t id);
 int		redirect_output_append(char *filename, t_command *son, size_t id);
@@ -69,7 +71,9 @@ void	echo(char *str, t_hash *hash);
 void	unset(char *str, t_hash *hash);
 void	add_to_history(char *pipeline);
 void	export(char *str, t_hash *hash);
+void	solo_copy(char *new, char *str);
 void	free_all_and_exit(t_hash *hash);
+void	expand_copy(char *new, char *str);
 void	builtins(char *input, t_hash *hash);
 void	tokenizer(char *input, t_hash *hash);
 void	execute_line(char *line, t_hash *hash);
@@ -77,21 +81,26 @@ void	count_cmds(char *input, size_t *n_cmds);
 void	insert_node(t_hash *hash, char *key, char *value);
 void	inside_quote_copy(char **str, char **new, char quote);
 void	copy_with_expansions(char *str, char *new, t_hash *hash);
+void	expansion_loop(char *limiter, t_command *son, size_t id);
+void	no_expansion_loop(char *limiter, t_command *son, size_t id);
 void	inside_quote_counter(char **str, size_t *counter, char quote);
+void	copy_with_expansions_heredoc(char *str, char *new, t_hash *hash);
 
 // char retunr
 char	*separator(char *str);
 char	*extract_cmd(char **input);
+char	**hash_to_matrix(t_hash *hash);
 char	*search(t_hash *hash, char *key);
+char	*remove_quote_or_expand(char *str);
 char	*expand_vars(char *str, t_hash *hash);
+
 // t_node return
 t_node	*create_node(char *key, char *value);
 
-// new functions, analyze they before putting in the right place
-int	    isbuiltin(char *check);
-int		reading_invalid(char *file, t_hash *hash);
-int		writing_invalid(char *file, t_hash *hash);
-int		redirect_invalid(char **split_pline, t_hash *hash);
+// size_t return
+size_t	solo_size(char *str);
+size_t	expand_size(char *str);
+size_t	size_with_values_heredoc(char *str, t_hash *hash);
 
 // pid_t return
 pid_t	execute_command(char **args, t_hash *hash);

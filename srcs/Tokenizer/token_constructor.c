@@ -25,16 +25,13 @@ void	tokenizer(char *input, t_hash *hash)
 	nbr_cmds = 0;
 	commands = count_and_fill(input, &nbr_cmds);
 	free(input);
-	// if (set_up_global(commands, nbr_cmds, hash) == FALSE)
-	// {
-	// 	ft_free_matrix(commands);
-	// 	return ;
-	// }
-	ft_free_matrix(commands);
-	// for (int i = 0; commands && *commands && commands[i]; i++){
-	// 	redirection(commands[i], hash);
-	// }
-	// ft_free_matrix((void **)commands);
+	if (set_up_global(commands, nbr_cmds, hash) == FALSE)
+	{
+	 	ft_free_matrix((void **)commands);
+		return ;
+	}
+	else
+		ft_free_matrix((void **)commands);
 }
 	/*
 	* os comandos estao em commands cada um em 1 string, todos com aspas, sem expandir e com os redirects;

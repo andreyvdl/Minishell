@@ -33,7 +33,7 @@ void	expansion_loop(char *limiter, t_command *son, size_t id)
 
 	while (TRUE)
 	{
-		line = redline(HEREDOC_PROMPT);
+		line = readline(HEREDOC_PROMPT);
 		if (line == NULL)
 		{
 			ft_printf_fd(STDOUT_FILENO, WAR_HEREDOC, limiter);

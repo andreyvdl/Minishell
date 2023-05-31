@@ -2,20 +2,20 @@
 
 static void	free_son_and_exit(void)
 {
-		ft_free_matrix(g_shell.LEXER_REST);
-		ft_free_matrix(g_shell.REDIRECT_REST);
+		ft_free_matrix((void **)g_shell.LEXER_REST);
+		ft_free_matrix((void **)g_shell.REDIRECT_REST);
 		free_hash(g_shell.hash);
 		while (g_shell.id > 0)
 		{
-			if (g_shell.command[g_shell.id].(*argv) != NULL)
-				ft_free_matrix(g_shell.command[g_shell.id].argv);
+			if (*g_shell.command[g_shell.id].argv != NULL)
+				ft_free_matrix((void **)g_shell.command[g_shell.id].argv);
 			// ! pai abriu, acho q o filho n tem q fechar if (g_shell.command[g_shell.id].wr_here > 0)
 			// !close(g_shell.command[g_shell.id].wr_here);
 			// !if (g_shell.command[g_shell.id].rd_here > 0)
 			// !close(g_shell.command[g_shell.id].rd_here);
-			free(g_shell.command[g_shell.id]);
 			g_shell.id--;
 		}
+		free(g_shell.command);
 		exit(REDI_OK);
 }
 
@@ -46,13 +46,12 @@ static int	without_expansions(char *limiter, t_command *son, size_t id)
 {
 	int		pid;
 	int		status;
-	char	*line;
 
 	pid = fork();
 	if (pid == 0)
 	{
 		// heredoc_signals(); disable for now
-		no_expansion_loop(limiter, son);
+		no_expansion_loop(limiter, son, id);
 		free_son_and_exit();
 	}
 	waitpid(pid, &status, 0);
@@ -70,7 +69,6 @@ static int	with_expansions(char *limiter, t_command *son, size_t id)
 {
 	int		pid;
 	int		status;
-	char	*line;
 
 	pid = fork();
 	if (pid == 0)
