@@ -32,4 +32,5 @@ void	tokenizer(char *input, t_hash *hash)
 	}
 	else
 		ft_free_matrix((void **)commands);
+	pre_executor();
 }
