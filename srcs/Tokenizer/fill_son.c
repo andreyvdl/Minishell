@@ -28,7 +28,7 @@ static void	copy_args(char **argv, char *cmd)
 				index++;
 			argv[arg_index] = ft_substr(cmd, 0, index);
 			arg_index++;
-			ft_memmove(cmd, cmd + index, ft_strlen(cmd + index));
+			ft_memset(cmd, -7, index);
 		}
 	}
 	argv[arg_index] = NULL;
