@@ -1,6 +1,5 @@
 #include "../../includes/minishell.h"
 
-
 int	isbuiltin(char *check)
 {
 	int		i;
@@ -8,7 +7,7 @@ int	isbuiltin(char *check)
 
 	builtin = ft_split(BUILTIN, ' ');
 	i = 0;
-	while (builtin && builtin[i])
+	while (check != NULL && builtin[i] != NULL)
 	{
 		if (ft_strcmp(builtin[i], check) == 0)
 		{
