@@ -15,19 +15,18 @@
 # include "./minishell_typedefs.h"
 # include "../libs/libft/includes/libft.h"
 
-
-
-#ifdef __APPLE__
-		#define SYSTEM_TYPE " \033[0;35m\033[0m "
-#elif defined(_WIN32)
-		#define SYSTEM_TYPE " \033[0;32m\033[0m "
-#elif defined(__linux__)
-		#define SYSTEM_TYPE " \033[0;36m\033[0m "
-#else
-		#define SYSTEM_TYPE " \033[0;31m\033[0m "
-#endif
-
-# define PROMPT "\n\033[1;34m  Minishell\033[0m\n" SYSTEM_TYPE "\033[1;33m\033[0m "
+# if defined(__APPLE__) || defined(__MACH__)
+#  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m🍎\e[0m\e[1;33m↳ \e[0m"
+# elif defined(_WIN32) || defined(_WIN64) || defined(__CYWIN__)
+#  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m💾\e[0m\e[1;33m↳ \e[0m"
+# elif defined(__linux__) || defined(unix) || defined(__unix) || \
+defined(__unix__)
+#  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m🐧\e[0m\e[1;33m↳ \e[0m"
+# elif defined(__FreeBSD__)
+#  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m😈\e[0m\e[1;33m↳ \e[0m"
+# else
+#  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m🖥\e[0m\e[1;33m↳ \e[0m"
+# endif
 
 // # define ERR_FORK "\e[1;5;31mms: forking error\e[0m"
 # define ERR_QUOTE "\e[1;5;31mms: close this quote \e[1m`%c`\n\e[0m"
@@ -77,7 +76,7 @@ int		redirect_output_append(char *filename, t_command *son, size_t id);
 void	pwd();
 void	env();
 void	echo();
-void    builtins();
+void	builtins();
 void	executor();
 void	set_up_signals(void);
 void	free_hash(t_hash *hash);
@@ -90,11 +89,9 @@ void	solo_copy(char *new, char *str);
 void	free_all_and_exit(t_hash *hash);
 void	expand_copy(char *new, char *str);
 void	tokenizer(char *input, t_hash *hash);
-void	execute_line(char *line, t_hash *hash);
 void	count_cmds(char *input, size_t *n_cmds);
 void	insert_node(t_hash *hash, char *key, char *value);
 void	inside_quote_copy(char **str, char **new, char quote);
-void	copy_with_expansions(char *str, char *new, t_hash *hash);
 void	expansion_loop(char *limiter, t_command *son, size_t id);
 void	no_expansion_loop(char *limiter, t_command *son, size_t id);
 void	inside_quote_counter(char **str, size_t *counter, char quote);
@@ -106,7 +103,6 @@ char	*extract_cmd(char **input);
 char	**hash_to_matrix(t_hash *hash);
 char	*search(t_hash *hash, char *key);
 char	*remove_quote_or_expand(char *str);
-char	*expand_vars(char *str, t_hash *hash);
 
 // t_node return
 t_node	*create_node(char *key, char *value);
