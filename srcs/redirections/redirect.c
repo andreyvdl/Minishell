@@ -71,7 +71,7 @@ int	redirection(char **str, t_command *son, size_t id)
 	int	status;
 
 	status = REDI_OK;
-	g_shell.REDIRECT_REST = str;
+	g_shell.redirect_rest = str;
 	while (*str)
 	{
 		if (**str == '<')
