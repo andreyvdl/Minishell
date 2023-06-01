@@ -77,7 +77,7 @@ int		redirect_output_append(char *filename, t_command *son, size_t id);
 void	echo();
 void    builtins();
 void	executor();
-void	env(t_hash *hash);
+void	env();
 void	set_up_signals(void);
 void	free_hash(t_hash *hash);
 void	easter_eggs(char *flags);

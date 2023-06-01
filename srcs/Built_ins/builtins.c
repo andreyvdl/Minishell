@@ -6,6 +6,8 @@ void	builtins()
 		cd();
 	else if (ft_strcmp(g_shell.command->argv[0], "echo") == 0)
 		echo();
+	else if (ft_strcmp(g_shell.command->argv[0], "env") == 0)
+		env();
 	else
 		ft_printf("builtin");
 }

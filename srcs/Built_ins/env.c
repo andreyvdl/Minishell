@@ -1,16 +1,14 @@
 #include "../../includes/minishell.h"
 
-void	env(t_hash *hash)
+void	env()
 {
-	t_node	*node;
+	char	**env;
+	int		i;
 
-	for (int i = 0; i < HASH_SIZE; i++)
-	{
-		node = hash->list[i];
-		while (node)
-		{
-			ft_printf("%s=%s\n", node->key, search(hash, node->key));
-			node = node->next;
-		}
-	}
+	i = 0;
+	env = g_shell.envp;
+	if (ft_matrixlen((const char **)g_shell.command->argv) > 1)
+		return ((void)ft_printf("Command is: env!"));
+	while (env && env[i])
+		ft_printf("%s\n", env[i++]);
 }
