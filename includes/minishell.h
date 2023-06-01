@@ -57,7 +57,7 @@
 extern t_pipe	g_shell;
 
 // int return
-int		cd(char *str);
+int		cd();
 int		isbuiltin(char *check);
 int		parser(char *str, t_hash *hash);
 int		pipe_case(char **splited_pline);
@@ -74,6 +74,7 @@ int		redirect_output_trunc(char *filename, t_command *son, size_t id);
 int		redirect_output_append(char *filename, t_command *son, size_t id);
 
 //void return
+void	echo();
 void    builtins();
 void	executor();
 void	env(t_hash *hash);
@@ -82,7 +83,6 @@ void	free_hash(t_hash *hash);
 void	easter_eggs(char *flags);
 void	easy_splitter(char *str);
 void	pwd(char *str, t_hash *hash);
-void	echo(char *str, t_hash *hash);
 void	unset(char *str, t_hash *hash);
 void	add_to_history(char *pipeline);
 void	export(char *str, t_hash *hash);

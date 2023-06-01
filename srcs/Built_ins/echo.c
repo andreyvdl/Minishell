@@ -1,10 +1,22 @@
 #include "../../includes/minishell.h"
 
-void	echo(char *str, t_hash *hash)
+void	echo()
 {
-	while (*str && (*str != ' ' && *str != '\t'))
-		str++;
-	while (*str && (*str == ' ' || *str == '\t'))
-		str++;
-	(void)hash;
+	char	**str;
+	int		i;
+
+	str = g_shell.command->argv;
+	if (str[1] == NULL)
+		return ((void)ft_printf("\n"));
+	else if (ft_strcmp(str[1], "-n") == 0)
+	{
+		i = 2;
+		while (str && str[i])
+			ft_printf("%s ", str[i++]);
+		return;
+	}
+	i = 1;
+	while (str && str[i])
+			ft_printf("%s ", str[i++]);
+	ft_putchar('\n');
 }
