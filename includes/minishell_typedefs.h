@@ -18,7 +18,6 @@ typedef struct s_hash {
 typedef struct s_command {
 	int		wr_here;
 	int		rd_here;
-	// ? char	*binp; not needed?;
 	char	**argv;
 }	t_command;
 

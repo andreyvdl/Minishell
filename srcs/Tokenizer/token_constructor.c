@@ -27,23 +27,10 @@ void	tokenizer(char *input, t_hash *hash)
 	free(input);
 	if (set_up_global(commands, nbr_cmds, hash) == FALSE)
 	{
+		executor();
 	 	ft_free_matrix((void **)commands);
 		return ;
 	}
 	else
 		ft_free_matrix((void **)commands);
 }
-	/*
-	* os comandos estao em commands cada um em 1 string, todos com aspas, sem expandir e com os redirects;
-	todo: leitura/escrita de arquivos do filho.
-	todo: checagem de acesso de arquivos.
-	todo: resto das bultins.
-	todo: status code.
-	todo: resumindo abaixo.
-	pai: faz o lexer e parseia por aspas e syntax;
-		se for 1 comando e for builtin ele executa
-		se for 1 comando e nao for builtin o filho executa
-	filho: abre arquivos e executa comandos;
-		se os comandos forem builtins ele deve retornar o status pro pai
-		se os comandos nao forem builtins ele deve executar enquanto o pai espera o retorno
-	 */
