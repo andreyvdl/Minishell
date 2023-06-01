@@ -3,7 +3,7 @@ NAME = minishell
 
 FILES = builtins.c cd.c echo_utils.c echo.c env.c exit.c export.c pwd.c unset.c \
 		add_to_history.c free_all_and_exit.c hash_to_matrix.c isbuiltin.c remove_expand_utils.c remove_expand_utils2.c remove_quote_or_expand.c solo_utils.c \
-		executor.c \
+		executor.c father_execute.c pre_executor.c\
 		hash_free.c hash_tab.c \
 		lexer_easy_splitter.c lexer_spacer_utils.c lexer_spacer.c \
 		parser.c parser_utils.c \
