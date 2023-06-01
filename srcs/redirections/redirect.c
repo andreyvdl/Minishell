@@ -69,10 +69,8 @@ static int	readers(char **str, t_command *son, size_t id)
 int	redirection(char **str, t_command *son, size_t id)
 {
 	int	status;
-	int	original_stdout;
 
 	status = REDI_OK;
-	original_stdout = dup(STDOUT_FILENO);
 	g_shell.REDIRECT_REST = str;
 	while (*str)
 	{
