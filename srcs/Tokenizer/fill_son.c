@@ -63,7 +63,7 @@ int	fill_son_orders(t_command *son_struct, char *cmd)
 
 	nbr_args = count_args(cmd);
 	status = REDI_OK;
-	if (nbr_args > 0)
+	if (nbr_args >= 0)
 	{
 		son_struct[g_shell.id].argv = (char **)ft_calloc(nbr_args + 1, \
 		sizeof(char *));
