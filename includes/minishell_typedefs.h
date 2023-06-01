@@ -22,19 +22,13 @@ typedef struct s_command {
 }	t_command;
 
 typedef struct s_pipe {
-	char		**LEXER_REST;
-	char		**REDIRECT_REST;
-	char		**envp;
 	size_t		id;
 	size_t		nbr_sons;
+	char		**pipeline_rest;
+	char		**redirect_rest;
+	char		**envp;
 	t_hash		*hash;
 	t_command	*command;
 }	t_pipe;
-
-typedef struct s_redirect
-{
-	char	*filename;
-	char	*delimiter;
-}	t_redirect;
 
 #endif
