@@ -8,6 +8,8 @@ void	builtins()
 		echo();
 	else if (ft_strcmp(g_shell.command->argv[0], "env") == 0)
 		env();
+	else if (ft_strcmp(g_shell.command->argv[0], "pwd") == 0)
+		pwd();
 	else
 		ft_printf("builtin");
 }
