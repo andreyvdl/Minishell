@@ -13,8 +13,8 @@ static void	re_print_prompt(int sig)
 
 static void	exit_heredoc(int sig)
 {
-	ft_free_matrix((void **)g_shell.LEXER_REST);
-	ft_free_matrix((void **)g_shell.REDIRECT_REST);
+	ft_free_matrix((void **)g_shell.pipeline_rest);
+	ft_free_matrix((void **)g_shell.redirect_rest);
 	while (g_shell.id > 0)
 	{
 		if (*g_shell.command[g_shell.id].argv != NULL)
