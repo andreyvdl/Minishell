@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-t_pipe g_shell;
+t_pipe	g_shell;
 
 static char	*env_collect(char *str)
 {	
@@ -46,7 +46,6 @@ static void	command(char *input, t_hash *hash)
 		return ;
 	}
 	tokenizer(input, hash);
-	//token_and_execution(input, hash);
 }
 
 int	main(int argc, char **argv, char **envp)
