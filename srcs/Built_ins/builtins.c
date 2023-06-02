@@ -1,15 +1,19 @@
 #include "../../includes/minishell.h"
 
-void	builtins()
+int	builtins(char **argv)
 {
-	if (ft_strcmp(g_shell.command->argv[0], "cd") == 0)
-		cd();
-	else if (ft_strcmp(g_shell.command->argv[0], "echo") == 0)
-		echo();
-	else if (ft_strcmp(g_shell.command->argv[0], "env") == 0)
-		env();
-	else if (ft_strcmp(g_shell.command->argv[0], "pwd") == 0)
-		pwd();
-	else
-		ft_printf("builtin");
+	if (ft_strcmp(*argv, "cd") == 0)
+		return (cd());
+	else if (ft_strcmp(*argv, "echo") == 0)
+		return (echo());
+	else if (ft_strcmp(*argv, "env") == 0)
+		return (env());
+	else if (ft_strcmp(*argv, "pwd") == 0)
+		return (pwd());
+	else if (ft_strcmp(*argv, "exit") == 0)
+		return (mini_exit());
+	else if (ft_strcmp(*argv, "export") == 0)
+		return (export());
+	else if (ft_strcmp(*argv, "unset") == 0)
+		return (unset());
 }
