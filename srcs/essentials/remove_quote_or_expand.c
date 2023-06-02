@@ -6,17 +6,17 @@ static void	remove_quote(char *str)
 	{
 		if (*str == '\'')
 		{
-			ft_memmove(str, str + 1, ft_strlen(str) + 1);
+			ft_memmove(str, str + 1, ft_strlen(str + 1) + 1);
 			while (*str != '\'')
 				str++;
-			ft_memmove(str, str + 1, ft_strlen(str) + 1);
+			ft_memmove(str, str + 1, ft_strlen(str + 1) + 1);
 		}
 		else if (*str == '\"')
 		{
-			ft_memmove(str, str + 1, ft_strlen(str) + 1);
+			ft_memmove(str, str + 1, ft_strlen(str + 1) + 1);
 			while (*str != '\"')
 				str++;
-			ft_memmove(str, str + 1, ft_strlen(str) + 1);
+			ft_memmove(str, str + 1, ft_strlen(str + 1) + 1);
 		}
 		else
 			str++;
