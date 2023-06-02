@@ -26,11 +26,6 @@ void	tokenizer(char *input, t_hash *hash)
 	commands = count_and_fill(input, &nbr_cmds);
 	free(input);
 	if (set_up_global(commands, nbr_cmds, hash) == REDI_SIGNAL)
-	{
-		ft_free_matrix((void **)commands);
-		return ;
-	}
-	else
-		ft_free_matrix((void **)commands);
-	pre_executor();
+		g_shell.nbr_sons = 0;
+	ft_free_matrix((void **)commands);
 }
