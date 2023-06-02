@@ -15,38 +15,65 @@
 # include "./minishell_typedefs.h"
 # include "../libs/libft/includes/libft.h"
 
+// prompts definitions
 # if defined(__APPLE__) || defined(__MACH__)
 #  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m🍎\e[0m\e[1;33m↳ \e[0m"
+#  define HEREDOC_PROMPT "🍎 here-doc> "
 # elif defined(_WIN32) || defined(_WIN64) || defined(__CYWIN__)
 #  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m💾\e[0m\e[1;33m↳ \e[0m"
+#  define HEREDOC_PROMPT "💾 here-doc> "
 # elif defined(__linux__) || defined(unix) || defined(__unix) || \
 defined(__unix__)
 #  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m🐧\e[0m\e[1;33m↳ \e[0m"
+#  define HEREDOC_PROMPT "🐧 here-doc> "
 # elif defined(__FreeBSD__)
 #  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m😈\e[0m\e[1;33m↳ \e[0m"
+#  define HEREDOC_PROMPT "😈 here-doc> "
 # else
 #  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m🖥\e[0m\e[1;33m↳ \e[0m"
+#  define HEREDOC_PROMPT "💻 here-doc> "
 # endif
-
-// # define ERR_FORK "\e[1;5;31mms: forking error\e[0m"
-# define ERR_QUOTE "\e[1;5;31mms: close this quote \e[1m`%c`\n\e[0m"
-# define ERR_READING "\e[1;5;31mms: read error\e[0m"
-# define ERR_WRITING "\e[1;5;31mms: write error\e[0m"
-# define ERR_HEREDOC "\e[1;5;31mms: heredoc error...\n\e[0m"
-# define WAR_HEREDOC "\e[1;33mms: finish with EOF, expected `%s`\n\e[0m"
 # define HEREDOC_PATH "/tmp/.heredoc"
-# define ERR_INPUT_DIR "\e[1;5;31mms: read error: %s\n\e[0m"
-# define HEREDOC_PROMPT "here-document> "
-# define ERR_UNS_SYNTAX "\e[1;5;31mms: unsuported syntax \e[1m`%s`\n\e[0m"
-# define ERR_EOL_SYNTAX "\e[1;5;31mms: syntax error \e[1m`EOL`\e[0m"
-# define ERR_NOW_SYNTAX "\e[1;5;31mms: syntax error \e[1m`%s`\n\e[0m"
-# define ERR_NEXT_SYNTAX "\e[1;5;31mms: syntax error after \e[1m`%s`\n\e[0m"
 
+// 💻🖥️ emojis do windows, comparar com o do linux da 42
+
+// error messages
+# define ERR_DUP "\e[1;5;31mms: dup2 error\e[0m (⊙_(⊙_⊙)_⊙)"
+# define ERR_FORK "\e[1;5;31mms: fork error\e[0m (⊙_⊙)？"
+# define ERR_PIPE "\e[1;5;31mms: pipe error\e[0m (⊙_⊙;)"
+# define ERR_QUOTE "\e[1;5;31mms: close this quote\e[1m`%c`\e[0m (╬▔皿▔)╯\n"
+# define ERR_EXECVE "\e[1;5;31mms: execve error\e[0m (x_x)"
+# define ERR_READING "\e[1;5;31mms: read error\e[0m (＠_＠;)"
+# define ERR_WRITING "\e[1;5;31mms: write error\e[0m (＠_＠;)"
+# define ERR_HEREDOC "\e[1;5;31mms: heredoc error... congrats...?\e[0m " \
+"ㄟ( ▔, ▔ )ㄏ\n"
+# define WAR_HEREDOC "\e[1;33mms: finish with EOF, expected `%s`\e[0m " \
+"༼ つ ◕_◕ ༽つ\n"
+# define ERR_EXEC_DIR "\e[1;5;31mms: execution error: %s\e[0m (＠_＠;)\n"
+# define ERR_INPUT_DIR "\e[1;5;31mms: read error: %s\e[0m (＠_＠;)\n"
+# define ERR_UNS_SYNTAX "\e[1;5;31mms: unsuported syntax \e[1m`%s`\e[0m " \
+"╰（‵□′）╯\n"
+# define ERR_EOL_SYNTAX "\e[1;5;31mms: syntax error \e[1m`EOL`\e[0m ╰（‵□′）╯"
+# define ERR_NOW_SYNTAX "\e[1;5;31mms: syntax error \e[1m`%s`\e[0m ╰（‵□′）╯\n"
+# define ERR_NEXT_SYNTAX "\e[1;5;31mms: syntax error after \e[1m`%s`\e[0m " \
+"╰（‵□′）╯\n"
+# define ERR_CMD_NOT_FOUND "\e[1;5;31mcommand not found: \e[1m`%s`\e[0m" \
+"┗( T﹏T )┛\n"
+
+// dev returns
 # define REDI_OK 0
 # define REDI_ERR 1
-# define SIGNAL_INT 130
+# define SIGNAL_INT -130
+# define FILE_ERROR 1
 # define REDI_SIGNAL -1
+# define CMD_NOT_FOUND 127
+# define IS_A_DIRECTORY 126
+# define FILENAME_TOO_LONG 126
+# define PERMISSION_DENIED 126
+# define SOMETHING_WENT_WRONG 2
 
+// flags
+# define NONE 00
 # define TRUNC 01101
 # define APPEND 02101
 # define HEREDOC 01102
