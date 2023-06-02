@@ -1,11 +1,5 @@
 #include "../../includes/minishell.h"
 
-static void	set_as_error(t_command *son)
-{
-	ft_free_matrix((void **)son[g_shell.id].argv);
-	son[g_shell.id].argv = NULL;
-}
-
 int	set_up_global(char **cmds, size_t nbr_cmds, t_hash *hash)
 {
 	int		status;
@@ -18,9 +12,7 @@ int	set_up_global(char **cmds, size_t nbr_cmds, t_hash *hash)
 	while (g_shell.id < nbr_cmds)
 	{
 		status = fill_son_orders(g_shell.command, *cmds);
-		if (status == REDI_ERR)
-			set_as_error(g_shell.command);
-		else if (status == REDI_SIGNAL)
+		if (status == REDI_SIGNAL)
 			return (status);
 		g_shell.id++;
 		cmds++;
