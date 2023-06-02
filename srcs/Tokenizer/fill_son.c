@@ -28,7 +28,7 @@ static void	copy_args(char **argv, char *cmd)
 				index++;
 			argv[arg_index] = ft_substr(cmd, 0, index);
 			arg_index++;
-			ft_memset(cmd, -7, index);
+			ft_memmove(cmd, cmd + index, ft_strlen(cmd + index) + 1);
 		}
 	}
 	argv[arg_index] = NULL;
@@ -55,6 +55,24 @@ static size_t	count_args(char *cmd)
 	return (nbr_args);
 }
 
+static void	expand_args(char **argv)
+{
+	size_t	index;
+	char	*temp;
+
+	index = 0;
+	while (argv[index] != NULL)
+	{
+		temp = remove_quote_or_expand(argv[index]);
+		if (argv[index] != temp)
+		{
+			free(argv[index]);
+			argv[index] = temp;
+		}
+		index++;
+	}
+}
+
 int	fill_son_orders(t_command *son_struct, char *cmd)
 {
 	int		status;
@@ -68,10 +86,11 @@ int	fill_son_orders(t_command *son_struct, char *cmd)
 		son_struct[g_shell.id].argv = (char **)ft_calloc(nbr_args + 1, \
 		sizeof(char *));
 		copy_args(son_struct[g_shell.id].argv, cmd);
+		expand_args(son_struct[g_shell.id].argv);
 	}
 	redirect = ft_split(cmd, -7);
-	son_struct[g_shell.id].wr_here = -1;
-	son_struct[g_shell.id].rd_here = -1;
+	son_struct[g_shell.id].wr_here = STDOUT_FILENO;
+	son_struct[g_shell.id].rd_here = STDIN_FILENO;
 	if (redirect && *redirect)
 		status = redirection(redirect, son_struct, g_shell.id);
 	ft_free_matrix((void **)redirect);
