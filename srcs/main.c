@@ -46,6 +46,7 @@ static void	command(char *input, t_hash *hash)
 		return ;
 	}
 	tokenizer(input, hash);
+	pre_executor();
 }
 
 int	main(int argc, char **argv, char **envp)
