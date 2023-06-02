@@ -7,12 +7,11 @@ static void	free_son_and_exit(void)
 	free_hash(g_shell.hash);
 	while (g_shell.id > 0)
 	{
-		if (*g_shell.command[g_shell.id].argv != NULL)
-			ft_free_matrix((void **)g_shell.command[g_shell.id].argv);
-		// ! pai abriu, acho q o filho n tem q fechar if (g_shell.command[g_shell.id].wr_here > 0)
-		// !close(g_shell.command[g_shell.id].wr_here);
-		// !if (g_shell.command[g_shell.id].rd_here > 0)
-		// !close(g_shell.command[g_shell.id].rd_here);
+		ft_free_matrix((void **)g_shell.command[g_shell.id].argv);
+		if (g_shell.command[g_shell.id].wr_here > STDOUT_FILENO)
+			close(g_shell.command[g_shell.id].wr_here);
+		if (g_shell.command[g_shell.id].rd_here > STDIN_FILENO)
+			close(g_shell.command[g_shell.id].rd_here);
 		g_shell.id--;
 	}
 	free(g_shell.command);
@@ -77,11 +76,11 @@ static int	with_expansions(char *limiter, t_command *son, size_t id)
 		expansion_loop(limiter, son, id);
 		free_son_and_exit();
 	}
-	waitpid(pid, &status, 0);
+	waitpid(pid, &status, NONE);
 	if (status == SIGNAL_INT)
 	{
 		close(son[id].rd_here);
-		son[id].rd_here = -130;
+		son[id].rd_here = SIGNAL_INT;
 		unlink(HEREDOC_PATH);
 		return (REDI_SIGNAL);
 	}
@@ -90,7 +89,7 @@ static int	with_expansions(char *limiter, t_command *son, size_t id)
 
 int	heredoc(char *limiter, t_command *son, size_t id)
 {
-	if (son[id].rd_here > -1)
+	if (son[id].rd_here > STDIN_FILENO)
 		close(son[id].rd_here);
 	son[id].rd_here = open(HEREDOC_PATH, HEREDOC, PERM_CREATE);
 	if (son[id].rd_here == -1)
