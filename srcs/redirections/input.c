@@ -36,7 +36,7 @@ int	redirect_input(char *filename, t_command *son, size_t id)
 	{
 		if (temp != filename)
 			free(temp);
-		if (son[id].rd_here > -1)
+		if (son[id].rd_here > STDIN_FILENO)
 			close(son[id].rd_here);
 		son[id].rd_here = -42;
 		return (REDI_ERR);
@@ -44,7 +44,7 @@ int	redirect_input(char *filename, t_command *son, size_t id)
 	file_des = open(temp, O_RDONLY);
 	if (temp != filename)
 		free(temp);
-	if (son[id].rd_here > -1)
+	if (son[id].rd_here > STDIN_FILENO)
 		close(son[id].rd_here);
 	son[id].rd_here = file_des;
 	return (REDI_OK);
