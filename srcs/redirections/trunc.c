@@ -9,11 +9,11 @@ int	redirect_output_trunc(char *filename, t_command *son, size_t id)
 	file_des = open(temp, TRUNC, PERM_CREATE);
 	if (temp != filename)
 		free(temp);
-	if (file_des == -1)
+	if (file_des == -1 || filename_too_big(temp) == TRUE)
 	{
 		if (son[id].wr_here > STDOUT_FILENO)
 			close(son[id].wr_here);
-		son[id].wr_here = -42;
+		son[id].wr_here = REDIRECT_ERROR;
 		perror(ERR_WRITING);
 		return (REDI_ERR);
 	}

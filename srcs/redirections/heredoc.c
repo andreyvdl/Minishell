@@ -95,7 +95,7 @@ int	heredoc(char *limiter, t_command *son, size_t id)
 	if (son[id].rd_here == -1)
 	{
 		perror(ERR_HEREDOC);
-		son[id].rd_here = -42;
+		son[id].rd_here = REDIRECT_ERROR;
 		return (REDI_SIGNAL);
 	}
 	if (ft_strchr(limiter, '\'') != NULL || ft_strchr(limiter, '\"') != NULL)

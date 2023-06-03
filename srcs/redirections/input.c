@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-static int	is_directory(char *filename)
+static int	is_directory_input(char *filename)
 {
 	struct stat	file_stat;
 
@@ -18,9 +18,14 @@ static int	open_check(char *filename)
 		perror(ERR_READING);
 		return (REDI_ERR);
 	}
-	else if (is_directory(filename) == TRUE)
+	else if (is_directory_input(filename) == TRUE)
 	{
-		ft_printf_fd(STDERR_FILENO, ERR_INPUT_DIR, strerror(21));
+		ft_printf_fd(STDERR_FILENO, ERR_INPUT_DIR, strerror(FT_EISDIR));
+		return (REDI_ERR);
+	}
+	else if (filename_too_big(filename) == TRUE)
+	{
+		ft_printf_fd(STDERR_FILENO, ERR_INPUT_DIR, strerror(FT_ENAMETOOLONG));
 		return (REDI_ERR);
 	}
 	return (REDI_OK);
@@ -38,7 +43,7 @@ int	redirect_input(char *filename, t_command *son, size_t id)
 			free(temp);
 		if (son[id].rd_here > STDIN_FILENO)
 			close(son[id].rd_here);
-		son[id].rd_here = -42;
+		son[id].rd_here = REDIRECT_ERROR;
 		return (REDI_ERR);
 	}
 	file_des = open(temp, O_RDONLY);
