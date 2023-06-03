@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-int	env()
+void	env()
 {
 	char	**env;
 	int		i;

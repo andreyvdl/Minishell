@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-int	echo()
+void	echo()
 {
 	char	**str;
 	int		i;

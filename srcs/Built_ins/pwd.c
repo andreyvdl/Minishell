@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-int	pwd()
+void	pwd()
 {
 	char	path[4096];
 

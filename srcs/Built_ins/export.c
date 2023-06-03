@@ -27,7 +27,7 @@ static char	*extract_value(char *str)
 	return (str + 1);
 }
 
-int	export(char *str, t_hash *hash)
+void	export(char *str, t_hash *hash)
 {
 	char	*existing_value;
 	char	*variable;
