@@ -1,22 +1,67 @@
 #include "../../includes/minishell.h"
 
 // file name too long 126
-// command not found 127
-// permission denied 126
 
-static void	is_directory(char *path)
+static void	permission_denied(char *path, char **binaries, char *temp)
 {
-	struct stat	file_stat;
+	ft_free_matrix((void **)binaries);
+	free(temp);
+	free(path);
+	free_son();
+	perror(ERR_ACCESS);
+	exit(EXEC_WENT_WRONG);
+}
 
-	file_stat = (struct stat){0};
-	stat(path, &file_stat);
-	if (S_ISDIR(file_stat.st_mode))
+static char	*try_all_paths(char **binaries, char *temp)
+{
+	size_t	looper;
+	char	*path;
+
+	looper = 0;
+	while (binaries[looper + 1] != NULL)
 	{
-		free_son();
+		path = ft_strjoin(binaries[looper], temp);
+		if (access(path, X_OK) != -1)
+			return (path);
 		free(path);
-		ft_printf_fd(STDERR_FILENO, ERR_EXEC_DIR, strerror(21));
-		exit(IS_A_DIRECTORY);
+		path = NULL;
+		looper++;
 	}
+	path = ft_strjoin(binaries[looper - 1], temp);
+	if (access(path, F_OK) == -1)
+	{
+		free(path);
+		path = NULL;
+	}
+	else if (access(path, X_OK) == -1)
+		permission_denied(path, binaries, temp);
+	return (path);
+}
+
+static char	*match_path(char *cmd)
+{
+	char	**binaries;
+	char	*temp;
+	char	*path;
+
+	binaries = ft_split(search(g_shell.hash, "PATH"), ':');
+	if (binaries == NULL)
+	{
+		ft_printf_fd(STDERR_FILENO, ERR_CMD_NOT_FOUND_2, cmd);
+		free_son();
+		exit(CMD_NOT_FOUND);
+	}
+	temp = ft_strjoin("/", cmd);
+	path = try_all_paths(binaries, temp);
+	ft_free_matrix((void **)binaries);
+	free(temp);
+	if (path == NULL)
+	{
+		ft_printf_fd(STDERR_FILENO, ERR_CMD_NOT_FOUND, cmd);
+		free_son();
+		exit(CMD_NOT_FOUND);
+	}
+	return (path);
 }
 
 static char	*find_path(char *cmd)
@@ -36,12 +81,12 @@ static char	*find_path(char *cmd)
 		free(temp);
 	}
 	else
-		path = 
-	check(path);
+		path = match_path(cmd);
+	execution_check(path);
 	return (path);
 }
 
-void	system_exec(char **old_argv, char **old_envp, size_t id)
+void	system_exec(char **old_argv, char **old_envp)
 {
 	char	**argv;
 	char	**envp;
@@ -53,8 +98,8 @@ void	system_exec(char **old_argv, char **old_envp, size_t id)
 	free_son();
 	execve(path, argv, envp);
 	perror(ERR_EXECVE);
-	free(path);
-	ft_free_matrix(argv);
-	ft_free_matrix(envp);
-	exit(SOMETHING_WENT_WRONG);
+	ft_free(path);
+	ft_free_matrix((void **)argv);
+	ft_free_matrix((void **)envp);
+	exit(EXEC_WENT_WRONG);
 }
