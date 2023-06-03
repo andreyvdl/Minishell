@@ -28,12 +28,12 @@ static void	close_opened(int status, t_command *son, size_t id)
 		if (son[id].rd_here > STDIN_FILENO)
 		{
 			close(son[id].rd_here);
-			son[id].rd_here = -42;
+			son[id].rd_here = REDIRECT_ERROR;
 		}
 		if (son[id].wr_here > STDOUT_FILENO)
 		{
 			close(son[id].wr_here);
-			son[id].wr_here = -42;
+			son[id].wr_here = REDIRECT_ERROR;
 		}
 		return ;
 	}
