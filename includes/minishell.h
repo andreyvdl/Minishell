@@ -39,18 +39,22 @@ defined(__unix__)
 
 // error messages
 # define ERR_DUP "\e[1;5;31mms: dup2 error\e[0m (⊙_(⊙_⊙)_⊙)"
+# define ERR_STAT "\e[1;5;31mms: stat error\e[0m (╯‵□′)╯︵┻━┻"
 # define ERR_FORK "\e[1;5;31mms: fork error\e[0m (⊙_⊙)？"
 # define ERR_PIPE "\e[1;5;31mms: pipe error\e[0m (⊙_⊙;)"
 # define ERR_QUOTE "\e[1;5;31mms: close this quote\e[1m`%c`\e[0m (╬▔皿▔)╯\n"
+# define ERR_ACCESS "\e[1;5;31mms: access error\e[0m (っ °Д °;)っ"
 # define ERR_EXECVE "\e[1;5;31mms: execve error\e[0m (x_x)"
-# define ERR_READING "\e[1;5;31mms: read error\e[0m (＠_＠;)"
-# define ERR_WRITING "\e[1;5;31mms: write error\e[0m (＠_＠;)"
+# define ERR_READING "\e[1;5;31mms: input error\e[0m (＠_＠;)"
+# define ERR_WRITING "\e[1;5;31mms: output error\e[0m (＠_＠;)"
 # define ERR_HEREDOC "\e[1;5;31mms: heredoc error... congrats...?\e[0m " \
 "ㄟ( ▔, ▔ )ㄏ\n"
 # define WAR_HEREDOC "\e[1;33mms: finish with EOF, expected `%s`\e[0m " \
 "༼ つ ◕_◕ ༽つ\n"
 # define ERR_EXEC_DIR "\e[1;5;31mms: execution error: %s\e[0m (＠_＠;)\n"
-# define ERR_INPUT_DIR "\e[1;5;31mms: read error: %s\e[0m (＠_＠;)\n"
+# define ERR_FILENAME "\e[1;5;31mms: filename error: %s\e[0m " \
+"┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻\n"
+# define ERR_INPUT_DIR "\e[1;5;31mms: input error: %s\e[0m (＠_＠;)\n"
 # define ERR_UNS_SYNTAX "\e[1;5;31mms: unsuported syntax \e[1m`%s`\e[0m " \
 "╰（‵□′）╯\n"
 # define ERR_EOL_SYNTAX "\e[1;5;31mms: syntax error \e[1m`EOL`\e[0m ╰（‵□′）╯"
@@ -59,18 +63,22 @@ defined(__unix__)
 "╰（‵□′）╯\n"
 # define ERR_CMD_NOT_FOUND "\e[1;5;31mcommand not found: \e[1m`%s`\e[0m" \
 "┗( T﹏T )┛\n"
+# define ERR_CMD_NOT_FOUND_2 "\e[1;5;31m(PATH not set)command not found: " \
+"\e[1m`%s`\e[0m ┗( T﹏T )┛\n"
+
+// dev macros
+# define FT_EISDIR 21
+# define CMD_NOT_FOUND 127
+# define REDIRECT_ERROR -42
+# define FT_ENAMETOOLONG 36
+# define FILENAME_MAX_LEN 255
+# define EXEC_WENT_WRONG 126
 
 // dev returns
 # define REDI_OK 0
 # define REDI_ERR 1
 # define SIGNAL_INT -130
-# define FILE_ERROR 1
 # define REDI_SIGNAL -1
-# define CMD_NOT_FOUND 127
-# define IS_A_DIRECTORY 126
-# define FILENAME_TOO_LONG 126
-# define PERMISSION_DENIED 126
-# define SOMETHING_WENT_WRONG 2
 
 // flags
 # define NONE 00
@@ -87,6 +95,7 @@ int		cd();
 int		isbuiltin(char *check);
 int		parser(char *str, t_hash *hash);
 int		pipe_case(char **splited_pline);
+int		filename_too_big(char *filename);
 int		write_to_case(char **splited_pline);
 int		intersections(char *str, char inter);
 int		read_from_case(char **splited_pline);
@@ -105,20 +114,26 @@ void	env();
 void	echo();
 void	builtins();
 void	executor(void);
+void	free_son(void);
 void	pre_executor(void);
 void	father_execute(void);
 void	set_up_signals(void);
 void	free_hash(t_hash *hash);
+void	is_directory(char *path);
 void	easter_eggs(char *flags);
 void	easy_splitter(char *str);
+void	execution_check(char *path);
 void	unset(char *str, t_hash *hash);
 void	add_to_history(char *pipeline);
 void	export(char *str, t_hash *hash);
 void	solo_copy(char *new, char *str);
 void	free_all_and_exit(t_hash *hash);
+void	guide_sons(int *pipe, size_t id);
 void	expand_copy(char *new, char *str);
+void	open_redirect(int *pipe, size_t id);
 void	tokenizer(char *input, t_hash *hash);
 void	count_cmds(char *input, size_t *n_cmds);
+void	system_exec(char **old_argv, char **old_envp);
 void	insert_node(t_hash *hash, char *key, char *value);
 void	inside_quote_copy(char **str, char **new, char quote);
 void	expansion_loop(char *limiter, t_command *son, size_t id);
