@@ -15,7 +15,7 @@ static void	copy_args(char **argv, char *cmd)
 	size_t	arg_index;
 
 	arg_index = 0;
-	while (*cmd != '\0')
+	while (cmd != NULL && *cmd != '\0')
 	{
 		if (*cmd == '<' || *cmd == '>')
 			skip_redirect(&cmd);
@@ -81,13 +81,10 @@ int	fill_son_orders(t_command *son_struct, char *cmd)
 
 	nbr_args = count_args(cmd);
 	status = REDI_OK;
-	if (nbr_args >= 0)
-	{
-		son_struct[g_shell.id].argv = (char **)ft_calloc(nbr_args + 1, \
-		sizeof(char *));
-		copy_args(son_struct[g_shell.id].argv, cmd);
-		expand_args(son_struct[g_shell.id].argv);
-	}
+	son_struct[g_shell.id].argv = (char **)ft_calloc(nbr_args + 1, \
+	sizeof(char *));
+	copy_args(son_struct[g_shell.id].argv, cmd);
+	expand_args(son_struct[g_shell.id].argv);
 	redirect = ft_split(cmd, -7);
 	son_struct[g_shell.id].wr_here = STDOUT_FILENO;
 	son_struct[g_shell.id].rd_here = STDIN_FILENO;
