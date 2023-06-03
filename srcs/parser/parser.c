@@ -80,7 +80,6 @@ int	parser(char *pipeline, t_hash *hash)
 		insert_node(hash, "?", "2");
 		return (TRUE);
 	}
-	ft_printf("\n");
 	ft_free_matrix((void **)splited);
 	return (FALSE);
 }
