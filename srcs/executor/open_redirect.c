@@ -5,7 +5,7 @@ static void	pipe_error(int *pipe)
 	close(pipe[0]);
 	close(pipe[1]);
 	free_son();
-	perror(ERR_DUP);
+	perror(ERR_DUP_2);
 	exit(EXEC_WENT_WRONG);
 }
 
@@ -16,9 +16,6 @@ static void	open_last(int *pipe, size_t id)
 		if (dup2(g_shell.command[id].rd_here, STDIN_FILENO) == -1)
 			pipe_error(pipe);
 	}
-	else
-		if (dup2(pipe[0], STDIN_FILENO) == -1)
-			pipe_error(pipe);
 	if (g_shell.command[id].wr_here > STDOUT_FILENO)
 		if (dup2(g_shell.command[id].wr_here, STDOUT_FILENO) == -1)
 			pipe_error(pipe);
@@ -48,9 +45,6 @@ static void	open_middle(int *pipe, size_t id)
 		if (dup2(g_shell.command[id].rd_here, STDIN_FILENO) == -1)
 			pipe_error(pipe);
 	}
-	else
-		if (dup2(pipe[0], STDIN_FILENO) == -1)
-			pipe_error(pipe);
 	if (g_shell.command[id].wr_here > STDOUT_FILENO)
 	{
 		if (dup2(g_shell.command[id].wr_here, STDOUT_FILENO) == -1)
