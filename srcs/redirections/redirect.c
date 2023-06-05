@@ -57,8 +57,10 @@ static int	readers(char **str, t_command *son, size_t id)
 {
 	if (ft_strcmp(*str, "<<") == 0)
 	{
-		if (heredoc(*(str + 1), son, id) != REDI_SIGNAL)
+		if (heredoc(*(str + 1), son, id) == REDI_SIGNAL)
 			return (REDI_SIGNAL);
+		close(son[id].rd_here);
+		son[id].rd_here = open(HEREDOC_PATH, O_RDONLY);
 	}
 	else
 		if (redirect_input(*(str + 1), son, id) == REDI_ERR)
