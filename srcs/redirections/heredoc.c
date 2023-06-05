@@ -1,5 +1,24 @@
 #include "../../includes/minishell.h"
 
+/* static void	free_heredoc_hash(t_hash *hash)
+{
+	size_t	looper;
+	t_node	*node;
+
+	looper = 0;
+	while (looper < HASH_SIZE)
+	{
+		node = hash->list[looper];
+		if (node != NULL)
+		{
+			free(node->key);
+			free(node->value);
+			free(node);
+		}
+		looper++;
+	}
+} */
+
 static void	free_son_and_exit(void)
 {
 	ft_free_matrix((void **)g_shell.pipeline_rest);
@@ -14,7 +33,13 @@ static void	free_son_and_exit(void)
 			close(g_shell.command[g_shell.id].rd_here);
 		g_shell.id--;
 	}
+	ft_free_matrix((void **)g_shell.command[g_shell.id].argv);
+	if (g_shell.command[g_shell.id].wr_here > STDOUT_FILENO)
+		close(g_shell.command[g_shell.id].wr_here);
+	if (g_shell.command[g_shell.id].rd_here > STDIN_FILENO)
+		close(g_shell.command[g_shell.id].rd_here);
 	free(g_shell.command);
+	rl_clear_history();
 	exit(REDI_OK);
 }
 
