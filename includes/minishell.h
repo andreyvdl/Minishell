@@ -30,7 +30,7 @@ defined(__unix__)
 #  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m😈\e[0m\e[1;33m↳ \e[0m"
 #  define HEREDOC_PROMPT "😈 here-doc> "
 # else
-#  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m🖥\e[0m\e[1;33m↳ \e[0m"
+#  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m💻\e[0m\e[1;33m↳ \e[0m"
 #  define HEREDOC_PROMPT "💻 here-doc> "
 # endif
 # define HEREDOC_PATH "/tmp/.heredoc"
@@ -38,33 +38,34 @@ defined(__unix__)
 // 💻🖥️ emojis do windows, comparar com o do linux da 42
 
 // error messages
-# define ERR_DUP "\e[1;5;31mms: dup2 error\e[0m (⊙_(⊙_⊙)_⊙)"
+# define ERR_DUP "\e[1;5;31mms: dup error\e[0m (⊙_(⊙_⊙)_⊙)"
 # define ERR_STAT "\e[1;5;31mms: stat error\e[0m (╯‵□′)╯︵┻━┻"
 # define ERR_FORK "\e[1;5;31mms: fork error\e[0m (⊙_⊙)？"
 # define ERR_PIPE "\e[1;5;31mms: pipe error\e[0m (⊙_⊙;)"
+# define ERR_DUP_2 "\e[1;5;31mms: dup2 error\e[0m (⊙_(⊙_⊙)_⊙)"
 # define ERR_QUOTE "\e[1;5;31mms: close this quote\e[1m`%c`\e[0m (╬▔皿▔)╯\n"
 # define ERR_ACCESS "\e[1;5;31mms: access error\e[0m (っ °Д °;)っ"
 # define ERR_EXECVE "\e[1;5;31mms: execve error\e[0m (x_x)"
 # define ERR_READING "\e[1;5;31mms: input error\e[0m (＠_＠;)"
 # define ERR_WRITING "\e[1;5;31mms: output error\e[0m (＠_＠;)"
-# define ERR_HEREDOC "\e[1;5;31mms: heredoc error... congrats...?\e[0m " \
-"ㄟ( ▔, ▔ )ㄏ\n"
-# define WAR_HEREDOC "\e[1;33mms: finish with EOF, expected `%s`\e[0m " \
-"༼ つ ◕_◕ ༽つ\n"
+# define ERR_HEREDOC "\e[1;5;31mms: heredoc error... congrats...?\e[0m \
+ㄟ( ▔, ▔ )ㄏ\n"
+# define WAR_HEREDOC "\e[1;33mms: finish with EOF, expected `%s`\e[0m \
+༼ つ ◕_◕ ༽つ\n"
 # define ERR_EXEC_DIR "\e[1;5;31mms: execution error: %s\e[0m (＠_＠;)\n"
-# define ERR_FILENAME "\e[1;5;31mms: filename error: %s\e[0m " \
-"┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻\n"
+# define ERR_FILENAME "\e[1;5;31mms: filename error: %s\e[0m \
+┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻\n"
 # define ERR_INPUT_DIR "\e[1;5;31mms: input error: %s\e[0m (＠_＠;)\n"
-# define ERR_UNS_SYNTAX "\e[1;5;31mms: unsuported syntax \e[1m`%s`\e[0m " \
-"╰（‵□′）╯\n"
+# define ERR_UNS_SYNTAX "\e[1;5;31mms: unsuported syntax \e[1m`%s`\e[0m \
+╰（‵□′）╯\n"
 # define ERR_EOL_SYNTAX "\e[1;5;31mms: syntax error \e[1m`EOL`\e[0m ╰（‵□′）╯"
 # define ERR_NOW_SYNTAX "\e[1;5;31mms: syntax error \e[1m`%s`\e[0m ╰（‵□′）╯\n"
-# define ERR_NEXT_SYNTAX "\e[1;5;31mms: syntax error after \e[1m`%s`\e[0m " \
-"╰（‵□′）╯\n"
-# define ERR_CMD_NOT_FOUND "\e[1;5;31mcommand not found: \e[1m`%s`\e[0m" \
-"┗( T﹏T )┛\n"
-# define ERR_CMD_NOT_FOUND_2 "\e[1;5;31m(PATH not set)command not found: " \
-"\e[1m`%s`\e[0m ┗( T﹏T )┛\n"
+# define ERR_NEXT_SYNTAX "\e[1;5;31mms: syntax error after \e[1m`%s`\e[0m \
+╰（‵□′）╯\n"
+# define ERR_CMD_NOT_FOUND "\e[1;5;31mcommand not found: \e[1m`%s`\e[0m \
+┗( T﹏T )┛\n"
+# define ERR_CMD_NOT_FOUND_2 "\e[1;5;31m(PATH not set)command not found: \
+\e[1m`%s`\e[0m ┗( T﹏T )┛\n"
 
 // dev macros
 # define FT_EISDIR 21
