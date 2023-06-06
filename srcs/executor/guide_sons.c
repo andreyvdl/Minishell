@@ -4,14 +4,15 @@ static void	execute_cmd(size_t id)
 {
 	if (g_shell.command[id].argv != NULL && \
 	isbuiltin(*g_shell.command[id].argv) == TRUE)
-	{
-		ft_printf_ln("builtins on WIP, check github for more info");
-		free_son();
-		exit(EXIT_SUCCESS);
-	}
+		builtins(g_shell.command[id].argv);
 	else if (g_shell.command[id].argv != NULL && \
 	*g_shell.command[id].argv != NULL)
 		system_exec(g_shell.command[id].argv, g_shell.envp);
+	else
+	{
+		free_son();
+		exit(EXIT_SUCCESS);
+	}
 }
 
 void	guide_sons(int *pipe, size_t id)
