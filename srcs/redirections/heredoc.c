@@ -1,24 +1,5 @@
 #include "../../includes/minishell.h"
 
-/* static void	free_heredoc_hash(t_hash *hash)
-{
-	size_t	looper;
-	t_node	*node;
-
-	looper = 0;
-	while (looper < HASH_SIZE)
-	{
-		node = hash->list[looper];
-		if (node != NULL)
-		{
-			free(node->key);
-			free(node->value);
-			free(node);
-		}
-		looper++;
-	}
-} */
-
 static void	free_son_and_exit(void)
 {
 	ft_free_matrix((void **)g_shell.pipeline_rest);
