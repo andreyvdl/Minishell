@@ -1,22 +1,38 @@
 #include "../../includes/minishell.h"
 
-void	echo()
+static int	echo_has_flag(char *flag)
 {
-	char	**str;
-	int		i;
+	if (flag == NULL)
+		return (FALSE);
+	if (*flag != '-')
+		return (FALSE);
+	flag++;
+	while (*flag == 'n' && *flag != '\0')
+		flag++;
+	if (*flag != '\0')
+		return (FALSE);
+	return (TRUE);
+}
 
-	str = g_shell.command->argv;
-	if (str[1] == NULL)
-		return ((void)ft_printf("\n"));
-	else if (ft_strcmp(str[1], "-n") == 0)
+static void	print_it(char **argv, int newline)
+{
+	while (*argv != NULL)
 	{
-		i = 2;
-		while (str && str[i])
-			ft_printf("%s ", str[i++]);
-		return;
+		ft_putstr(*argv);
+		if (*(argv + 1) != NULL)
+			ft_putchar(' ');
+		argv++;
 	}
-	i = 1;
-	while (str && str[i])
-			ft_printf("%s ", str[i++]);
-	ft_putchar('\n');
+	if (newline == TRUE)
+		ft_putchar('\n');
+}
+
+void	ft_echo(char **argv)
+{
+	if (echo_has_flag(*(argv + 1)) == TRUE)
+		print_it(argv + 2, FALSE);
+	else
+		print_it(argv + 1, TRUE);
+	free_son();
+	exit(EXIT_SUCCESS);
 }
