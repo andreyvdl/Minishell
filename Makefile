@@ -38,10 +38,10 @@ MKDIR = mkdir -p
 
 #=====================[MESSAGES]=============
 
-DEL_MSG				= @echo -n "[\e[0;31m DEL \e[0m] "
-BIN_MSG				= @echo -n "[\e[0;32m BIN \e[0m] "
-BLD_MSG				= @echo -n "[\e[0;34m BLD \e[0m] "
-MKD_MSG				= @echo -n "[\e[0;35m MKD \e[0m] "
+DEL_MSG				= @echo -n "[\033[0;31m DEL \033[0m] "
+BIN_MSG				= @echo -n "[\033[0;32m BIN \033[0m] "
+BLD_MSG				= @echo -n "[\033[0;34m BLD \033[0m] "
+MKD_MSG				= @echo -n "[\033[0;35m MKD \033[0m] "
 
 # =================[BASIC_RULES] ============
 
