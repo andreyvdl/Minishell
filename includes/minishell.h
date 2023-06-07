@@ -36,10 +36,15 @@ defined(__unix__)
 # define HEREDOC_PATH "/tmp/.heredoc"
 
 // builtin error messages
-# define ERR_CD_DIR "\e[1;31mcd: `%s`: is NOT a directory \e[0m(┬┬﹏┬┬)\n"
+# define ERR_CD_DIR "\e[1;31mcd: `%s`: %s \e[0m(┬┬﹏┬┬)\n"
 # define ERR_CD_ARGS "\e[1;31mcd: too many args \e[0m(╯°□°）╯︵ ┻━┻\n"
 # define ERR_CD_HOME "\e[1;31mcd: HOME is not set \e[0m(┬┬﹏┬┬)\n"
+# define ERR_ENV_ARGS "\e[1;31menv: minishell do NOT use extra args or flags \
+\e[0mo(一︿一+)o\n"
 # define ERR_CD_ACCESS "\e[1;31mcd: access error \e[0m(っ °Д °;)っ"
+# define ERR_PWD_PERROR "\e[1;31mpwd: something happend with pwd \e[0m(⊙o⊙)"
+# define ERR_CD_TOO_LONG "\e[1;31mcd: %s: %s \e[0m(⊙﹏⊙∥)\n"
+# define ERR_PWD_TOO_LONG "\e[1;31mpwd: %s: %s \e[0m(⊙﹏⊙∥)\n"
 # define ERR_EXPORT_INVALID "\e[1;31mexport: `%s`: is NOT a valid \
 identifier \e[0m┗|｀O′|┛"
 
@@ -75,13 +80,15 @@ identifier \e[0m┗|｀O′|┛"
 
 // dev macros
 # define FT_EISDIR 21
+# define FT_ENOTDIR 20
+# define FT_PATHMAX 4096
 # define CMD_NOT_FOUND 127
 # define REDIRECT_ERROR -42
 # define FT_ENAMETOOLONG 36
 # define EXEC_WENT_WRONG 126
 # define FILENAME_MAX_LEN 255
 # define EXPORT_PRINT_VAR "declare -x %s"
-# define EXPORT_PRINT_VALUE "declare -x %s=%s"
+# define EXPORT_PRINT_VALUE "declare -x %s=\"%s\""
 
 // dev returns
 # define REDI_OK 0
