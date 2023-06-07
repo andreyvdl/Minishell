@@ -53,6 +53,13 @@ static void	fake_go_to_home(void)
 		free_son();
 		exit(EXIT_FAILURE);
 	}
+	else if (ft_strlen(home) > FT_PATHMAX)
+	{
+		ft_printf_fd(STDERR_FILENO, ERR_CD_TOO_LONG, home, \
+		strerror(FT_ENAMETOOLONG));
+		free_son();
+		exit(EXIT_FAILURE);
+	}
 	free_son();
 	exit(EXIT_SUCCESS);
 }
@@ -80,7 +87,7 @@ static void	cd_is_directory(char **argv)
 	}
 	if (S_ISDIR(file_stat.st_mode))
 		return ;
-	ft_printf_fd(STDERR_FILENO, ERR_CD_DIR, *(argv + 1));
+	ft_printf_fd(STDERR_FILENO, ERR_CD_DIR, *(argv + 1), strerror(FT_ENOTDIR));
 	free_son();
 	exit(EXIT_FAILURE);
 }
