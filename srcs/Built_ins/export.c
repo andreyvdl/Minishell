@@ -51,7 +51,7 @@ void	export(char *str, t_hash *hash)
 	printf("Exported %s=%s\n", variable, value);
 } */
 
-static void	print_vars(void)
+static void	print_vars_export(void)
 {
 	t_node	*node;
 	size_t	looper;
@@ -103,7 +103,7 @@ static void	add_new_vars(char **argv)
 void	ft_export(char **argv)
 {
 	if (*(argv + 1) == NULL || **(argv + 1) == '\0')
-		print_vars();
+		print_vars_export();
 	add_new_vars(argv);
 	free_son();
 	exit(EXIT_SUCCESS);
