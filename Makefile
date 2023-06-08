@@ -1,10 +1,10 @@
 #============ [FILES] ==========
 NAME = minishell
 
-FILES = builtins.c cd.c echo.c env.c exit.c export.c pwd.c unset.c \
+FILES = builtins.c cd.c echo.c env.c exit_utils.c exit.c export.c father_cd.c father_echo.c father_env.c father_exit.c father_export.c father_pwd.c father_unset.c pwd.c unset.c \
 		add_to_history.c filename_too_big.c free_all_and_exit.c hash_to_matrix.c isbuiltin.c remove_expand_utils.c remove_expand_utils2.c remove_quote_or_expand.c solo_utils.c \
 		execution_check.c executor.c father_execute.c free_son.c guide_sons.c is_directory.c open_redirect.c pre_executor.c system_exec.c\
-		hash_free.c hash_tab.c \
+		hash_free.c hash_remove.c hash_tab.c \
 		lexer_easy_splitter.c lexer_spacer_utils.c lexer_spacer.c \
 		parser.c parser_utils.c \
 		append.c heredoc_utils.c heredoc_utils2.c heredoc.c input.c redirect.c trunc.c \

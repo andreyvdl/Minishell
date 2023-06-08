@@ -12,8 +12,8 @@ void	builtins(char **argv)
 		ft_env(argv);
 	else if (ft_strcmp(*argv, "pwd") == 0)
 		ft_pwd();
-	// else if (ft_strcmp(*argv, "exit") == 0)
-	// 	return (mini_exit());
-	// else if (ft_strcmp(*argv, "unset") == 0)
-	// 	return (unset());
+	else if (ft_strcmp(*argv, "exit") == 0)
+		ft_exit(argv);
+	else if (ft_strcmp(*argv, "unset") == 0)
+		ft_unset(argv);
 }

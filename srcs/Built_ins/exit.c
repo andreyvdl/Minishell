@@ -47,3 +47,58 @@ void	mini_exit(char *input, t_hash *hash)
 	}
 }
 */
+
+static int	only_numbers(char *arg)
+{
+	while ((*arg == '\t' || *arg == ' ') && *arg != '\0')
+		arg++;
+	if (*arg == '+' || *arg == '-')
+		arg++;
+	while (ft_isdigit(*arg) && *arg != '\0')
+		arg++;
+	while ((*arg == '\t' || *arg == ' ') && *arg != '\0')
+		arg++;
+	if (*arg != '\0')
+		return (FALSE);
+	return (TRUE);
+}
+
+static void	son_exit(char *arg)
+{
+	ssize_t	nbr;
+
+	if (only_numbers(arg) == FALSE)
+	{
+		ft_printf_fd(STDERR_FILENO, ERR_EXIT_NUMBER, arg);
+		free_son();
+		exit(FT_EXIT_ERROR);
+	}
+	else if (number_big(arg) == TRUE)
+	{
+		ft_printf_fd(STDERR_FILENO, ERR_EXIT_NUMBER, arg);
+		free_son();
+		exit(FT_EXIT_ERROR);
+	}
+	nbr = ft_atoll(arg);
+	free_son();
+	nbr %= 256;
+	if (nbr < 0)
+		nbr *= -1;
+	exit(nbr);
+}
+
+void	ft_exit(char **argv)
+{
+	if (*(argv + 1) != NULL && *(argv + 2) != NULL)
+	{
+		ft_printf_fd(STDERR_FILENO, ERR_EXIT_ARGS);
+		free_son();
+		exit(EXIT_FAILURE);
+	}
+	else if (*(argv + 1) == NULL)
+	{
+		free_son();
+		exit(EXIT_SUCCESS);
+	}
+	son_exit(*(argv + 1));
+}

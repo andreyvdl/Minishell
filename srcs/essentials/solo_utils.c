@@ -11,7 +11,7 @@ static void	solo_value_size(char **str, size_t *size)
 		if (**str == '?')
 		{
 			(*str)++;
-			*size += ft_strlen(search(g_shell.hash, "?"));
+			*size += ft_strlen(search(g_shell.hash, STATUS_CODE));
 			return ;
 		}
 		len = 0;
@@ -69,7 +69,7 @@ static void	solo_value_copy(char **new, char **str)
 		if (**str == '?')
 		{
 			(*str)++;
-			aux_copy(new, search(g_shell.hash, "?"));
+			aux_copy(new, search(g_shell.hash, STATUS_CODE));
 			return ;
 		}
 		len = 0;

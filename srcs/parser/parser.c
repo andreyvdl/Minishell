@@ -70,14 +70,14 @@ int	parser(char *pipeline, t_hash *hash)
 	easy_splitter(pipeline);
 	if (unclosed_quotes(pipeline))
 	{
-		insert_node(hash, "?", "2");
+		insert_node(hash, STATUS_CODE, FATHER_FAILURE);
 		return (TRUE);
 	}
 	splited = ft_split(pipeline, -7);
 	if (has_invalid_syntax(splited))
 	{
 		ft_free_matrix((void **)splited);
-		insert_node(hash, "?", "2");
+		insert_node(hash, STATUS_CODE, FATHER_FAILURE);
 		return (TRUE);
 	}
 	ft_free_matrix((void **)splited);

@@ -26,7 +26,7 @@ static void	expand_value_copy(char **new, char **str)
 		if (**str == '?')
 		{
 			(*str)++;
-			aux_copy(new, search(g_shell.hash, "?"));
+			aux_copy(new, search(g_shell.hash, STATUS_CODE));
 			return ;
 		}
 		len = 0;

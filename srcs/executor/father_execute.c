@@ -1,19 +1,19 @@
 #include "../../includes/minishell.h"
 
-void	father_execute(void)
+void	father_execute(char **argv)
 {
-	if (ft_strcmp(g_shell.command[0].argv[0], "echo") == 0)
-		return ;//father_echo(g_shell.command);
-	else if (ft_strcmp(g_shell.command[0].argv[0], "cd") == 0)
-		return ;//father_cd(g_shell.command);
-	else if (ft_strcmp(g_shell.command[0].argv[0], "pwd") == 0)
-		return ;//father_pwd(g_shell.command);
-	else if (ft_strcmp(g_shell.command[0].argv[0], "export") == 0)
-		return ;//father_export(g_shell.command);
-	else if (ft_strcmp(g_shell.command[0].argv[0], "unset") == 0)
-		return ;//father_unset(g_shell.command);
-	else if (ft_strcmp(g_shell.command[0].argv[0], "env") == 0)
-		return ;//father_env(g_shell.command);
-	else if (ft_strcmp(g_shell.command[0].argv[0], "exit") == 0)
-		return ;//father_exit(g_shell.command);
+	if (ft_strcmp(*argv, "echo") == 0)
+		father_echo(argv);
+	else if (ft_strcmp(*argv, "cd") == 0)
+		father_cd(argv);
+	else if (ft_strcmp(*argv, "export") == 0)
+		father_export(argv);
+	else if (ft_strcmp(*argv, "env") == 0)
+		father_env(argv);
+	else if (ft_strcmp(*argv, "pwd") == 0)
+		father_pwd();
+	else if (ft_strcmp(*argv, "exit") == 0)
+		father_exit(argv);
+	else if (ft_strcmp(*argv, "unset") == 0)
+		father_unset(argv);
 }

@@ -1,16 +1,6 @@
 #include "../../includes/minishell.h"
 
-/* void	pwd()
-{
-	char	path[4096];
-
-	if (getcwd(path, sizeof(path)) != NULL)
-		printf("%s\n", path);
-	else
-		perror("pwd");
-} */
-
-void	ft_pwd(void)
+void	father_pwd(void)
 {
 	char	*cwd;
 
@@ -19,20 +9,19 @@ void	ft_pwd(void)
 	if (cwd == NULL)
 	{
 		perror(ERR_PWD_PERROR);
-		free_son();
-		exit(EXIT_FAILURE);
+		insert_node(g_shell.hash, STATUS_CODE, FATHER_FAILURE);
+		return ;
 	}
 	if (ft_strlen(cwd) > FT_PATHMAX)
 	{
 		ft_printf_fd(STDERR_FILENO, ERR_PWD_TOO_LONG, cwd, \
 		strerror(FT_ENAMETOOLONG));
 		free(cwd);
-		free_son();
-		exit(EXIT_FAILURE);
+		insert_node(g_shell.hash, STATUS_CODE, FATHER_FAILURE);
+		return ;
 	}
 	ft_putstr(cwd);
 	free(cwd);
 	ft_putchar('\n');
-	free_son();
-	exit(EXIT_SUCCESS);
+	insert_node(g_shell.hash, STATUS_CODE, FATHER_SUCCESS);
 }

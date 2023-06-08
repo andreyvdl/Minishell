@@ -1,17 +1,6 @@
 #include "../../includes/minishell.h"
 
-/* void	unset(char *str, t_hash *hash)
-{
-	while (*str && (*str != ' ' &&  *str != '\t'))
-		str++;
-	while (*str && (*str == ' ' || *str == '\t'))
-		str++;
-	ft_putstr(str);
-	ft_putchar('\n');
-	(void)hash;
-} */
-
-static int	fake_remove(char *arg)
+static int	can_remove_node(char *arg)
 {
 	if (!ft_isalpha(*arg) && *arg != '_')
 		return (FALSE);
@@ -30,21 +19,20 @@ static void	remove_these(char **argv)
 	printed = 0;
 	while (*argv != NULL)
 	{
-		if (fake_remove(*argv) == FALSE)
+		if (can_remove_node(*argv) == FALSE)
 			printed = ft_printf_fd(STDERR_FILENO, ERR_UNSET_INVALID, *argv);
+		else
+			remove_node(g_shell.hash, *argv);
 		argv++;
 	}
 	if (printed != 0)
-	{
-		free_son();
-		exit(EXIT_FAILURE);
-	}
+		insert_node(g_shell.hash, STATUS_CODE, FATHER_FAILURE);
+	else
+		insert_node(g_shell.hash, STATUS_CODE, FATHER_SUCCESS);
 }
 
-void	ft_unset(char **argv)
+void	father_unset(char **argv)
 {
 	if (*(argv + 1) != NULL)
 		remove_these(argv);
-	free_son();
-	exit(EXIT_SUCCESS);
 }

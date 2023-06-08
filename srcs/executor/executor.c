@@ -5,7 +5,7 @@ static void	status_after_execution(int status)
 	char	*nbr;
 
 	nbr = ft_itoa(status);
-	insert_node(g_shell.hash, "?", nbr);
+	insert_node(g_shell.hash, STATUS_CODE, nbr);
 	free(nbr);
 }
 

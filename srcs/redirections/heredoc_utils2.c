@@ -20,7 +20,7 @@ static void	dollar_value(char **str, char **new, t_hash *hash)
 	{
 		if (*key == '?')
 		{
-			value = search(hash, "?");
+			value = search(hash, STATUS_CODE);
 			copy_this_value(new, value);
 			(*str)++;
 			return ;
@@ -58,7 +58,7 @@ static void	get_dollar_value_size(char **str, size_t *counter, t_hash *hash)
 	{
 		if (*key == '?')
 		{
-			(*counter) += ft_strlen(search(hash, "?"));
+			(*counter) += ft_strlen(search(hash, STATUS_CODE));
 			(*str)++;
 			return ;
 		}

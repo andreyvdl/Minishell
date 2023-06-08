@@ -33,13 +33,13 @@ void	pre_executor(void)
 {
 	if (g_shell.nbr_sons == 1 && g_shell.command->argv != NULL && \
 	isbuiltin(g_shell.command->argv[0]) == TRUE)
-			father_execute();
+		father_execute(g_shell.command[0].argv);
 	else if (g_shell.nbr_sons > 0)
 	{
 		executor();
 		free_father_global(FALSE);
 	}
-	else 
+	else
 		free_father_global(TRUE);
 	ft_free_matrix((void **)g_shell.envp);
 	free(g_shell.command);

@@ -20,7 +20,7 @@ static void	set_up_hash(t_hash *hash, char **env)
 	int		i;
 	char	*token;
 
-	insert_node(hash, "?", "0");
+	insert_node(hash, STATUS_CODE, FATHER_SUCCESS);
 	i = 0;
 	while (env[i])
 	{

@@ -95,9 +95,14 @@ static void	cd_is_directory(char **argv)
 void	ft_cd(char **argv)
 {
 	has_many_args(argv);
-	if (*(argv + 1) == NULL || **(argv + 1) == '\0' || \
+	if (*(argv + 1) == NULL || \
 	(**(argv + 1) == '~' && *(*(argv + 1) + 1) == '\0'))
 		fake_go_to_home();
+	if (**(argv + 1) == '\0')
+	{
+		free_son();
+		exit(EXIT_SUCCESS);
+	}
 	if (access(*(argv + 1), X_OK) == -1)
 	{
 		perror(ERR_CD_ACCESS);

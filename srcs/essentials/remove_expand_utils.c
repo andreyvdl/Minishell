@@ -11,7 +11,7 @@ static void	dollar_case_count(char **str, size_t *size)
 		if (**str == '?')
 		{
 			(*str)++;
-			*size += ft_strlen(search(g_shell.hash, "?"));
+			*size += ft_strlen(search(g_shell.hash, STATUS_CODE));
 			return ;
 		}
 		len = 0;

@@ -42,17 +42,23 @@ defined(__unix__)
 # define ERR_ENV_ARGS "\e[1;31menv: minishell do NOT use extra args or flags \
 \e[0mo(一︿一+)o\n"
 # define ERR_CD_ACCESS "\e[1;31mcd: access error \e[0m(っ °Д °;)っ"
-# define ERR_PWD_PERROR "\e[1;31mpwd: something happend with pwd \e[0m(⊙o⊙)"
+# define ERR_EXIT_ARGS "\e[1;31mexit: too many args \e[0m(╯°□°）╯︵ ┻━┻\n"
+# define ERR_PWD_PERROR "\e[1;31mpwd: getcwd error \e[0m(⊙o⊙)"
 # define ERR_CD_TOO_LONG "\e[1;31mcd: %s: %s \e[0m(⊙﹏⊙∥)\n"
+# define ERR_EXIT_NUMBER "\e[1;31mexit: %s: numeric argument required \e[0m\
+(╯°□°）╯︵ ┻━┻\n"
 # define ERR_PWD_TOO_LONG "\e[1;31mpwd: %s: %s \e[0m(⊙﹏⊙∥)\n"
+# define ERR_UNSET_INVALID "\e[1;31munset: `%s`: is NOT a valid \
+identifier \e[0m┗|｀O′|┛\n"
 # define ERR_EXPORT_INVALID "\e[1;31mexport: `%s`: is NOT a valid \
-identifier \e[0m┗|｀O′|┛"
+identifier \e[0m┗|｀O′|┛\n"
 
 // error messages
 # define ERR_DUP "\e[1;31mms: dup error \e[0m(⊙_(⊙_⊙)_⊙)"
 # define ERR_STAT "\e[1;31mms: stat error \e[0m(╯‵□′)╯︵┻━┻"
 # define ERR_FORK "\e[1;31mms: fork error \e[0m(⊙_⊙)？"
 # define ERR_PIPE "\e[1;31mms: pipe error \e[0m(⊙_⊙;)"
+# define ERR_CHDIR "\e[1;31mcd: chdir error \e[0m(╯‵□′)╯︵┻━┻"
 # define ERR_DUP_2 "\e[1;31mms: dup2 error \e[0m(⊙_(⊙_⊙)_⊙)"
 # define ERR_QUOTE "\e[1;31mms: close this quote \e[1;51m`%c` \e[0m(╬▔皿▔)╯\n"
 # define ERR_ACCESS "\e[1;31mms: access error \e[0m(っ °Д °;)っ"
@@ -82,13 +88,24 @@ identifier \e[0m┗|｀O′|┛"
 # define FT_EISDIR 21
 # define FT_ENOTDIR 20
 # define FT_PATHMAX 4096
+# define STATUS_CODE "?"
+# define MAGIC_NUMBER 5381
 # define CMD_NOT_FOUND 127
+# define EXIT_LONG_NEG "9223372036854775808"
+# define EXIT_LONG_POS "9223372036854775807"
+# define FT_EXIT_ERROR 2
+# define EXIT_LONG_SIZE 19
+# define FATHER_FAILURE "1"
+# define FATHER_SUCCESS "0"
 # define REDIRECT_ERROR -42
 # define FT_ENAMETOOLONG 36
 # define EXEC_WENT_WRONG 126
 # define FILENAME_MAX_LEN 255
 # define EXPORT_PRINT_VAR "declare -x %s"
 # define EXPORT_PRINT_VALUE "declare -x %s=\"%s\""
+# define FATHER_EXIT_FAILURE "2"
+# define FATHER_CMD_NOT_FOUND "127"
+# define FATHER_EXEC_WENT_WRONG "126"
 
 // dev returns
 # define REDI_OK 0
@@ -107,6 +124,7 @@ identifier \e[0m┗|｀O′|┛"
 extern t_pipe	g_shell;
 
 // int return
+int		number_big(char *arg);
 int		isbuiltin(char *check);
 int		parser(char *str, t_hash *hash);
 int		pipe_case(char **splited_pline);
@@ -123,23 +141,29 @@ int		redirect_output_trunc(char *filename, t_command *son, size_t id);
 int		redirect_output_append(char *filename, t_command *son, size_t id);
 
 //void return
-void	pwd();
-void	env();
+void	ft_pwd(void);
 void	executor(void);
 void	free_son(void);
-void	pre_executor(void);
+void	father_pwd(void);
 void	ft_cd(char **argv);
+void	pre_executor(void);
+void	ft_env(char **argv);
 void	ft_echo(char **argv);
-void	father_execute(void);
+void	ft_exit(char **argv);
 void	set_up_signals(void);
+void	ft_unset(char **argv);
 void	builtins(char **argv);
+void	father_cd(char **argv);
 void	ft_export(char **argv);
 void	free_hash(t_hash *hash);
+void	father_env(char **argv);
 void	easter_eggs(char *flags);
+void	father_echo(char **argv);
 void	is_directory(char *path);
 void	easy_splitter(char *str);
+void	father_export(char **argv);
+void	father_execute(char **argv);
 void	execution_check(char *path);
-void	unset(char *str, t_hash *hash);
 void	add_to_history(char *pipeline);
 void	export(char *str, t_hash *hash);
 void	solo_copy(char *new, char *str);

@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 17:42:23 by adantas-          #+#    #+#             */
-/*   Updated: 2023/04/24 17:49:32 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/06/08 15:36:23 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*ft_strdup(const char *s)
 	char	*copy;
 	size_t	index;
 
+	if (s == NULL)
+		return (NULL);
 	copy = (char *)malloc((get_string_size(s) + 1) * sizeof(char));
 	if (copy == NULL)
 		return (NULL);
