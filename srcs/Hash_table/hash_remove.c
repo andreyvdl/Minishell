@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "../../includes/minishell.h"
 
 static void	remove_it(t_node *prev, t_node *curr)
 {
@@ -8,8 +8,7 @@ static void	remove_it(t_node *prev, t_node *curr)
 	free(curr);
 }
 
-static void	remove_it_2(t_node *prev, t_node *curr, t_hash *hash, \
-unsigned const int index)
+static void	remove_it_2(t_node *curr, t_hash *hash, unsigned const int index)
 {
 	hash->list[index] = curr->next;
 	ft_free(curr->value);
@@ -25,14 +24,14 @@ void	remove_node(t_hash *hash, char *key)
 
 	prev = NULL;
 	curr = hash->list[index];
-	while (node != NULL)
+	while (curr != NULL)
 	{
 		if (ft_strcmp(curr->key, key) == 0)
 		{
 			if (prev != NULL)
 				remove_it(prev, curr);
 			else
-				remove_it_2(prev, curr, hash, index);
+				remove_it_2(curr, hash, index);
 			break ;
 		}
 		prev = curr;
