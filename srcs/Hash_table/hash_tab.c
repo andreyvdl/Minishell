@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-static unsigned int	hash_code(char *key)
+unsigned int	hash_code(char *key)
 {
 	unsigned long	hash;
 	unsigned int	c;
