@@ -124,76 +124,84 @@ identifier \e[0m┗|｀O′|┛\n"
 extern t_pipe	g_shell;
 
 // int return
-int		number_big(char *arg);
-int		isbuiltin(char *check);
-int		parser(char *str, t_hash *hash);
-int		pipe_case(char **splited_pline);
-int		filename_too_big(char *filename);
-int		write_to_case(char **splited_pline);
-int		read_from_case(char **splited_pline);
-int		heredoc(char *limiter, t_command *son, size_t id);
-int		fill_son_orders(t_command *son_struct, char *cmd);
-int		unclosed_quotes_case(char **pipeline, char quote);
-int		redirection(char **str, t_command *son, size_t id);
-int		set_up_global(char **cmds, size_t nbr_cmds, t_hash *hash);
-int		redirect_input(char *filename, t_command *son, size_t id);
-int		redirect_output_trunc(char *filename, t_command *son, size_t id);
-int		redirect_output_append(char *filename, t_command *son, size_t id);
+int				number_big(char *arg);
+int				isbuiltin(char *check);
+int				parser(char *str, t_hash *hash);
+int				pipe_case(char **splited_pline);
+int				filename_too_big(char *filename);
+int				write_to_case(char **splited_pline);
+int				read_from_case(char **splited_pline);
+int				heredoc(char *limiter, t_command *son, size_t id);
+int				fill_son_orders(t_command *son_struct, char *cmd);
+int				unclosed_quotes_case(char **pipeline, char quote);
+int				redirection(char **str, t_command *son, size_t id);
+int				set_up_global(char **cmds, size_t nbr_cmds, t_hash *hash);
+int				redirect_input(char *filename, t_command *son, size_t id);
+int				redirect_output_trunc(char *filename, t_command *son, \
+size_t id);
+int				redirect_output_append(char *filename, t_command *son, \
+size_t id);
 
 //void return
-void	ft_pwd(void);
-void	executor(void);
-void	free_son(void);
-void	father_pwd(void);
-void	ft_cd(char **argv);
-void	pre_executor(void);
-void	ft_env(char **argv);
-void	ft_echo(char **argv);
-void	ft_exit(char **argv);
-void	set_up_signals(void);
-void	ft_unset(char **argv);
-void	builtins(char **argv);
-void	father_cd(char **argv);
-void	ft_export(char **argv);
-void	free_hash(t_hash *hash);
-void	father_env(char **argv);
-void	easter_eggs(char *flags);
-void	father_echo(char **argv);
-void	is_directory(char *path);
-void	easy_splitter(char *str);
-void	father_export(char **argv);
-void	father_execute(char **argv);
-void	execution_check(char *path);
-void	add_to_history(char *pipeline);
-void	export(char *str, t_hash *hash);
-void	solo_copy(char *new, char *str);
-void	free_all_and_exit(t_hash *hash);
-void	guide_sons(int *pipe, size_t id);
-void	expand_copy(char *new, char *str);
-void	open_redirect(int *pipe, size_t id);
-void	tokenizer(char *input, t_hash *hash);
-void	count_cmds(char *input, size_t *n_cmds);
-void	system_exec(char **old_argv, char **old_envp);
-void	insert_node(t_hash *hash, char *key, char *value);
-void	inside_quote_copy(char **str, char **new, char quote);
-void	expansion_loop(char *limiter, t_command *son, size_t id);
-void	no_expansion_loop(char *limiter, t_command *son, size_t id);
-void	inside_quote_counter(char **str, size_t *counter, char quote);
-void	copy_with_expansions_heredoc(char *str, char *new, t_hash *hash);
+void			ft_pwd(void);
+void			executor(void);
+void			free_son(void);
+void			father_pwd(void);
+void			ft_cd(char **argv);
+void			pre_executor(void);
+void			ft_env(char **argv);
+void			ft_echo(char **argv);
+void			ft_exit(char **argv);
+void			set_up_signals(void);
+void			ft_unset(char **argv);
+void			builtins(char **argv);
+void			father_cd(char **argv);
+void			ft_export(char **argv);
+void			free_hash(t_hash *hash);
+void			father_env(char **argv);
+void			easter_eggs(char *flags);
+void			father_exit(char **argv);
+void			father_echo(char **argv);
+void			is_directory(char *path);
+void			easy_splitter(char *str);
+void			father_unset(char **argv);
+void			father_export(char **argv);
+void			father_execute(char **argv);
+void			execution_check(char *path);
+void			add_to_history(char *pipeline);
+void			export(char *str, t_hash *hash);
+void			solo_copy(char *new, char *str);
+void			free_all_and_exit(t_hash *hash);
+void			guide_sons(int *pipe, size_t id);
+void			expand_copy(char *new, char *str);
+void			open_redirect(int *pipe, size_t id);
+void			tokenizer(char *input, t_hash *hash);
+void			remove_node(t_hash *hash, char *key);
+void			count_cmds(char *input, size_t *n_cmds);
+void			system_exec(char **old_argv, char **old_envp);
+void			insert_node(t_hash *hash, char *key, char *value);
+void			inside_quote_copy(char **str, char **new, char quote);
+void			expansion_loop(char *limiter, t_command *son, size_t id);
+void			no_expansion_loop(char *limiter, t_command *son, size_t id);
+void			inside_quote_counter(char **str, size_t *counter, char quote);
+void			copy_with_expansions_heredoc(char *str, char *new, \
+t_hash *hash);
 
 // char return
-char	*separator(char *str);
-char	*extract_cmd(char **input);
-char	**hash_to_matrix(t_hash *hash);
-char	*search(t_hash *hash, char *key);
-char	*remove_quote_or_expand(char *str);
+char			*separator(char *str);
+char			*extract_cmd(char **input);
+char			**hash_to_matrix(t_hash *hash);
+char			*search(t_hash *hash, char *key);
+char			*remove_quote_or_expand(char *str);
 
 // t_node return
-t_node	*create_node(char *key, char *value);
+t_node			*create_node(char *key, char *value);
 
 // size_t return
-size_t	solo_size(char *str);
-size_t	expand_size(char *str);
-size_t	size_with_values_heredoc(char *str, t_hash *hash);
+size_t			solo_size(char *str);
+size_t			expand_size(char *str);
+size_t			size_with_values_heredoc(char *str, t_hash *hash);
 
+// unsigned int return
+unsigned int	hash_code(char *key);
 #endif // minishell.h
