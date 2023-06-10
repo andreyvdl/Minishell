@@ -13,7 +13,10 @@ int	set_up_global(char **cmds, size_t nbr_cmds, t_hash *hash)
 	{
 		status = fill_son_orders(g_shell.command, *cmds);
 		if (status == REDI_SIGNAL)
+		{
+			printf("NA GLOBAL CHEGOU COM REDI_SIGNAL\n");
 			return (status);
+		}
 		g_shell.id++;
 		cmds++;
 	}

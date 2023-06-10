@@ -55,11 +55,11 @@ static int	without_expansions(char *limiter, t_command *son, size_t id)
 	pid = fork();
 	if (pid == 0)
 	{
-		// heredoc_signals(); disable for now
+		heredoc_signals();
 		no_expansion_loop(limiter, son, id);
 		free_son_and_exit();
 	}
-	waitpid(pid, &status, 0);
+	waitpid(pid, &status, NONE);
 	if (status == SIGNAL_INT)
 	{
 		close(son[id].rd_here);
@@ -78,13 +78,14 @@ static int	with_expansions(char *limiter, t_command *son, size_t id)
 	pid = fork();
 	if (pid == 0)
 	{
-		// heredoc_signals(); disable for now
+		heredoc_signals();
 		expansion_loop(limiter, son, id);
 		free_son_and_exit();
 	}
 	waitpid(pid, &status, NONE);
-	if (status == SIGNAL_INT)
+	if (status == 130)
 	{
+		printf("ENTREI NO SIGNAL INT\n"); // remover depois
 		close(son[id].rd_here);
 		son[id].rd_here = SIGNAL_INT;
 		unlink(HEREDOC_PATH);

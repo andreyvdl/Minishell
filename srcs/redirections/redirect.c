@@ -2,22 +2,19 @@
 
 static void	closer(t_command *son, size_t id)
 {
-	size_t	temp_id;
-
-	temp_id = id;
-	while (temp_id <= id)
+	while (id < g_shell.nbr_sons)
 	{
-		if (son[temp_id].rd_here > -1)
+		if (son[id].rd_here > STDIN_FILENO)
 		{
-			close(son[temp_id].rd_here);
-			son[temp_id].rd_here = -130;
+			close(son[id].rd_here);
+			son[id].rd_here = SIGNAL_INT;
 		}
-		if (son[temp_id].wr_here > -1)
+		if (son[id].wr_here > STDOUT_FILENO)
 		{
-			close(son[temp_id].wr_here);
-			son[temp_id].wr_here = -130;
+			close(son[id].wr_here);
+			son[id].wr_here = SIGNAL_INT;
 		}
-		temp_id--;
+		id--;
 	}
 }
 
@@ -58,7 +55,10 @@ static int	readers(char **str, t_command *son, size_t id)
 	if (ft_strcmp(*str, "<<") == 0)
 	{
 		if (heredoc(*(str + 1), son, id) == REDI_SIGNAL)
+		{
+			printf("SAIU DO READERS COM REDI_SIGNAL\n"); //remover depois
 			return (REDI_SIGNAL);
+		}
 		close(son[id].rd_here);
 		son[id].rd_here = open(HEREDOC_PATH, O_RDONLY);
 	}
@@ -92,5 +92,6 @@ int	redirection(char **str, t_command *son, size_t id)
 	}
 	if (*str != NULL)
 		close_opened(status, son, id);
+	printf("STATUS É %d\n", status);
 	return (status);
 }

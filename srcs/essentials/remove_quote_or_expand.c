@@ -29,7 +29,6 @@ static char	*solo_expand(char *str)
 
 	new = (char *)ft_calloc(solo_size(str) + 1, sizeof(char));
 	solo_copy(new, str);
-	free(str);
 	return (new);
 }
 
@@ -39,7 +38,6 @@ static char	*remove_expand(char *str)
 
 	new = (char *)ft_calloc(expand_size(str) + 1, sizeof(char));
 	expand_copy(new, str);
-	free(str);
 	return (new);
 }
 

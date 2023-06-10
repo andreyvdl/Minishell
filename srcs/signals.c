@@ -13,18 +13,25 @@ static void	re_print_prompt(int sig)
 
 static void	exit_heredoc(int sig)
 {
+	ft_putchar('\n');
 	ft_free_matrix((void **)g_shell.pipeline_rest);
 	ft_free_matrix((void **)g_shell.redirect_rest);
-	while (g_shell.id > 0)
+	while (g_shell.id < g_shell.nbr_sons)
 	{
 		if (*g_shell.command[g_shell.id].argv != NULL)
 			ft_free_matrix((void **)g_shell.command[g_shell.id].argv);
-		free(g_shell.command);
+		if (g_shell.command[g_shell.id].wr_here > STDOUT_FILENO)
+			close(g_shell.command[g_shell.id].wr_here);
+		if (g_shell.command[g_shell.id].rd_here > STDIN_FILENO)
+			close(g_shell.command[g_shell.id].rd_here);
 		g_shell.id--;
 	}
 	free_hash(g_shell.hash);
 	if (sig == SIGINT)
-		exit(SIGNAL_INT);
+	{
+		printf("VC DEU CTRLC NO HEREDOC\n"); // remover depois
+		exit(130);
+	}
 	exit(REDI_OK);
 }
 

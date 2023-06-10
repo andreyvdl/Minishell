@@ -39,8 +39,8 @@ defined(__unix__)
 # define ERR_CD_DIR "\e[1;31mcd: `%s`: %s \e[0m(┬┬﹏┬┬)\n"
 # define ERR_CD_ARGS "\e[1;31mcd: too many args \e[0m(╯°□°）╯︵ ┻━┻\n"
 # define ERR_CD_HOME "\e[1;31mcd: HOME is not set \e[0m(┬┬﹏┬┬)\n"
-# define ERR_ENV_ARGS "\e[1;31menv: minishell do NOT use extra args or flags \
-\e[0mo(一︿一+)o\n"
+# define ERR_ENV_ARGS "\e[1;31menv: minishell env do NOT receive extra args or \
+flags \e[0mo(一︿一+)o\n"
 # define ERR_CD_ACCESS "\e[1;31mcd: access error \e[0m(っ °Д °;)っ"
 # define ERR_EXIT_ARGS "\e[1;31mexit: too many args \e[0m(╯°□°）╯︵ ┻━┻\n"
 # define ERR_PWD_PERROR "\e[1;31mpwd: getcwd error \e[0m(⊙o⊙)"
@@ -67,7 +67,7 @@ identifier \e[0m┗|｀O′|┛\n"
 # define ERR_WRITING "\e[1;31mms: output error \e[0m(＠_＠;)"
 # define ERR_HEREDOC "\e[1;31mms: heredoc error... congratulations...? \e[0m\
 ㄟ( ▔, ▔ )ㄏ\n"
-# define WAR_HEREDOC "\e[1;33mms: you finish it with EOF, but writed \e[1m\
+# define WAR_HEREDOC "\n\e[1;33mms: you finish it with EOF, but writed \e[1m\
 `%s` \e[0m┑(￣Д ￣)┍\n"
 # define ERR_EXEC_DIR "\e[1;31mms: execution error: \e[1m%s \e[0m(＠_＠;)\n"
 # define ERR_FILENAME "\e[1;31mms: filename error: \e[1m%s \e[0m\
@@ -102,6 +102,7 @@ identifier \e[0m┗|｀O′|┛\n"
 # define EXEC_WENT_WRONG 126
 # define FILENAME_MAX_LEN 255
 # define EXPORT_PRINT_VAR "declare -x %s"
+# define HEREDOC_CONTROL_C "130"
 # define EXPORT_PRINT_VALUE "declare -x %s=\"%s\""
 # define FATHER_EXIT_FAILURE "2"
 # define FATHER_CMD_NOT_FOUND "127"
@@ -155,6 +156,7 @@ void			ft_exit(char **argv);
 void			set_up_signals(void);
 void			ft_unset(char **argv);
 void			builtins(char **argv);
+void			heredoc_signals(void);
 void			father_cd(char **argv);
 void			ft_export(char **argv);
 void			free_hash(t_hash *hash);

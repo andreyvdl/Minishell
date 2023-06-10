@@ -1,7 +1,24 @@
 #include "../../includes/minishell.h"
 
+static int	father_redirect(t_command command)
+{
+	int	backup;
+
+	backup = STDOUT_FILENO;
+	if (command.wr_here > STDOUT_FILENO)
+	{
+		backup = dup(STDOUT_FILENO);
+		dup2(command.wr_here, STDOUT_FILENO);
+		close(command.wr_here);
+	}
+	return (backup);
+}
+
 void	father_execute(char **argv)
 {
+	int	backup;
+
+	backup = father_redirect(g_shell.command[0]);
 	if (ft_strcmp(*argv, "echo") == 0)
 		father_echo(argv);
 	else if (ft_strcmp(*argv, "cd") == 0)
@@ -16,4 +33,5 @@ void	father_execute(char **argv)
 		father_exit(argv);
 	else if (ft_strcmp(*argv, "unset") == 0)
 		father_unset(argv);
+	dup2(backup, STDOUT_FILENO);
 }

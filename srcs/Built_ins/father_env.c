@@ -46,7 +46,8 @@ void	father_env(char **argv)
 			insert_node(g_shell.hash, STATUS_CODE, FATHER_EXEC_WENT_WRONG);
 			return ;
 		}
-		insert_node(g_shell.hash, STATUS_CODE, FATHER_FAILURE);
+		insert_node(g_shell.hash, STATUS_CODE, FATHER_CMD_NOT_FOUND);
+		return ;
 	}
 	else if (*(argv + 1) != NULL)
 	{

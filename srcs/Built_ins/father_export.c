@@ -37,7 +37,7 @@ static int	add_var(char *arg)
 
 	copy = ft_strdup(arg);
 	len = 0;
-	if (ft_isalpha(copy[len]) == FALSE || copy[len] != '_')
+	if (ft_isalpha(copy[len]) == FALSE && copy[len] != '_')
 	{
 		free(copy);
 		return (FALSE);
@@ -66,7 +66,7 @@ static void	add_new_vars(char **argv)
 	while (*argv != NULL)
 	{
 		if (add_var(*argv) == FALSE)
-			printed = ft_printf_fd(STDERR_FILENO, ERR_UNSET_INVALID, *argv);
+			printed = ft_printf_fd(STDERR_FILENO, ERR_EXPORT_INVALID, *argv);
 		argv++;
 	}
 	if (printed != 0)

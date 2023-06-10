@@ -61,14 +61,14 @@ int	main(int argc, char **argv, char **envp)
 	g_shell.hash = hash;
 	while (TRUE)
 	{
-		// set_up_signals(); disable for now
+		set_up_signals();
 		input = readline(PROMPT);
 		if (input && *input == '\0')
 		{
 			free(input);
 			continue ;
 		}
-		// signal(SIGINT, SIG_IGN); disable for now
+		signal(SIGINT, SIG_IGN);
 		command(input, hash);
 	}
 	return (0);

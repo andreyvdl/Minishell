@@ -31,6 +31,7 @@ static void	free_father_global(int has_error)
 
 void	pre_executor(void)
 {
+	printf("NUMERO DE FILHOS: %zu\n", g_shell.nbr_sons); //remover depois
 	if (g_shell.nbr_sons == 1 && g_shell.command->argv != NULL && \
 	isbuiltin(g_shell.command->argv[0]) == TRUE)
 		father_execute(g_shell.command[0].argv);
@@ -39,8 +40,16 @@ void	pre_executor(void)
 		executor();
 		free_father_global(FALSE);
 	}
-	else
+	else if (g_shell.nbr_sons == 0)
+	{
 		free_father_global(TRUE);
+		insert_node(g_shell.hash, STATUS_CODE, HEREDOC_CONTROL_C);
+	}
+	else
+	{
+		free_father_global(TRUE);
+		insert_node(g_shell.hash, STATUS_CODE, FATHER_FAILURE);
+	}
 	ft_free_matrix((void **)g_shell.envp);
 	free(g_shell.command);
 }
