@@ -16,6 +16,7 @@ static void	exit_heredoc(int sig)
 	ft_putchar('\n');
 	ft_free_matrix((void **)g_shell.pipeline_rest);
 	ft_free_matrix((void **)g_shell.redirect_rest);
+	ft_free_matrix((void **)g_shell.envp);
 	while (g_shell.id < g_shell.nbr_sons)
 	{
 		if (*g_shell.command[g_shell.id].argv != NULL)
@@ -26,7 +27,9 @@ static void	exit_heredoc(int sig)
 			close(g_shell.command[g_shell.id].rd_here);
 		g_shell.id--;
 	}
+	free(g_shell.command);
 	free_hash(g_shell.hash);
+	rl_clear_history();
 	if (sig == SIGINT)
 		exit(REDI_SIGNAL);
 	exit(REDI_OK);

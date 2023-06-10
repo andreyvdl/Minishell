@@ -9,6 +9,7 @@ int	set_up_global(char **cmds, size_t nbr_cmds, t_hash *hash)
 	g_shell.id = 0;
 	g_shell.nbr_sons = nbr_cmds;
 	g_shell.pipeline_rest = cmds;
+	g_shell.envp = hash_to_matrix(hash);
 	while (g_shell.id < nbr_cmds)
 	{
 		status = fill_son_orders(g_shell.command, *cmds);
@@ -18,6 +19,5 @@ int	set_up_global(char **cmds, size_t nbr_cmds, t_hash *hash)
 		cmds++;
 	}
 	g_shell.id = 0;
-	g_shell.envp = hash_to_matrix(hash);
 	return (status);
 }

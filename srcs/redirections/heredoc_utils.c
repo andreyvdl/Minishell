@@ -36,7 +36,7 @@ void	expansion_loop(char *limiter, t_command *son, size_t id)
 		line = readline(HEREDOC_PROMPT);
 		if (line == NULL)
 		{
-			ft_printf_fd(STDOUT_FILENO, WAR_HEREDOC, limiter);
+			ft_printf_fd(STDERR_FILENO, WAR_HEREDOC, limiter);
 			break ;
 		}
 		else if (ft_strcmp(line, limiter) == 0)
@@ -60,7 +60,7 @@ void	no_expansion_loop(char *limiter, t_command *son, size_t id)
 		line = readline(HEREDOC_PROMPT);
 		if (line == NULL)
 		{
-			ft_printf_fd(STDOUT_FILENO, WAR_HEREDOC, limiter);
+			ft_printf_fd(STDERR_FILENO, WAR_HEREDOC, limiter);
 			break ;
 		}
 		else if (ft_strcmp(line, limiter) == 0)

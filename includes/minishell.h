@@ -97,6 +97,7 @@ identifier \e[0m┗|｀O′|┛\n"
 # define EXIT_LONG_SIZE 19
 # define FATHER_FAILURE "1"
 # define FATHER_SUCCESS "0"
+# define FT_WHITESPACES "\n\v\t\r\f "
 # define REDIRECT_ERROR -42
 # define FT_ENAMETOOLONG 36
 # define EXEC_WENT_WRONG 126

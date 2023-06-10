@@ -37,7 +37,7 @@ static void	command(char *input, t_hash *hash)
 	if (input == NULL)
 		free_all_and_exit(hash);
 	add_to_history(input);
-	pipeline = ft_strtrim(input, "\n\v\t\r\f ");
+	pipeline = ft_strtrim(input, FT_WHITESPACES);
 	free(input);
 	input = separator(pipeline);
 	if (parser(input, hash))

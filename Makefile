@@ -72,19 +72,19 @@ $(BUILDS)/%.o:%.c
 $(LIBFT):
 	@make -C $(LIBFTDIR)
 
-test:$(NAME)
-	./$(NAME)
-
-t:test
-
 v:all
-	valgrind -q --leak-check=full --show-leak-kinds=all --suppressions=sup ./minishell
+	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --suppressions=sup --track-fds=yes --track-origins=yes --trace-children-skip='*/bin/*,*/sbin/*' ./minishell
+#				checa leak		mostra leak				segue child			suprime erros		marca fds		marca var n init	ignora vazamento dos binarios
+
+vq:all
+	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --suppressions=sup --track-fds=yes --track-origins=yes --trace-children-skip='*/bin/*,*/sbin/*' -q ./minishell
+#				checa leak		mostra leak				segue child			suprime erros		marca fds		marca var n init	ignora vazamento dos binarios		silencioso
 
 gdb:all
 	gdb --tui minishell
 
 # ============ [Target-sepecific Directives]==========
-.PHONY: all clean fclean re test t v
+.PHONY: all clean fclean re v vq gdb
 
 # =============[Dependency Inclusion Directive] ======
 -include ${DEP}

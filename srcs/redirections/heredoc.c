@@ -4,8 +4,9 @@ static void	free_son_and_exit(void)
 {
 	ft_free_matrix((void **)g_shell.pipeline_rest);
 	ft_free_matrix((void **)g_shell.redirect_rest);
+	ft_free_matrix((void **)g_shell.envp);
 	free_hash(g_shell.hash);
-	while (g_shell.id > 0)
+	while (g_shell.id < g_shell.nbr_sons)
 	{
 		ft_free_matrix((void **)g_shell.command[g_shell.id].argv);
 		if (g_shell.command[g_shell.id].wr_here > STDOUT_FILENO)
@@ -14,11 +15,6 @@ static void	free_son_and_exit(void)
 			close(g_shell.command[g_shell.id].rd_here);
 		g_shell.id--;
 	}
-	ft_free_matrix((void **)g_shell.command[g_shell.id].argv);
-	if (g_shell.command[g_shell.id].wr_here > STDOUT_FILENO)
-		close(g_shell.command[g_shell.id].wr_here);
-	if (g_shell.command[g_shell.id].rd_here > STDIN_FILENO)
-		close(g_shell.command[g_shell.id].rd_here);
 	free(g_shell.command);
 	rl_clear_history();
 	exit(REDI_OK);

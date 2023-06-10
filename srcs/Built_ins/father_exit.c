@@ -60,6 +60,7 @@ static void	validate_exit(char *arg)
 	nbr %= 256;
 	if (nbr < 0)
 		nbr *= -1;
+	just_free();
 	exit(nbr);
 }
 
