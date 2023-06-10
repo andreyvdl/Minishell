@@ -90,7 +90,6 @@ int	fill_son_orders(t_command *son_struct, char *cmd)
 	son_struct[g_shell.id].rd_here = STDIN_FILENO;
 	if (redirect && *redirect)
 		status = redirection(redirect, son_struct, g_shell.id);
-	printf("STATUS DEPOIS DO REDIRECT %d\n", status); // remover depois
 	ft_free_matrix((void **)redirect);
 	return (status);
 }

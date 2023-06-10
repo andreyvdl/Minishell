@@ -31,7 +31,6 @@ static void	free_father_global(int has_error)
 
 void	pre_executor(void)
 {
-	printf("NUMERO DE FILHOS: %zu\n", g_shell.nbr_sons); //remover depois
 	if (g_shell.nbr_sons == 1 && g_shell.command->argv != NULL && \
 	isbuiltin(g_shell.command->argv[0]) == TRUE)
 		father_execute(g_shell.command[0].argv);

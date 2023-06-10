@@ -24,6 +24,7 @@ static void	print_vars_export(void)
 
 static void	add_this_to_hash(char *copy, size_t len, int has_value)
 {
+	copy[len] = '\0';
 	if (has_value == TRUE)
 		insert_node(g_shell.hash, copy, copy + len + 1);
 	else

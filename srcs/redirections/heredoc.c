@@ -83,9 +83,8 @@ static int	with_expansions(char *limiter, t_command *son, size_t id)
 		free_son_and_exit();
 	}
 	waitpid(pid, &status, NONE);
-	if (status == 130)
+	if (WIFEXITED(status) && WEXITSTATUS(status) == 255)
 	{
-		printf("ENTREI NO SIGNAL INT\n"); // remover depois
 		close(son[id].rd_here);
 		son[id].rd_here = SIGNAL_INT;
 		unlink(HEREDOC_PATH);

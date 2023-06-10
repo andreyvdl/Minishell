@@ -26,9 +26,6 @@ void	tokenizer(char *input, t_hash *hash)
 	commands = count_and_fill(input, &nbr_cmds);
 	free(input);
 	if (set_up_global(commands, nbr_cmds, hash) == REDI_SIGNAL)
-	{
-		printf("SAIU DA GLOBAL COM REDI_SIGNAL, NUMERO DE FILHOS VIRA 0"); //remover depois
 		g_shell.nbr_sons = 0;
-	}
 	ft_free_matrix((void **)commands);
 }

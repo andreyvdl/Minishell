@@ -67,8 +67,8 @@ identifier \e[0m┗|｀O′|┛\n"
 # define ERR_WRITING "\e[1;31mms: output error \e[0m(＠_＠;)"
 # define ERR_HEREDOC "\e[1;31mms: heredoc error... congratulations...? \e[0m\
 ㄟ( ▔, ▔ )ㄏ\n"
-# define WAR_HEREDOC "\n\e[1;33mms: you finish it with EOF, but writed \e[1m\
-`%s` \e[0m┑(￣Д ￣)┍\n"
+# define WAR_HEREDOC "\n\e[1;33mheredoc: you finish it with EOF, but writed \
+\e[1m`%s` \e[0m┑(￣Д ￣)┍\n"
 # define ERR_EXEC_DIR "\e[1;31mms: execution error: \e[1m%s \e[0m(＠_＠;)\n"
 # define ERR_FILENAME "\e[1;31mms: filename error: \e[1m%s \e[0m\
 ┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻\n"

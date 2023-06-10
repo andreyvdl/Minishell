@@ -28,10 +28,7 @@ static void	exit_heredoc(int sig)
 	}
 	free_hash(g_shell.hash);
 	if (sig == SIGINT)
-	{
-		printf("VC DEU CTRLC NO HEREDOC\n"); // remover depois
-		exit(130);
-	}
+		exit(REDI_SIGNAL);
 	exit(REDI_OK);
 }
 

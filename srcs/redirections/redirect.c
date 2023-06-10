@@ -55,10 +55,7 @@ static int	readers(char **str, t_command *son, size_t id)
 	if (ft_strcmp(*str, "<<") == 0)
 	{
 		if (heredoc(*(str + 1), son, id) == REDI_SIGNAL)
-		{
-			printf("SAIU DO READERS COM REDI_SIGNAL\n"); //remover depois
 			return (REDI_SIGNAL);
-		}
 		close(son[id].rd_here);
 		son[id].rd_here = open(HEREDOC_PATH, O_RDONLY);
 	}
@@ -92,6 +89,5 @@ int	redirection(char **str, t_command *son, size_t id)
 	}
 	if (*str != NULL)
 		close_opened(status, son, id);
-	printf("STATUS É %d\n", status);
 	return (status);
 }
