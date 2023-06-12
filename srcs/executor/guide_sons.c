@@ -2,15 +2,16 @@
 
 static void	execute_cmd(size_t id)
 {
-	if (g_shell.command[id].argv != NULL && \
+	if (g_shell.command[id].argv != NULL && **g_shell.command[id].argv && \
 	isbuiltin(*g_shell.command[id].argv) == TRUE)
 		builtins(g_shell.command[id].argv);
-	else if (g_shell.command[id].argv != NULL && \
+	else if (g_shell.command[id].argv != NULL && **g_shell.command[id].argv && \
 	*g_shell.command[id].argv != NULL)
 		system_exec(g_shell.command[id].argv, g_shell.envp);
 	else
 	{
 		free_son();
+		close_std_error();
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -25,6 +26,7 @@ void	guide_sons(int *pipe, size_t id)
 		close(pipe[0]);
 		close(pipe[1]);
 		free_son();
+		close_std_error();
 		exit(EXIT_FAILURE);
 	}
 	open_redirect(pipe, id);
