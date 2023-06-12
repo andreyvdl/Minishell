@@ -6,6 +6,7 @@ static void	pipe_error(int *pipe)
 	close(pipe[1]);
 	free_son();
 	perror(ERR_DUP_2);
+	close_std_error();
 	exit(EXEC_WENT_WRONG);
 }
 
