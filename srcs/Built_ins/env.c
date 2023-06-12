@@ -40,7 +40,7 @@ static void	print_vars_env(void)
 		node = g_shell.hash->list[looper];
 		while (node != NULL)
 		{
-			if (node->value != NULL)
+			if (*node->key != '?' && node->value != NULL)
 				ft_printf_ln("%s=%s", node->key, node->value);
 			node = node->next;
 		}
