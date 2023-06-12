@@ -6,7 +6,7 @@ static void	solo_value_size(char **str, size_t *size)
 	char	*key;
 
 	(*str)++;
-	if (ft_isdigit(**str) == FALSE)
+	if (ft_isalpha(**str) == TRUE || **str == '_' || **str == '?')
 	{
 		if (**str == '?')
 		{
@@ -21,6 +21,8 @@ static void	solo_value_size(char **str, size_t *size)
 		*size += ft_strlen(search(g_shell.hash, key));
 		free(key);
 	}
+	else if (ft_isdigit(**str) == FALSE)
+		(*size)++;
 	while (ft_isalnum(**str) == TRUE || **str == '_')
 		(*str)++;
 }
@@ -64,7 +66,7 @@ static void	solo_value_copy(char **new, char **str)
 	char	*key;
 
 	(*str)++;
-	if (ft_isdigit(**str) == FALSE)
+	if (ft_isalpha(**str) == TRUE || **str == '_' || **str == '?')
 	{
 		if (**str == '?')
 		{
@@ -79,6 +81,8 @@ static void	solo_value_copy(char **new, char **str)
 		aux_copy(new, search(g_shell.hash, key));
 		free(key);
 	}
+	else if (ft_isdigit(**str) == FALSE && (*str)++)
+		aux_copy(new, "$");
 	while (ft_isalnum(**str) == TRUE || **str == '_')
 		(*str)++;
 }
