@@ -18,7 +18,7 @@ static void	free_father_global(int has_error)
 		}
 		return ;
 	}
-	while (looper < g_shell.nbr_sons)
+	while (looper <= g_shell.nbr_sons)
 	{
 		ft_free_matrix((void **)g_shell.command[looper].argv);
 		if (g_shell.command[looper].wr_here > STDOUT_FILENO)
@@ -33,7 +33,10 @@ void	pre_executor(void)
 {
 	if (g_shell.nbr_sons == 1 && g_shell.command->argv != NULL && \
 	isbuiltin(g_shell.command->argv[0]) == TRUE)
+	{
 		father_execute(g_shell.command[0].argv);
+		free_father_global(FALSE);
+	}
 	else if (g_shell.nbr_sons > 0)
 	{
 		executor();
