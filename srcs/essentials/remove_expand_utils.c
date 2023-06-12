@@ -6,7 +6,7 @@ static void	dollar_case_count(char **str, size_t *size)
 	char	*key;
 
 	(*str)++;
-	if (ft_isdigit(**str) == FALSE)
+	if (ft_isalpha(**str) == TRUE || **str == '_' || **str == '?')
 	{
 		if (**str == '?')
 		{
@@ -21,6 +21,8 @@ static void	dollar_case_count(char **str, size_t *size)
 		*size += ft_strlen(search(g_shell.hash, key));
 		free(key);
 	}
+	else if (ft_isdigit(**str) == FALSE)
+		(*size)++;
 	while (ft_isalnum(**str) == TRUE || **str == '_')
 		(*str)++;
 }
