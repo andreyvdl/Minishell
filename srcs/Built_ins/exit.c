@@ -81,9 +81,6 @@ static void	son_exit(char *arg)
 	}
 	nbr = ft_atoll(arg);
 	free_son();
-	nbr %= 256;
-	if (nbr < 0)
-		nbr *= -1;
 	exit(nbr);
 }
 
