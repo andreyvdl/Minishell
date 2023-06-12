@@ -57,9 +57,6 @@ static void	validate_exit(char *arg)
 		exit(FT_EXIT_ERROR);
 	}
 	nbr = ft_atoll(arg);
-	nbr %= 256;
-	if (nbr < 0)
-		nbr *= -1;
 	just_free();
 	exit(nbr);
 }
@@ -69,7 +66,7 @@ void	father_exit(char **argv)
 	if (*(argv + 1) != NULL && *(argv + 2) != NULL)
 	{
 		ft_printf_fd(STDERR_FILENO, ERR_EXIT_ARGS);
-		insert_node(g_shell.hash, STATUS_CODE, FATHER_EXIT_FAILURE);
+		insert_node(g_shell.hash, STATUS_CODE, FATHER_FAILURE);
 		return ;
 	}
 	else if (*(argv + 1) == NULL)
