@@ -2,36 +2,42 @@
 
 static void	copy_this_value(char **new, char *value)
 {
-	size_t	len;
+	size_t	index;
 
-	len = ft_strlen(value);
-	ft_memcpy(*new, value, len);
-	(*new) = (*new) + len;
+	if (value == NULL)
+		return ;
+	index = 0;
+	while (value[index] != '\0')
+	{
+		**new = value[index];
+		(*new)++;
+		index++;
+	}
 }
 
 static void	dollar_value(char **str, char **new, t_hash *hash)
 {
 	char	*key;
-	char	*value;
+	size_t	len;
 
 	(*str)++;
-	key = (*str);
-	if (!(*key >= '0' && *key <= '9'))
+	if (ft_isalpha(**str) == TRUE || **str == '_' || **str == '?')
 	{
-		if (*key == '?')
+		if (**str == '?')
 		{
-			value = search(hash, STATUS_CODE);
-			copy_this_value(new, value);
+			copy_this_value(new, search(hash, STATUS_CODE));
 			(*str)++;
 			return ;
 		}
-		while (ft_isalnum(*key) || *key == '_')
-			key++;
-		key = ft_substr(*str, 0, key - *str);
-		value = search(hash, key);
+		len = 0;
+		while (ft_isalnum(*(*str + len)) || *(*str + len) == '_')
+			len++;
+		key = ft_substr(*str, 0, len);
+		copy_this_value(new, search(hash, key));
 		free(key);
-		copy_this_value(new, value);
 	}
+	else if (ft_isdigit(**str) == FALSE && (*str)++)
+		copy_this_value(new, "$");
 	while ((ft_isalnum(**str) || **str == '_') && **str)
 		(*str)++;
 }
@@ -51,23 +57,26 @@ void	copy_with_expansions_heredoc(char *str, char *new, t_hash *hash)
 static void	get_dollar_value_size(char **str, size_t *counter, t_hash *hash)
 {
 	char	*key;
+	size_t	len;
 
 	(*str)++;
-	key = (*str);
-	if (!(*key >= '0' && *key <= '9'))
+	if (ft_isalpha(**str) == TRUE || **str == '_' || **str == '?')
 	{
-		if (*key == '?')
+		if (**str == '?')
 		{
 			(*counter) += ft_strlen(search(hash, STATUS_CODE));
 			(*str)++;
 			return ;
 		}
-		while (ft_isalnum(*key) || *key == '_')
-			key++;
-		key = ft_substr(*str, 0, key - *str);
+		len = 0;
+		while (ft_isalnum(*(*str + len)) || *(*str + len) == '_')
+			len++;
+		key = ft_substr(*str, 0, len);
 		(*counter) += ft_strlen(search(hash, key));
 		free(key);
 	}
+	else if (ft_isdigit(**str) == FALSE)
+		(*counter)++;
 	while ((ft_isalnum(**str) || **str == '_') && **str)
 		(*str)++;
 }
