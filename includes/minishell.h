@@ -17,20 +17,20 @@
 
 // prompts definitions
 # if defined(__APPLE__) || defined(__MACH__)
-#  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m🍎\e[0m\e[1;33m↳ \e[0m"
+#  define PROMPT "\e[1;34m👤🍎 Minishell\e[0m\e[1;33m↳ \e[0m"
 #  define HEREDOC_PROMPT "🍎 here-doc> "
 # elif defined(_WIN32) || defined(_WIN64) || defined(__CYWIN__)
-#  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m💾\e[0m\e[1;33m↳ \e[0m"
+#  define PROMPT "\e[1;34m👤💾 Minishell\e[0m\e[1;33m↳ \e[0m"
 #  define HEREDOC_PROMPT "💾 here-doc> "
 # elif defined(__linux__) || defined(unix) || defined(__unix) || \
 defined(__unix__)
-#  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m🐧\e[0m\e[1;33m↳ \e[0m"
+#  define PROMPT "\e[1;34m👤🐧 Minishell\e[0m\e[1;33m↳ \e[0m"
 #  define HEREDOC_PROMPT "🐧 here-doc> "
 # elif defined(__FreeBSD__)
-#  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m😈\e[0m\e[1;33m↳ \e[0m"
+#  define PROMPT "\e[1;34m👤😈 Minishell\e[0m\e[1;33m↳ \e[0m"
 #  define HEREDOC_PROMPT "😈 here-doc> "
 # else
-#  define PROMPT "\e[1;34m👤  Minishell\e[0m\n  \e[0;35m💻\e[0m\e[1;33m↳ \e[0m"
+#  define PROMPT "\e[1;34m👤💻 Minishell\e[0m\e[1;33m↳ \e[0m"
 #  define HEREDOC_PROMPT "💻 here-doc> "
 # endif
 # define HEREDOC_PATH "/tmp/.heredoc"
@@ -105,7 +105,6 @@ identifier \e[0m┗|｀O′|┛\n"
 # define EXPORT_PRINT_VAR "declare -x %s"
 # define HEREDOC_CONTROL_C "130"
 # define EXPORT_PRINT_VALUE "declare -x %s=\"%s\""
-# define FATHER_EXIT_FAILURE "2"
 # define FATHER_CMD_NOT_FOUND "127"
 # define FATHER_EXEC_WENT_WRONG "126"
 
@@ -157,6 +156,7 @@ void			ft_exit(char **argv);
 void			set_up_signals(void);
 void			ft_unset(char **argv);
 void			builtins(char **argv);
+void			close_std_error(void);
 void			heredoc_signals(void);
 void			father_cd(char **argv);
 void			ft_export(char **argv);
