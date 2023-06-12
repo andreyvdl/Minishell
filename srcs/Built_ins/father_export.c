@@ -11,9 +11,9 @@ static void	print_vars_export(void)
 		node = g_shell.hash->list[looper];
 		while (node != NULL)
 		{
-			if (node->value != NULL)
+			if (*node->key != '?' && node->value != NULL)
 				ft_printf_ln(EXPORT_PRINT_VALUE, node->key, node->value);
-			else
+			else if (*node->key != '?')
 				ft_printf_ln(EXPORT_PRINT_VAR, node->key);
 			node = node->next;
 		}
