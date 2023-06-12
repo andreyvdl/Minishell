@@ -21,7 +21,7 @@ static void	expand_value_copy(char **new, char **str)
 	char	*key;
 
 	(*str)++;
-	if (ft_isdigit(**str) == FALSE)
+	if (ft_isalpha(**str) == TRUE || **str == '_' || **str == '?')
 	{
 		if (**str == '?')
 		{
@@ -36,6 +36,8 @@ static void	expand_value_copy(char **new, char **str)
 		aux_copy(new, search(g_shell.hash, key));
 		free(key);
 	}
+	else if (ft_isdigit(**str) == FALSE)// && (*str)++)
+		aux_copy(new, "$");
 	while (ft_isalnum(**str) == TRUE || **str == '_')
 		(*str)++;
 }
