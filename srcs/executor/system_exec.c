@@ -9,6 +9,7 @@ static void	permission_denied(char *path, char **binaries, char *temp)
 	free(path);
 	free_son();
 	perror(ERR_ACCESS);
+	close_std_error();
 	exit(EXEC_WENT_WRONG);
 }
 
@@ -49,6 +50,7 @@ static char	*match_path(char *cmd)
 	{
 		ft_printf_fd(STDERR_FILENO, ERR_CMD_NOT_FOUND_2, cmd);
 		free_son();
+		close_std_error();
 		exit(CMD_NOT_FOUND);
 	}
 	temp = ft_strjoin("/", cmd);
@@ -59,6 +61,7 @@ static char	*match_path(char *cmd)
 	{
 		ft_printf_fd(STDERR_FILENO, ERR_CMD_NOT_FOUND, cmd);
 		free_son();
+		close_std_error();
 		exit(CMD_NOT_FOUND);
 	}
 	return (path);
@@ -101,5 +104,6 @@ void	system_exec(char **old_argv, char **old_envp)
 	ft_free(path);
 	ft_free_matrix((void **)argv);
 	ft_free_matrix((void **)envp);
+	close_std_error();
 	exit(EXEC_WENT_WRONG);
 }
