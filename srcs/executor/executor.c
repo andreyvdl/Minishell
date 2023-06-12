@@ -42,7 +42,7 @@ static int	forking(pid_t *pid, int *pipe, int fd_original)
 	return (EXIT_SUCCESS);
 }
 
-void	executor()
+void	executor(void)
 {
 	int		pipe_fd[2];
 	int		backup_fd;
