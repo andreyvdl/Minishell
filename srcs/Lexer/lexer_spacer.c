@@ -11,7 +11,7 @@ int	metachar_and_quote_cases(char *str)
 	((*str == '<' || *str == '>') && *(str + 1) == '|'))
 		return (TRUE);
 	else if ((*(str + 1) == '\'' || *(str + 1) == '\"') && *str != ' ' && \
-	!ft_isalnum(*str))
+	!ft_isprint(*str))
 		return (TRUE);
 	return (FALSE);
 }
