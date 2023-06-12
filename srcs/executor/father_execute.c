@@ -18,6 +18,11 @@ void	father_execute(char **argv)
 {
 	int	backup;
 
+	if (g_shell.command->wr_here <= -1 || g_shell.command->rd_here <= -1)
+	{
+		insert_node(g_shell.hash, STATUS_CODE, FATHER_FAILURE);
+		return ;
+	}
 	backup = father_redirect(g_shell.command[0]);
 	if (ft_strcmp(*argv, "echo") == 0)
 		father_echo(argv);
