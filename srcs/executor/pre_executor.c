@@ -7,7 +7,7 @@ static void	free_father_global(int has_error)
 	looper = 0;
 	if (has_error == TRUE)
 	{
-		while (looper <= g_shell.id)
+		while (looper < g_shell.id)
 		{
 			ft_free_matrix((void **)g_shell.command[looper].argv);
 			if (g_shell.command[looper].wr_here > STDOUT_FILENO)
@@ -18,7 +18,7 @@ static void	free_father_global(int has_error)
 		}
 		return ;
 	}
-	while (looper <= g_shell.nbr_sons)
+	while (looper < g_shell.nbr_sons)
 	{
 		ft_free_matrix((void **)g_shell.command[looper].argv);
 		if (g_shell.command[looper].wr_here > STDOUT_FILENO)

@@ -5,7 +5,7 @@ static void	just_free(void)
 	size_t	looper;
 
 	looper = 0;
-	while (looper <= g_shell.id)
+	while (looper < g_shell.id)
 	{
 		ft_free_matrix((void **)g_shell.command[looper].argv);
 		if (g_shell.command[looper].wr_here > STDOUT_FILENO)

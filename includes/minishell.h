@@ -175,6 +175,7 @@ void			add_to_history(char *pipeline);
 void			export(char *str, t_hash *hash);
 void			solo_copy(char *new, char *str);
 void			free_all_and_exit(t_hash *hash);
+void			deslocate_expansion_empty(void);
 void			guide_sons(int *pipe, size_t id);
 void			expand_copy(char *new, char *str);
 void			open_redirect(int *pipe, size_t id);

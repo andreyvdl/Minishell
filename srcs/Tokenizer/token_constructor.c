@@ -28,4 +28,5 @@ void	tokenizer(char *input, t_hash *hash)
 	if (set_up_global(commands, nbr_cmds, hash) == REDI_SIGNAL)
 		g_shell.nbr_sons = 0;
 	ft_free_matrix((void **)commands);
+	deslocate_expansion_empty();
 }

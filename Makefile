@@ -8,7 +8,7 @@ FILES = builtins.c cd.c echo.c env.c exit_utils.c exit.c export.c father_cd.c fa
 		lexer_easy_splitter.c lexer_spacer_utils.c lexer_spacer.c \
 		parser.c parser_utils.c \
 		append.c heredoc_utils.c heredoc_utils2.c heredoc.c input.c redirect.c trunc.c \
-		fill_son.c token_constructor_utils.c token_constructor.c token_setup_global.c \
+		deslocate_expansion.c fill_son.c token_constructor_utils.c token_constructor.c token_setup_global.c \
 		easter_eggs.c main.c signals.c
 
 

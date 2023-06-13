@@ -7,7 +7,7 @@ void	free_son(void)
 	looper = 0;
 	ft_free_matrix((void **)g_shell.envp);
 	free_hash(g_shell.hash);
-	while (looper <= g_shell.nbr_sons)
+	while (looper < g_shell.nbr_sons)
 	{
 		ft_free_matrix((void **)g_shell.command[looper].argv);
 		if (g_shell.command[looper].wr_here > STDOUT_FILENO)
