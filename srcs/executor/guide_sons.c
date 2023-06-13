@@ -5,14 +5,15 @@ static void	execute_cmd(size_t id)
 	if (g_shell.command[id].argv != NULL && **g_shell.command[id].argv && \
 	isbuiltin(*g_shell.command[id].argv) == TRUE)
 		builtins(g_shell.command[id].argv);
-	else if (g_shell.command[id].argv != NULL && **g_shell.command[id].argv && \
-	*g_shell.command[id].argv != NULL)
+	else if (g_shell.command[id].argv != NULL && \
+	*g_shell.command[id].argv != NULL && **g_shell.command[id].argv)
 		system_exec(g_shell.command[id].argv, g_shell.envp);
 	else
 	{
+		ft_printf_fd(STDERR_FILENO, ERR_CMD_NOT_FOUND, "");
 		free_son();
 		close_std_error();
-		exit(EXIT_SUCCESS);
+		exit(CMD_NOT_FOUND);
 	}
 }
 
