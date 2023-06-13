@@ -17,20 +17,20 @@
 
 // prompts definitions
 # if defined(__APPLE__) || defined(__MACH__)
-#  define PROMPT "\e[1;34m👤🍎 Minishell\e[0m\e[1;33m↳ \e[0m"
+#  define PROMPT "\e[1;34m👤🍎 Minishell\e[0m\e[1;33m⤑ \e[0m"
 #  define HEREDOC_PROMPT "🍎 here-doc> "
 # elif defined(_WIN32) || defined(_WIN64) || defined(__CYWIN__)
-#  define PROMPT "\e[1;34m👤💾 Minishell\e[0m\e[1;33m↳ \e[0m"
+#  define PROMPT "\e[1;34m👤💾 Minishell\e[0m\e[1;33m⤑ \e[0m"
 #  define HEREDOC_PROMPT "💾 here-doc> "
 # elif defined(__linux__) || defined(unix) || defined(__unix) || \
 defined(__unix__)
-#  define PROMPT "\e[1;34m👤🐧 Minishell\e[0m\e[1;33m↳ \e[0m"
+#  define PROMPT "\e[1;34m👤🐧 Minishell\e[0m\e[1;33m⤑ \e[0m"
 #  define HEREDOC_PROMPT "🐧 here-doc> "
 # elif defined(__FreeBSD__)
-#  define PROMPT "\e[1;34m👤😈 Minishell\e[0m\e[1;33m↳ \e[0m"
+#  define PROMPT "\e[1;34m👤😈 Minishell\e[0m\e[1;33m⤑ \e[0m"
 #  define HEREDOC_PROMPT "😈 here-doc> "
 # else
-#  define PROMPT "\e[1;34m👤💻 Minishell\e[0m\e[1;33m↳ \e[0m"
+#  define PROMPT "\e[1;34m👤💻 Minishell\e[0m\e[1;33m⤑ \e[0m"
 #  define HEREDOC_PROMPT "💻 here-doc> "
 # endif
 # define HEREDOC_PATH "/tmp/.heredoc"
