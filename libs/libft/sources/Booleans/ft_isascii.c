@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:01:05 by adantas-          #+#    #+#             */
-/*   Updated: 2023/04/25 17:21:03 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:47:41 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	ft_isascii(int c)
 	const char	del_ascii = 127;
 
 	if (c >= '\0' && c <= del_ascii)
-		return (true);
-	return (false);
+		return (TRUE);
+	return (FALSE);
 }

@@ -5,25 +5,25 @@ static int	validate_metachar(char **splited_pline)
 {
 	if (**splited_pline == '&')
 	{
-		ft_putendl_fd("\e[31mms: unsuported syntax `&`\e[0m", 2);
-		return (true);
+		ft_printf_fd(STDERR_FILENO, ERR_UNS_SYNTAX, *splited_pline);
+		return (TRUE);
 	}
 	else if (**splited_pline == '|')
 	{
 		if (pipe_case(splited_pline))
-			return (true);
+			return (TRUE);
 	}
 	else if (**splited_pline == '<')
 	{
 		if (read_from_case(splited_pline))
-			return (true);
+			return (TRUE);
 	}
 	else if (**splited_pline == '>')
 	{
 		if (write_to_case(splited_pline))
-			return (true);
+			return (TRUE);
 	}
-	return (false);
+	return (FALSE);
 }
 
 static int	has_invalid_syntax(char **splited_pline)
@@ -36,11 +36,11 @@ static int	has_invalid_syntax(char **splited_pline)
 		if (ft_ismetachar(**temp))
 		{
 			if (validate_metachar(temp))
-				return (true);
+				return (TRUE);
 		}
 		temp++;
 	}
-	return (false);
+	return (FALSE);
 }
 
 static int	unclosed_quotes(char *pipeline)
@@ -50,30 +50,36 @@ static int	unclosed_quotes(char *pipeline)
 		if (*pipeline == '\'' || *pipeline == '\"')
 		{
 			if (unclosed_quotes_case(&pipeline, *pipeline))
-				return (true);
+				return (TRUE);
 		}
 		else
 			pipeline++;
 	}
-	return (false);
+	return (FALSE);
 }
+
+/*
+TODO: separate the redirections from the pipeline before verify if they are
+valid: bash accepts: `ls < gjabgja | cat > jgbahga` as two errors !!NOT ONE!!;
+*/
 
 int	parser(char *pipeline, t_hash *hash)
 {
 	char	**splited;
 
+	easy_splitter(pipeline);
 	if (unclosed_quotes(pipeline))
 	{
-		insert_node(hash, "?", "2");
-		return (true);
+		insert_node(hash, STATUS_CODE, FATHER_FAILURE);
+		return (TRUE);
 	}
 	splited = ft_split(pipeline, -7);
 	if (has_invalid_syntax(splited))
 	{
 		ft_free_matrix((void **)splited);
-		insert_node(hash, "?", "2");
-		return (true);
+		insert_node(hash, STATUS_CODE, FATHER_FAILURE);
+		return (TRUE);
 	}
 	ft_free_matrix((void **)splited);
-	return (false);
+	return (FALSE);
 }

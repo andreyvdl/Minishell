@@ -1,30 +1,28 @@
 #include "../../includes/minishell.h"
-#include <stdio.h>
 
-static int syntax_error(char *str) {
+void	ft_pwd(void)
+{
+	char	*cwd;
 
-  while (*str && (*str != ' ' && *str != '\t'))
-    str++;
-  while (*str && (*str == ' ' || *str == '\t'))
-    str++;
-  if (*str >= 33 && *str <= 126)
-    return (-1);
-  return (1);
-}
-
-void pwd(char *str, t_hash *hash) {
-  char buf[1024];
-
-  if (syntax_error(str) == -1) {
-    while (*str && (*str != ' ' && *str != '\t'))
-      str++;
-    while (*str && (*str == ' ' || *str == '\t'))
-      str++;
-    ft_printf("pwd: bad option: %s\n", str);
-  } else {
-    if (getcwd(str, sizeof(buf)))
-      ft_printf("%s\n", buf);
-    else
-      perror("Error\n");
-  }
+	cwd = NULL;
+	cwd = getcwd(NULL, 0);
+	if (cwd == NULL)
+	{
+		perror(ERR_PWD_PERROR);
+		free_son();
+		exit(EXIT_FAILURE);
+	}
+	if (ft_strlen(cwd) > FT_PATHMAX)
+	{
+		ft_printf_fd(STDERR_FILENO, ERR_PWD_TOO_LONG, cwd, \
+		strerror(FT_ENAMETOOLONG));
+		free(cwd);
+		free_son();
+		exit(EXIT_FAILURE);
+	}
+	ft_putstr(cwd);
+	free(cwd);
+	ft_putchar('\n');
+	free_son();
+	exit(EXIT_SUCCESS);
 }

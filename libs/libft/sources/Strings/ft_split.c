@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 20:08:31 by adantas-          #+#    #+#             */
-/*   Updated: 2023/04/25 22:34:59 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:19:06 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ static char	**allocate_strings(char const *string, char delimiter, \
 	{
 		while (string[index] == delimiter)
 			index++;
-		(*matrix)[line] = (char *)malloc(get_word_size(string, delimiter, index) \
-										+ 1);
+		(*matrix)[line] = (char *)malloc(get_word_size(string, delimiter, index)
+				+ 1);
 		if ((*matrix)[line] == NULL)
 		{
 			clear_matrix(matrix, line);

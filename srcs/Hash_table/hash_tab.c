@@ -1,11 +1,11 @@
 #include "../../includes/minishell.h"
 
-static unsigned int	hash_code(char *key)
+unsigned int	hash_code(char *key)
 {
 	unsigned long	hash;
 	unsigned int	c;
 
-	hash = 5381;
+	hash = MAGIC_NUMBER;
 	while (*key)
 	{
 		c = *key;
@@ -55,10 +55,9 @@ void insert_node(t_hash *hash, char *key, char *value)
 
 char	*search(t_hash *hash, char *key)
 {
-	unsigned int	index;
+	unsigned const int	index = hash_code(key);
 	t_node			*node;
 
-	index = hash_code(key);
 	node = hash->list[index];
 	while (node)
 	{

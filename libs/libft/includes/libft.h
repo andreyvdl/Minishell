@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 15:00:37 by adantas-          #+#    #+#             */
-/*   Updated: 2023/05/04 16:59:44 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:31:13 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-# include <limits.h>
-# include <stdbool.h>
 # include "libft_defines.h"
 # include "libft_structs.h"
 
@@ -107,6 +105,7 @@ void			ft_putstr_fd(char *s, int fd);
 
 char			**ft_matrixdup(char **matrix);
 char			**ft_split(char const *s, char c);
+char			*ft_chrtrim(char const *s1, char const set);
 char			*ft_strcapitalize(char *str);
 char			*ft_strcat(char *dest, char *src);
 char			*ft_strchr(const char *s, int c);
@@ -122,6 +121,7 @@ char			*ft_strstr(const char *str, const char *to_find);
 char			*ft_strtrim(char const *s1, char const *set);
 char			*ft_strupcase(char *str);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
+size_t			ft_matrixlen(const char **matrix);
 int				ft_strcmp(char *s1, char *s2);
 void			ft_striteri(char *s, void (*f)(unsigned int, char*));
 size_t			ft_strlcat(char *dst, const char *src, size_t size);

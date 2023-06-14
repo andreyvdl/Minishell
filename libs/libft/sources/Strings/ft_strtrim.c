@@ -6,14 +6,14 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 19:51:30 by adantas-          #+#    #+#             */
-/*   Updated: 2023/05/05 16:10:08 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:12:10 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libft.h"
 
-static bool		set_in_beginning(char character, char const *set);
-static bool		set_in_ending(char character, char const *set);
+static int		set_in_beginning(char character, char const *set);
+static int		set_in_ending(char character, char const *set);
 static char		*copy_trimmed(char const *string, size_t start, size_t end);
 static size_t	get_string_size(char const *string);
 
@@ -34,15 +34,15 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (s1 == NULL && *s1 == '\0')
 		return (NULL);
 	start = 0;
-	while (s1[start] != '\0' && set_in_beginning(s1[start], set) == true)
+	while (s1[start] != '\0' && set_in_beginning(s1[start], set) == TRUE)
 		start++;
 	end = get_string_size(s1) - 1;
-	while (end > start && set_in_ending(s1[end], set) == true)
+	while (end > start && set_in_ending(s1[end], set) == TRUE)
 		end--;
 	return (copy_trimmed(s1, start, end + 1));
 }
 
-static bool	set_in_beginning(char character, char const *set)
+static int	set_in_beginning(char character, char const *set)
 {
 	size_t	index;
 
@@ -50,10 +50,10 @@ static bool	set_in_beginning(char character, char const *set)
 	while (set[index] != '\0')
 	{
 		if (set[index] == character)
-			return (true);
+			return (TRUE);
 		index++;
 	}
-	return (false);
+	return (FALSE);
 }
 
 static size_t	get_string_size(char const *string)
@@ -66,7 +66,7 @@ static size_t	get_string_size(char const *string)
 	return (size);
 }
 
-static bool	set_in_ending(char character, char const *set)
+static int	set_in_ending(char character, char const *set)
 {
 	size_t	index;
 
@@ -74,10 +74,10 @@ static bool	set_in_ending(char character, char const *set)
 	while (set[index] != '\0')
 	{
 		if (set[index] == character)
-			return (true);
+			return (TRUE);
 		index++;
 	}
-	return (false);
+	return (FALSE);
 }
 
 static char	*copy_trimmed(char const *string, size_t start, size_t end)

@@ -1,107 +1,90 @@
+#============ [FILES] ==========
 NAME = minishell
+
+FILES = builtins.c cd.c echo.c env.c exit_utils.c exit.c export.c father_cd.c father_echo.c father_env.c father_exit.c father_export.c father_pwd.c father_unset.c pwd.c unset.c \
+		add_to_history.c filename_too_big.c free_all_and_exit.c hash_to_matrix.c isbuiltin.c remove_expand_utils.c remove_expand_utils2.c remove_quote_or_expand.c solo_utils.c \
+		execution_check.c executor.c father_execute.c free_son.c guide_sons.c is_directory.c open_redirect.c pre_executor.c system_exec.c\
+		hash_free.c hash_remove.c hash_tab.c \
+		lexer_easy_splitter.c lexer_spacer_utils.c lexer_spacer.c \
+		parser.c parser_utils.c \
+		append.c heredoc_utils.c heredoc_utils2.c heredoc.c input.c redirect.c trunc.c \
+		deslocate_expansion.c fill_son.c token_constructor_utils.c token_constructor.c token_setup_global.c \
+		easter_eggs.c main.c signals.c
+
+
+OBJS = $(addprefix $(BUILDS)/, $(FILES:.c=.o))
+
+DEP = $(OBJS:.o=.d)
+
+LIBFT = $(LIBFTDIR)libft.a
+
+#================= [DIRS] ===================
+SRCS = ./srcs
+VPATH = Built_ins essentials executor Hash_table  Lexer parser  redirections Tokenizer
+VPATH := $(SRCS) $(addprefix $(SRCS)/, $(VPATH))
+HEADER = ./includes ./libs/libft/includes
+HEADER := $(addprefix -I, $(HEADER))
+LIBFTDIR = ./libs/libft/
+BUILDS = ./builds
+
+#=================== [CONFIG_COMP] ==========
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-LIBFT = libs/libft/libft.a
-INCLUDES = -I includes -I libs/libft/includes
+CFLAGS = -Wall -Werror -Wextra -g
+DEPFLAGS = -MMD -MF
 
-# vou mudar isso ainda fiquei com preguica e so pra quebrar um galho por enquanto
-SRCS_BUILT_INS = srcs/Built_ins/builtins.c \
-		srcs/Built_ins/cd.c \
-		srcs/Built_ins/echo.c \
-		srcs/Built_ins/echo_utils.c \
-		srcs/Built_ins/env.c \
-		srcs/Built_ins/exit.c \
-		srcs/Built_ins/export.c \
-		srcs/Built_ins/pwd.c \
-		srcs/Built_ins/unset.c
+#===================== [COMMANDS] ===========
+DEL = rm -rf
+MKDIR = mkdir -p
 
-SRCS_ESSENTIALS = srcs/essentials/add_to_history.c \
-		srcs/essentials/free_all_and_exit.c
+#=====================[MESSAGES]=============
 
-SRCS_HASH_TABLE = srcs/Hash_table/hash_free.c \
-		srcs/Hash_table/hash_tab.c
+DEL_MSG				= @echo -ne "[\e[0;31m DEL \e[0m] "
+BIN_MSG				= @echo -ne "[\e[0;32m BIN \e[0m] "
+BLD_MSG				= @echo -ne "[\e[0;34m BLD \e[0m] "
+MKD_MSG				= @echo -ne "[\e[0;35m MKD \e[0m] "
 
-SRCS_LEXER = srcs/Lexer/lexer_easy_splitter.c \
-		srcs/Lexer/lexer_expander.c \
-		srcs/Lexer/lexer_expander_utils.c \
-		srcs/Lexer/lexer_spacer.c \
-		srcs/Lexer/lexer_spacer_utils.c
+# =================[BASIC_RULES] ============
 
-SRCS_PARSER = srcs/parser/parser.c \
-		srcs/parser/parser_utils.c
-
-SRCS_OTHERS = srcs/main.c \
-		srcs/pipe.c
-
-SRCS = $(SRCS_BUILT_INS) $(SRCS_ESSENTIALS) $(SRCS_HASH_TABLE) $(SRCS_LEXER) $(SRCS_PARSER) $(SRCS_OTHERS)
-
-OBJS_BUILT_INS = $(patsubst srcs/Built_ins/%.c,builds/Built_ins/%.o,$(SRCS_BUILT_INS))
-OBJS_ESSENTIALS = $(patsubst srcs/essentials/%.c,builds/essentials/%.o,$(SRCS_ESSENTIALS))
-OBJS_HASH_TABLE = $(patsubst srcs/Hash_table/%.c,builds/Hash_table/%.o,$(SRCS_HASH_TABLE))
-OBJS_LEXER = $(patsubst srcs/Lexer/%.c,builds/Lexer/%.o,$(SRCS_LEXER))
-OBJS_PARSER = $(patsubst srcs/parser/%.c,builds/parser/%.o,$(SRCS_PARSER))
-OBJS_OTHERS = $(patsubst %.c,builds/%.o,$(notdir $(SRCS_OTHERS)))
-
-OBJS = $(OBJS_BUILT_INS) $(OBJS_ESSENTIALS) $(OBJS_HASH_TABLE) $(OBJS_LEXER) $(OBJS_PARSER) $(OBJS_OTHERS)
-
-
-all: CFLAGS += -O2 #flagzinha de otimizacao n se importe por enquanto
 all: $(NAME)
 
-debug: CFLAGS += -g
-debug: fclean all
-
-$(NAME): $(OBJS)
-	@make -C libs/libft
-	@printf "\r\033[0;32m[BIN] $(NAME)\033[0m\033[K\n"
-	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) -o $(NAME) -lreadline
-
-builds/Built_ins/%.o: srcs/Built_ins/%.c
-	@mkdir -p builds/Built_ins
-	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-builds/essentials/%.o: srcs/essentials/%.c
-	@mkdir -p builds/essentials
-	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-builds/Hash_table/%.o: srcs/Hash_table/%.c
-	@mkdir -p builds/Hash_table
-	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-builds/Lexer/%.o: srcs/Lexer/%.c
-	@mkdir -p builds/Lexer
-	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-builds/parser/%.o: srcs/parser/%.c
-	@mkdir -p builds/parser
-	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-builds/%.o: srcs/%.c
-	@mkdir -p builds
-	@printf "\r\033[0;33m[BUILD] $@\033[0m\033[K"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(NAME): $(LIBFT) $(BUILDS) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(HEADER)  $(LIBFT) -o $(NAME) -lreadline
 
 clean:
-	@make clean -C libs/libft
-	@printf "\r\033[0;31m[REMOVE] objects\033[0m\033[K\n"
-	@rm -rf builds
+	$(DEL) $(BUILDS)
+	@make clean -C $(LIBFTDIR)
 
 fclean: clean
-	@make fclean -C libs/libft
-	@printf "\r\033[0;31m[REMOVE] $(NAME)\033[0m\033[K\n"
-	@rm -f $(NAME)
-
-valg: all
-	valgrind -q --leak-check=full --show-leak-kinds=all --suppressions=sup ./minishell
-
-gdb: all
-	gdb --tui minishell
+	$(DEL) ./minishell
+	@make fclean -C $(LIBFTDIR)
 
 re: fclean all
 
-.PHONY: all clean fclean re debug
+# =================[OTHER_RULES]============
+$(BUILDS):
+	@$(MKDIR) $@
+
+$(BUILDS)/%.o:%.c
+	$(BLD_MSG)
+	@echo "Building ..." $@
+	@$(CC) $(CFLAGS) -c $(HEADER) $< -o $@ $(DEPFLAGS) $(@:.o=.d)
+
+$(LIBFT):
+	@make -C $(LIBFTDIR)
+
+v:all
+	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --suppressions=sup --track-fds=yes --track-origins=yes --trace-children-skip='*/bin/*,*/sbin/*' ./minishell
+#				checa leak		mostra leak				segue child			suprime erros		marca fds		marca var n init	ignora vazamento dos binarios
+
+vq:all
+	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --suppressions=sup --track-fds=yes --track-origins=yes --trace-children-skip='*/bin/*,*/sbin/*' -q ./minishell
+#				checa leak		mostra leak				segue child			suprime erros		marca fds		marca var n init	ignora vazamento dos binarios		silencioso
+
+gdb:all
+	gdb --tui minishell
+
+# ============ [Target-sepecific Directives]==========
+.PHONY: all clean fclean re v vq gdb
+
+# =============[Dependency Inclusion Directive] ======
+-include ${DEP}

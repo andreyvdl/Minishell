@@ -1,6 +1,8 @@
 #include "../includes/minishell.h"
 
-char	*env_collect(char *str)
+t_pipe	g_shell;
+
+static char	*env_collect(char *str)
 {	
 	int		i;
 	char	*s;
@@ -13,59 +15,38 @@ char	*env_collect(char *str)
 	return (s);
 }
 
-void	printer(char *search, char **input)
+static void	set_up_hash(t_hash *hash, char **env)
 {
-	int	i;
+	int		i;
+	char	*token;
 
+	insert_node(hash, STATUS_CODE, FATHER_SUCCESS);
 	i = 0;
-	while (input[i])
+	while (env[i])
 	{
-		if (ft_strcmp(search, input[i]) == 0)
-		{
-			printf("%s", input[i]);
-			return ;
-		}
-		printf("%s", input[i]);
+		token = env_collect(env[i]);
+		insert_node(hash, token, &env[i][ft_strlen(env[i]) + 1]);
 		i++;
 	}
 }
 
-static void	set_up_hash(t_hash *hash, char **env)
-{
-	char		*token;
-	static int	i;
-
-	if (i == 0)
-	{
-		while (env[i])
-		{
-			token = env_collect(env[i]);
-			insert_node(hash, token, &env[i][ft_strlen(env[i]) + 1]);
-			i++;
-		}
-		insert_node(hash, "?", "0");
-	}
-}
-
-void	command(char *input, char **env, t_hash *hash)
+static void	command(char *input, t_hash *hash)
 {
 	char	*pipeline;
 
-	set_up_hash(hash, env);
 	if (input == NULL)
 		free_all_and_exit(hash);
 	add_to_history(input);
-	pipeline = ft_strtrim(input, "\n\v\t\r\f ");
+	pipeline = ft_strtrim(input, FT_WHITESPACES);
 	free(input);
 	input = separator(pipeline);
-	easy_splitter(input);
 	if (parser(input, hash))
 	{
 		free(input);
 		return ;
 	}
-	free(input);
-	//builtins(input, hash);
+	tokenizer(input, hash);
+	pre_executor();
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -73,18 +54,22 @@ int	main(int argc, char **argv, char **envp)
 	t_hash	*hash;
 	char	*input;
 
-	(void)argc;
-	(void)argv;
+	if (argc != 1)
+		easter_eggs(argv[1]);
 	hash = (t_hash *)ft_calloc(sizeof(t_hash), 1);
-	while (true)
+	set_up_hash(hash, envp);
+	g_shell.hash = hash;
+	while (TRUE)
 	{
-		input = readline("Minishell > ");
+		set_up_signals();
+		input = readline(PROMPT);
 		if (input && *input == '\0')
 		{
 			free(input);
 			continue ;
 		}
-		command(input, envp, hash);
+		signal(SIGINT, SIG_IGN);
+		command(input, hash);
 	}
 	return (0);
 }

@@ -7,34 +7,32 @@ int	unclosed_quotes_case(char **pipeline, char quote)
 		(*pipeline)++;
 	if (**pipeline == '\0')
 	{
-		ft_printf_fd(2, "\e[31mms: close this quote `%c`\e[0m\n", quote);
-		return (true);
+		ft_printf_fd(STDERR_FILENO, ERR_QUOTE, quote);
+		return (TRUE);
 	}
 	(*pipeline)++;
-	return (false);
+	return (FALSE);
 }
 
 int	pipe_case(char **splited_pline)
 {
 	if (*(*splited_pline + 1) == '|' || *(*splited_pline + 1) == '&')
 	{
-		ft_printf_fd(2, "\e[31mms: unsuported syntax `%s`\e[0m\n", \
-		*splited_pline);
-		return (true);
+		ft_printf_fd(STDERR_FILENO, ERR_UNS_SYNTAX, *splited_pline);
+		return (TRUE);
 	}
 	else if (*(splited_pline + 1) == NULL)
 	{
-		ft_putendl_fd("\e[31mms: syntax error `EOL`\e[0m", 2);
-		return (true);
+		ft_putendl_fd(ERR_EOL_SYNTAX, STDERR_FILENO);
+		return (TRUE);
 	}
 	else if (ft_ismetachar(**(splited_pline + 1)) && \
 	**(splited_pline + 1) != '<' && **(splited_pline +1) != '>')
 	{
-		ft_printf_fd(2, "\e[31mms: syntax error after `%s`\e[0m\n", \
-		*splited_pline);
-		return (true);
+		ft_printf_fd(STDERR_FILENO, ERR_NEXT_SYNTAX, *splited_pline);
+		return (TRUE);
 	}
-	return (false);
+	return (FALSE);
 }
 
 int	read_from_case(char **splited_pline)
@@ -42,21 +40,20 @@ int	read_from_case(char **splited_pline)
 	if (ft_strncmp(*splited_pline, "<<<", 3) == 0 || ft_strstr(*splited_pline, \
 	">") || ft_strstr(*splited_pline, "&"))
 	{
-		ft_printf_fd(2, "\e[31mms: syntax error `%s`\e[0m\n", *splited_pline);
-		return (true);
+		ft_printf_fd(STDERR_FILENO, ERR_NOW_SYNTAX, *splited_pline);
+		return (TRUE);
 	}
 	else if (*(splited_pline + 1) == NULL)
 	{
-		ft_putendl_fd("\e[31mms: syntax error `EOL`\e[0m", 2);
-		return (true);
+		ft_putendl_fd(ERR_EOL_SYNTAX, STDERR_FILENO);
+		return (TRUE);
 	}
 	else if (ft_ismetachar(**(splited_pline + 1)))
 	{
-		ft_printf_fd(2, "\e[31mms: syntax error after `%s`\e[0m\n", \
-		*splited_pline);
-		return (true);
+		ft_printf_fd(STDERR_FILENO, ERR_NEXT_SYNTAX, *splited_pline);
+		return (TRUE);
 	}
-	return (false);
+	return (FALSE);
 }
 
 int	write_to_case(char **splited_pline)
@@ -64,19 +61,18 @@ int	write_to_case(char **splited_pline)
 	if (ft_strncmp(*splited_pline, ">>>", 3) == 0 || ft_strstr(*splited_pline, \
 	"<") || ft_strstr(*splited_pline, "&"))
 	{
-		ft_printf_fd(2, "\e[31mms: syntax error `%s`\e[0m\n", *splited_pline);
-		return (true);
+		ft_printf_fd(STDERR_FILENO, ERR_NOW_SYNTAX, *splited_pline);
+		return (TRUE);
 	}
 	else if (*(splited_pline + 1) == NULL)
 	{
-		ft_putendl_fd("\e[31mms: syntax error `EOL`\e[0m", 2);
-		return (true);
+		ft_putendl_fd(ERR_EOL_SYNTAX, STDERR_FILENO);
+		return (TRUE);
 	}
 	else if (ft_ismetachar(**(splited_pline + 1)))
 	{
-		ft_printf_fd(2, "\e[31mms: syntax error after `%s`\e[0m\n", \
-		*splited_pline);
-		return (true);
+		ft_printf_fd(STDERR_FILENO, ERR_NEXT_SYNTAX, *splited_pline);
+		return (TRUE);
 	}
-	return (false);
+	return (FALSE);
 }

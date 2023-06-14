@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 16:57:54 by adantas-          #+#    #+#             */
-/*   Updated: 2023/04/25 17:00:53 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:47:58 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int	ft_isalnum(int c)
 {
 	if ((c >= '0' && c <= '9') || \
 		(c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return (true);
-	return (false);
+		return (TRUE);
+	return (FALSE);
 }

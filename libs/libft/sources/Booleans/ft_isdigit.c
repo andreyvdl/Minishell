@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:21:17 by adantas-          #+#    #+#             */
-/*   Updated: 2023/04/25 17:22:56 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:47:34 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@
 int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
-		return (true);
-	return (false);
+		return (TRUE);
+	return (FALSE);
 }

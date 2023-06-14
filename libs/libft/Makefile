@@ -6,7 +6,7 @@
 #    By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/26 12:02:01 by adantas-          #+#    #+#              #
-#    Updated: 2023/04/28 10:53:40 by adantas-         ###   ########.fr        #
+#    Updated: 2023/05/30 10:12:21 by adantas-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,13 +47,13 @@ LIBFT_SOURCES=${addprefix sources/Binary_Tree/, ft_btree_apply_infix.c \
 					ft_strdup.c ft_strlcat.c ft_strlowcase.c ft_strnstr.c \
 					ft_strstr.c ft_substr.c ft_strcapitalize.c ft_strcmp.c \
 					ft_striteri.c ft_strlcpy.c ft_strmapi.c ft_strrchr.c \
-					ft_strtrim.c} \
+					ft_strtrim.c ft_matrixlen.c ft_chrtrim.c} \
 				${addprefix sources/Utilities/, ft_tolower.c ft_toupper.c}
 LIBFT_OBJECTS=${LIBFT_SOURCES:.c=.o}
 # VARIABLES ====================================================================
 
 NAME=libft.a
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror -g3
 INCLUDES=-I./includes
 
 # COLORS =======================================================================
