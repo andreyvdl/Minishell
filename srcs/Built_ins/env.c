@@ -22,6 +22,7 @@ static int	env_is_directory(char **argv)
 	{
 		free_son();
 		perror(ERR_STAT);
+		close_std();
 		exit(EXIT_FAILURE);
 	}
 	if (S_ISDIR(file_stat.st_mode))
@@ -47,6 +48,7 @@ static void	print_vars_env(void)
 		looper++;
 	}
 	free_son();
+	close_std();
 	exit(EXIT_SUCCESS);
 }
 
@@ -56,12 +58,14 @@ void	ft_env(char **argv)
 	{
 		ft_printf_fd(STDERR_FILENO, ERR_ENV_ARGS);
 		free_son();
+		close_std();
 		exit(EXEC_WENT_WRONG);
 	}
 	else if (*(argv + 1) != NULL)
 	{
 		ft_printf_fd(STDERR_FILENO, ERR_ENV_ARGS);
 		free_son();
+		close_std();
 		exit(CMD_NOT_FOUND);
 	}
 	print_vars_env();

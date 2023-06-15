@@ -71,6 +71,7 @@ static void	print_vars_export(void)
 		looper++;
 	}
 	free_son();
+	close_std();
 	exit(EXIT_SUCCESS);
 }
 
@@ -100,6 +101,7 @@ static void	add_new_vars(char **argv)
 	if (printed != 0)
 	{
 		free_son();
+		close_std();
 		exit(EXIT_FAILURE);
 	}
 }
@@ -110,5 +112,6 @@ void	ft_export(char **argv)
 		print_vars_export();
 	add_new_vars(argv);
 	free_son();
+	close_std();
 	exit(EXIT_SUCCESS);
 }

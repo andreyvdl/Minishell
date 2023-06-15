@@ -147,6 +147,7 @@ size_t id);
 void			ft_pwd(void);
 void			executor(void);
 void			free_son(void);
+void			close_std(void);
 void			father_pwd(void);
 void			ft_cd(char **argv);
 void			pre_executor(void);

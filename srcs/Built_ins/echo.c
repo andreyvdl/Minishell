@@ -34,5 +34,6 @@ void	ft_echo(char **argv)
 	else
 		print_it(argv + 1, TRUE);
 	free_son();
+	close_std();
 	exit(EXIT_SUCCESS);
 }

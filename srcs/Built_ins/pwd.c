@@ -10,6 +10,7 @@ void	ft_pwd(void)
 	{
 		perror(ERR_PWD_PERROR);
 		free_son();
+		close_std();
 		exit(EXIT_FAILURE);
 	}
 	if (ft_strlen(cwd) > FT_PATHMAX)
@@ -18,11 +19,12 @@ void	ft_pwd(void)
 		strerror(FT_ENAMETOOLONG));
 		free(cwd);
 		free_son();
+		close_std();
 		exit(EXIT_FAILURE);
 	}
-	ft_putstr(cwd);
+	ft_putendl_fd(cwd, STDOUT_FILENO);
 	free(cwd);
-	ft_putchar('\n');
 	free_son();
+	close_std();
 	exit(EXIT_SUCCESS);
 }
