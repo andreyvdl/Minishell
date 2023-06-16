@@ -7,8 +7,8 @@ void	free_son(void)
 	looper = 0;
 	ft_free_matrix((void **)g_shell.envp);
 	free_hash(g_shell.hash);
-	ft_putstr_fd(*g_shell.command[g_shell.id].argv, 2); // test
-	ft_putstr_fd("AAAAAAAAA\n", 2); // test
+	// ft_putstr_fd(*g_shell.command[g_shell.id].argv, 2); // test
+	// ft_putstr_fd("AAAAAAAAA\n", 2); // test
 	while (looper < g_shell.nbr_sons)
 	{
 		ft_free_matrix((void **)g_shell.command[looper].argv);
@@ -22,15 +22,9 @@ void	free_son(void)
 	rl_clear_history();
 }
 
-void	close_std_error(void)
-{
-	close(STDIN_FILENO);
-	close(STDOUT_FILENO);
-	close(STDERR_FILENO);
-}
-
 void	close_std(void)
 {
+	close(STDIN_FILENO);
 	close(STDOUT_FILENO);
 	close(STDERR_FILENO);
 }

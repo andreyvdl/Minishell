@@ -2,18 +2,11 @@
 
 static void	just_free(void)
 {
-	size_t	looper;
-
-	looper = 0;
-	while (looper < g_shell.id)
-	{
-		ft_free_matrix((void **)g_shell.command[looper].argv);
-		if (g_shell.command[looper].wr_here > STDOUT_FILENO)
-			close(g_shell.command[looper].wr_here);
-		if (g_shell.command[looper].rd_here > STDIN_FILENO)
-			close(g_shell.command[looper].rd_here);
-		looper++;
-	}
+	ft_free_matrix((void **)g_shell.command->argv);
+	if (g_shell.command->wr_here > STDOUT_FILENO)
+		close(g_shell.command->wr_here);
+	if (g_shell.command->rd_here > STDIN_FILENO)
+		close(g_shell.command->rd_here);
 	free(g_shell.command);
 	ft_free_matrix((void **)g_shell.envp);
 	free_hash(g_shell.hash);
