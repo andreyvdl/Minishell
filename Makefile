@@ -9,7 +9,7 @@ FILES = builtins.c cd.c echo.c env.c exit_utils.c exit.c export.c father_cd.c fa
 		parser.c parser_utils.c \
 		append.c heredoc_utils.c heredoc_utils2.c heredoc.c input.c redirect.c trunc.c \
 		deslocate_expansion.c fill_son.c token_constructor_utils.c token_constructor.c token_setup_global.c \
-		easter_eggs.c main.c signals.c signals2.c
+		easter_eggs.c main.c signals.c
 
 
 OBJS = $(addprefix $(BUILDS)/, $(FILES:.c=.o))
