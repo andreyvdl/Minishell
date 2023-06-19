@@ -2,12 +2,20 @@
 
 static void	execute_cmd(size_t id)
 {
-	if (g_shell.command[id].argv != NULL && **g_shell.command[id].argv && \
+	if (g_shell.command[id].argv != NULL && *g_shell.command[id].argv != NULL \
+	&& **g_shell.command[id].argv != '\0' && \
 	isbuiltin(*g_shell.command[id].argv) == TRUE)
 		builtins(g_shell.command[id].argv);
 	else if (g_shell.command[id].argv != NULL && \
-	*g_shell.command[id].argv != NULL && **g_shell.command[id].argv)
+	*g_shell.command[id].argv != NULL && **g_shell.command[id].argv != '\0')
 		system_exec(g_shell.command[id].argv, g_shell.envp);
+	else if (g_shell.command[id].argv != NULL && \
+	*g_shell.command[id].argv != NULL && **g_shell.command[id].argv == '\0')
+	{
+		free_son();
+		close_std();
+		exit(EXIT_SUCCESS);
+	}
 	else
 	{
 		ft_printf_fd(STDERR_FILENO, ERR_CMD_NOT_FOUND, "");

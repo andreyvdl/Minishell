@@ -38,10 +38,10 @@ MKDIR = mkdir -p
 
 #=====================[MESSAGES]=============
 
-DEL_MSG				= @echo -ne "[\e[0;31m DEL \e[0m] "
-BIN_MSG				= @echo -ne "[\e[0;32m BIN \e[0m] "
-BLD_MSG				= @echo -ne "[\e[0;34m BLD \e[0m] "
-MKD_MSG				= @echo -ne "[\e[0;35m MKD \e[0m] "
+DEL_MSG				= @printf "[\e[0;31m DEL \e[0m] "
+BIN_MSG				= @printf "[\e[0;32m BIN \e[0m] "
+BLD_MSG				= @printf "[\e[0;34m BLD \e[0m] "
+MKD_MSG				= @printf "[\e[0;35m MKD \e[0m] "
 
 # =================[BASIC_RULES] ============
 
@@ -66,7 +66,7 @@ $(BUILDS):
 
 $(BUILDS)/%.o:%.c
 	$(BLD_MSG)
-	@echo "Building ..." $@
+	@printf "Building ... %s\n" $@
 	@$(CC) $(CFLAGS) -c $(HEADER) $< -o $@ $(DEPFLAGS) $(@:.o=.d)
 
 $(LIBFT):
