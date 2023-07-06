@@ -55,6 +55,7 @@ static int	add_var(char *arg)
 		add_this_to_hash(copy, len, TRUE);
 	else
 		add_this_to_hash(copy, len, FALSE);
+	free(copy);
 	return (TRUE);
 }
 

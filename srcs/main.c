@@ -38,6 +38,11 @@ static void	command(char *input, t_hash *hash)
 		free_all_and_exit(hash);
 	add_to_history(input);
 	pipeline = ft_strtrim(input, FT_WHITESPACES);
+	if (*pipeline == 0)
+	{
+		insert_node(hash, STATUS_CODE, "0");
+		return ;
+	}
 	free(input);
 	input = separator(pipeline);
 	if (parser(input, hash))
