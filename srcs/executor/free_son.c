@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_son.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/27 16:15:40 by adantas-          #+#    #+#             */
+/*   Updated: 2023/06/27 16:15:41 by adantas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 void	free_son(void)
@@ -7,8 +19,6 @@ void	free_son(void)
 	looper = 0;
 	ft_free_matrix((void **)g_shell.envp);
 	free_hash(g_shell.hash);
-	// ft_putstr_fd(*g_shell.command[g_shell.id].argv, 2); // test
-	// ft_putstr_fd("AAAAAAAAA\n", 2); // test
 	while (looper < g_shell.nbr_sons)
 	{
 		ft_free_matrix((void **)g_shell.command[looper].argv);

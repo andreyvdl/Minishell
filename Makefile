@@ -73,7 +73,7 @@ $(LIBFT):
 	@make -C $(LIBFTDIR)
 
 v:all
-	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --suppressions=sup --track-fds=yes --track-origins=yes --trace-children-skip='*/bin/*,*/sbin/*' ./minishell
+	valgrind -q --leak-check=full --show-leak-kinds=all --trace-children=yes --suppressions=sup --track-fds=yes --track-origins=yes --trace-children-skip='*/bin/*,*/sbin/*' ./minishell
 #				checa leak		mostra leak				segue child			suprime erros		marca fds		marca var n init	ignora vazamento dos binarios
 
 vq:all

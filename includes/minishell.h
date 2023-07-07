@@ -1,19 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/27 15:54:42 by adantas-          #+#    #+#             */
+/*   Updated: 2023/06/27 15:58:00 by adantas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
+# include "../libs/libft/includes/libft.h"
+# include "./minishell_typedefs.h"
 # include <fcntl.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <string.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include <sys/types.h>
-# include <sys/stat.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-# include "./minishell_typedefs.h"
-# include "../libs/libft/includes/libft.h"
+# include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <unistd.h>
 
 // prompts definitions
 # if defined(__APPLE__) || defined(__MACH__)
@@ -23,7 +35,7 @@
 #  define PROMPT "\e[1;34m👤💾 Minishell\e[0m\e[1;33m⟼  \e[0m"
 #  define HEREDOC_PROMPT "💾 \e[1;34mhere-doc\e[0m\e[1;33m⟸  \e[0m"
 # elif defined(__linux__) || defined(unix) || defined(__unix) || \
-defined(__unix__)
+	defined(__unix__)
 #  define PROMPT "\e[1;34m👤🐧 Minishell\e[0m\e[1;33m⟼  \e[0m"
 #  define HEREDOC_PROMPT "🐧 \e[1;34mhere-doc\e[0m\e[1;33m⟸  \e[0m"
 # elif defined(__FreeBSD__)
@@ -138,10 +150,10 @@ int				unclosed_quotes_case(char **pipeline, char quote);
 int				redirection(char **str, t_command *son, size_t id);
 int				set_up_global(char **cmds, size_t nbr_cmds, t_hash *hash);
 int				redirect_input(char *filename, t_command *son, size_t id);
-int				redirect_output_trunc(char *filename, t_command *son, \
-size_t id);
-int				redirect_output_append(char *filename, t_command *son, \
-size_t id);
+int				redirect_output_trunc(char *filename, t_command *son,
+					size_t id);
+int				redirect_output_append(char *filename, t_command *son,
+					size_t id);
 
 //void return
 void			ft_pwd(void);
@@ -189,10 +201,10 @@ void			inside_quote_copy(char **str, char **new, char quote);
 void			expansion_loop(char *limiter, t_command *son, size_t id);
 void			no_expansion_loop(char *limiter, t_command *son, size_t id);
 void			inside_quote_counter(char **str, size_t *counter, char quote);
-void			copy_with_expansions_heredoc(char *str, char *new, \
-t_hash *hash);
+void			copy_with_expansions_heredoc(char *str, char *new,
+					t_hash *hash);
 
-// char return
+// char return 
 char			*separator(char *str);
 char			*extract_cmd(char **input);
 char			**hash_to_matrix(t_hash *hash);

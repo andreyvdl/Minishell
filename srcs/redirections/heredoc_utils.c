@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/27 16:18:15 by adantas-          #+#    #+#             */
+/*   Updated: 2023/06/27 16:18:43 by adantas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 static char	*expand_vars_heredoc(char *str, t_hash *hash)
@@ -72,4 +84,3 @@ void	no_expansion_loop(char *limiter, t_command *son, size_t id)
 		free(line);
 	}
 }
-

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_utils2.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/27 16:17:13 by adantas-          #+#    #+#             */
+/*   Updated: 2023/06/27 16:17:28 by adantas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 static void	copy_this_value(char **new, char *value)
@@ -41,7 +53,6 @@ static void	dollar_value(char **str, char **new, t_hash *hash)
 	while ((ft_isalnum(**str) || **str == '_') && **str)
 		(*str)++;
 }
-
 
 void	copy_with_expansions_heredoc(char *str, char *new, t_hash *hash)
 {

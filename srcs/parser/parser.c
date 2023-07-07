@@ -1,5 +1,16 @@
-#include "../../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/27 16:06:28 by adantas-          #+#    #+#             */
+/*   Updated: 2023/06/27 16:06:28 by adantas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../../includes/minishell.h"
 
 static int	validate_metachar(char **splited_pline)
 {
@@ -57,11 +68,6 @@ static int	unclosed_quotes(char *pipeline)
 	}
 	return (FALSE);
 }
-
-/*
-TODO: separate the redirections from the pipeline before verify if they are
-valid: bash accepts: `ls < gjabgja | cat > jgbahga` as two errors !!NOT ONE!!;
-*/
 
 int	parser(char *pipeline, t_hash *hash)
 {
