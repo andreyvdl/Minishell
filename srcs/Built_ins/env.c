@@ -6,24 +6,11 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:12:00 by adantas-          #+#    #+#             */
-/*   Updated: 2023/06/27 16:12:00 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:53:15 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-/* void	env()
-{
-	char	**env;
-	int		i;
-
-	i = 0;
-	env = g_shell.envp;
-	if (ft_matrixlen((const char **)g_shell.command->argv) > 1)
-		return ((void)ft_printf("Command is: env!"));
-	while (env && env[i])
-		ft_printf("%s\n", env[i++]);
-} */
 
 static int	env_is_directory(char **argv)
 {

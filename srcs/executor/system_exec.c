@@ -6,13 +6,11 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:16:07 by adantas-          #+#    #+#             */
-/*   Updated: 2023/06/27 16:16:08 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:14:44 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// file name too long 126
 
 static void	permission_denied(char *path, char **binaries, char *temp)
 {

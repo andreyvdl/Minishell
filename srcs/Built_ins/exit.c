@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:09:23 by adantas-          #+#    #+#             */
-/*   Updated: 2023/06/27 16:09:54 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:52:16 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,19 @@ static void	son_exit(char *arg)
 	{
 		ft_printf_fd(STDERR_FILENO, ERR_EXIT_NUMBER, arg);
 		free_son();
+		close_std();
 		exit(FT_EXIT_ERROR);
 	}
 	else if (number_big(arg) == TRUE)
 	{
 		ft_printf_fd(STDERR_FILENO, ERR_EXIT_NUMBER, arg);
 		free_son();
+		close_std();
 		exit(FT_EXIT_ERROR);
 	}
 	nbr = ft_atoll(arg);
 	free_son();
+	close_std();
 	exit(nbr);
 }
 
@@ -54,11 +57,13 @@ void	ft_exit(char **argv)
 	{
 		ft_printf_fd(STDERR_FILENO, ERR_EXIT_ARGS);
 		free_son();
+		close_std();
 		exit(EXIT_FAILURE);
 	}
 	else if (*(argv + 1) == NULL)
 	{
 		free_son();
+		close_std();
 		exit(EXIT_SUCCESS);
 	}
 	son_exit(*(argv + 1));

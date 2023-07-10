@@ -6,22 +6,11 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:09:10 by adantas-          #+#    #+#             */
-/*   Updated: 2023/06/27 16:09:11 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:53:42 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-/* void	unset(char *str, t_hash *hash)
-{
-	while (*str && (*str != ' ' &&  *str != '\t'))
-		str++;
-	while (*str && (*str == ' ' || *str == '\t'))
-		str++;
-	ft_putstr(str);
-	ft_putchar('\n');
-	(void)hash;
-} */
 
 static int	fake_remove(char *arg)
 {
@@ -49,6 +38,7 @@ static void	remove_these(char **argv)
 	if (printed != 0)
 	{
 		free_son();
+		close_std();
 		exit(EXIT_FAILURE);
 	}
 }
@@ -58,5 +48,6 @@ void	ft_unset(char **argv)
 	if (*(argv + 1) != NULL)
 		remove_these(argv);
 	free_son();
+	close_std();
 	exit(EXIT_SUCCESS);
 }
