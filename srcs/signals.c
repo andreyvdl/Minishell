@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:29:00 by adantas-          #+#    #+#             */
-/*   Updated: 2023/06/27 16:29:01 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/07/13 16:09:30 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	re_print_prompt(int sig)
 {
 	if (sig == SIGINT)
 	{
+		insert_node(g_shell.hash, STATUS_CODE, "130");
 		ft_putchar('\n');
 		rl_on_new_line();
 		rl_replace_line("", 0);
