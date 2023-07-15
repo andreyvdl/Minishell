@@ -6,11 +6,25 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:16:20 by adantas-          #+#    #+#             */
-/*   Updated: 2023/06/27 16:16:21 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/07/14 21:59:19 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static void	free_on_error(size_t looper)
+{
+	while (looper < g_shell.id)
+	{
+		ft_free_matrix((void **)g_shell.command[looper].argv);
+		if (g_shell.command[looper].wr_here > STDOUT_FILENO)
+			close(g_shell.command[looper].wr_here);
+		if (g_shell.command[looper].rd_here > STDIN_FILENO)
+			close(g_shell.command[looper].rd_here);
+		looper++;
+	}
+	ft_free_matrix((void **)g_shell.command[looper].argv);
+}
 
 static void	free_father_global(int has_error)
 {
@@ -19,15 +33,7 @@ static void	free_father_global(int has_error)
 	looper = 0;
 	if (has_error == TRUE)
 	{
-		while (looper < g_shell.id)
-		{
-			ft_free_matrix((void **)g_shell.command[looper].argv);
-			if (g_shell.command[looper].wr_here > STDOUT_FILENO)
-				close(g_shell.command[looper].wr_here);
-			if (g_shell.command[looper].rd_here > STDIN_FILENO)
-				close(g_shell.command[looper].rd_here);
-			looper++;
-		}
+		free_on_error(looper);
 		return ;
 	}
 	while (looper < g_shell.nbr_sons)
