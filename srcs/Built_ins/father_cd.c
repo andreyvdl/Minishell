@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:12:52 by adantas-          #+#    #+#             */
-/*   Updated: 2023/06/27 16:12:53 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:19:07 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static void	change_directory(char *path)
 	}
 	cwd = getcwd(NULL, 0);
 	insert_node(g_shell.hash, "PWD", cwd);
+	free_cwd(cwd);
 }
 
 void	father_cd(char **argv)
