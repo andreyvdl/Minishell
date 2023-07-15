@@ -30,3 +30,20 @@
    fun:add_history
    ...
 }
+{
+   <KeySignaForSomeReason>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   fun:rl_make_bare_keymap
+   fun:rl_generic_bind
+   fun:rl_macro_bind
+   fun:rl_parse_and_bind
+   obj:/usr/lib64/libreadline.so.8.2
+   obj:/usr/lib64/libreadline.so.8.2
+   fun:rl_parse_and_bind
+   obj:/usr/lib64/libreadline.so.8.2
+   fun:rl_read_init_file
+   fun:rl_initialize
+}
