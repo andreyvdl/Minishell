@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:29:00 by adantas-          #+#    #+#             */
-/*   Updated: 2023/07/13 16:09:30 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:19:12 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	exit_heredoc(int sig)
 	free(g_shell.command);
 	free_hash(g_shell.hash);
 	rl_clear_history();
+	close_std();
 	if (sig == SIGINT)
 		exit(REDI_SIGNAL);
 	exit(REDI_OK);

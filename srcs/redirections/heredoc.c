@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:17:50 by adantas-          #+#    #+#             */
-/*   Updated: 2023/06/27 16:17:50 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:18:29 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	free_son_and_exit(void)
 	}
 	free(g_shell.command);
 	rl_clear_history();
+	close_std();
 	exit(REDI_OK);
 }
 

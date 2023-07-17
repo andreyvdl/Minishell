@@ -6,7 +6,7 @@
 /*   By: adantas- <adantas-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:16:07 by adantas-          #+#    #+#             */
-/*   Updated: 2023/07/10 13:14:44 by adantas-         ###   ########.fr       */
+/*   Updated: 2023/07/17 11:53:54 by adantas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*try_all_paths(char **binaries, char *temp)
 	char	*path;
 
 	looper = 0;
-	while (binaries[looper + 1] != NULL)
+	while (binaries[looper] != NULL)
 	{
 		path = ft_strjoin(binaries[looper], temp);
 		if (access(path, X_OK) != -1)
@@ -56,7 +56,7 @@ static char	*match_path(char *cmd)
 	char	*path;
 
 	binaries = ft_split(search(g_shell.hash, "PATH"), ':');
-	if (binaries == NULL)
+	if (binaries == NULL || *binaries == NULL)
 	{
 		ft_printf_fd(STDERR_FILENO, ERR_CMD_NOT_FOUND_2, cmd);
 		free_son();
