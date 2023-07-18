@@ -93,7 +93,7 @@ static void	solo_value_copy(char **new, char **str)
 		aux_copy(new, search(g_shell.hash, key));
 		free(key);
 	}
-	else if (ft_isdigit(**str) == FALSE && (*str)++)
+	else if (ft_isdigit(**str) == FALSE && (**str) != 0 && (*str)++)
 		aux_copy(new, "$");
 	while (ft_isalnum(**str) == TRUE || **str == '_')
 		(*str)++;
