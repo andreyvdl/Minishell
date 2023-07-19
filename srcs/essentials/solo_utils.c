@@ -78,7 +78,9 @@ static void	solo_value_copy(char **new, char **str)
 	char	*key;
 
 	(*str)++;
-	if (ft_isalpha(**str) == TRUE || **str == '_' || **str == '?')
+	if (**str == '\0')
+		aux_copy(new, "$");
+	else if (ft_isalpha(**str) == TRUE || **str == '_' || **str == '?')
 	{
 		if (**str == '?')
 		{
@@ -93,7 +95,7 @@ static void	solo_value_copy(char **new, char **str)
 		aux_copy(new, search(g_shell.hash, key));
 		free(key);
 	}
-	else if (ft_isdigit(**str) == FALSE && (**str) != 0 && (*str)++)
+	else if (ft_isdigit(**str) == FALSE && (*str)++)
 		aux_copy(new, "$");
 	while (ft_isalnum(**str) == TRUE || **str == '_')
 		(*str)++;
